@@ -1,6 +1,8 @@
 // Конфигурация webpack для сборки
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,7 +11,12 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
     // Правила обработки файлов
 
@@ -39,6 +46,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
+    new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
+    new CompressionPlugin({ algorithm: 'gzip' }),
   ],
   devServer: {
     static: [

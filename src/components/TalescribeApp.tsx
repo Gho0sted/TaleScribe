@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { Menu, Search, Bell, AlertTriangle } from '../constants/icons';
 import { Link, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useTalescribe } from '../contexts/TalescribeContext';
@@ -7,14 +7,15 @@ import { ROUTES } from '../constants/routes';
 import EditionSelector from './ui/EditionSelector';
 import LanguageSwitcher from './layout/LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
-import DiceRollerPage from './pages/DiceRollerPage';
-import DashboardPage from './pages/DashboardPage';
-import CharactersPage from './pages/CharactersPage';
-import QuestsPage from './pages/QuestsPage';
-import CampaignsPage from './pages/CampaignsPage';
-import CombatTrackerPage from './pages/CombatTrackerPage';
-import ContentGeneratorsPage from './pages/ContentGeneratorsPage';
-import DataManagerPage from './pages/DataManagerPage';
+const DiceRollerPage = React.lazy(() => import('./pages/DiceRollerPage'));
+const DashboardPage = React.lazy(() => import('./pages/DashboardPage'));
+const CharactersPage = React.lazy(() => import('./pages/CharactersPage'));
+const QuestsPage = React.lazy(() => import('./pages/QuestsPage'));
+const CampaignsPage = React.lazy(() => import('./pages/CampaignsPage'));
+const CombatTrackerPage = React.lazy(() => import('./pages/CombatTrackerPage'));
+const ContentGeneratorsPage = React.lazy(() => import('./pages/ContentGeneratorsPage'));
+const DataManagerPage = React.lazy(() => import('./pages/DataManagerPage'));
+import { LoadingSpinner } from './ui/LoadingSpinner';
 
 const TalescribeApp: React.FC = () => {
   const { t } = useTranslation();
@@ -135,7 +136,8 @@ const TalescribeApp: React.FC = () => {
           />
         )}
         <main className="flex-1">
-          <Routes>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
             <Route
               path="/"
               element={<DashboardPage onNavigate={(page) => navigate(PATH_MAP[page] || `/${page}`)} />}
@@ -150,6 +152,7 @@ const TalescribeApp: React.FC = () => {
             <Route path="/generator" element={<div className="p-8">{t('nav.development')}</div>} />
             <Route path="*" element={<div className="p-8">{t('nav.development')}</div>} />
           </Routes>
+          </Suspense>
         </main>
       </div>
     </div>
