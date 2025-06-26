@@ -9,4 +9,5 @@ export const ROUTES = {
   campaignsCalendar: '/campaigns/calendar',
   campaignsJournal: '/campaigns/journal',
   dataManager: '/data-manager',
+  talents: '/talents',
 };

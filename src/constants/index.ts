@@ -10,6 +10,7 @@ import {
   Package,
   Shield,
   Sword,
+  Lightbulb,
   Save,
   Settings,
 } from './icons';
@@ -162,6 +163,8 @@ export const SKILLS_DATA: Skill[] = [
   { id: 'survival', name: 'Выживание', ability: 'wisdom', icon: '🏕️' }
 ];
 
+export { CLASS_TALENTS } from './CLASS_TALENTS';
+
 export const NAVIGATION: NavigationItem[] = [
   { id: 'dashboard', name: 'Главная', icon: Home, color: 'blue' },
   { id: 'characters', name: 'Персонажи', icon: User, color: 'green' },
@@ -174,6 +177,7 @@ export const NAVIGATION: NavigationItem[] = [
   { id: 'items', name: 'Предметы', icon: Package, color: 'amber' },
   { id: 'bestiary', name: 'Бестиарий', icon: Shield, color: 'red' },
   { id: 'battle', name: 'Бой', icon: Sword, color: 'orange' },
+  { id: 'talents', name: 'Таланты', icon: Lightbulb, color: 'yellow' },
   { id: 'data-manager', name: 'Данные', icon: Save, color: 'cyan' },
   { id: 'settings', name: 'Настройки', icon: Settings, color: 'gray' }
 ];
