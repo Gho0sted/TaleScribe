@@ -1,9 +1,18 @@
 // Collection of static data used across the application
 // Коллекция статических данных, используемых во всем приложении
 import {
-  Home, User, Sparkles, Dice6, Scroll, Users, Package,
-  Shield, Sword, Save, Settings 
-} from 'lucide-react';
+  Home,
+  User,
+  Sparkles,
+  Dice6,
+  Scroll,
+  Users,
+  Package,
+  Shield,
+  Sword,
+  Save,
+  Settings,
+} from './icons';
 import { 
   DNDEdition,
   NavigationItem,
@@ -159,6 +168,7 @@ export const NAVIGATION: NavigationItem[] = [
   { id: 'character-generator', name: 'Генератор', icon: Sparkles, color: 'emerald' },
   { id: 'dice', name: 'Кости', icon: Dice6, color: 'teal' },
   { id: 'spells', name: 'Заклинания', icon: Scroll, color: 'indigo' },
+  { id: 'quests', name: 'Квесты', icon: Scroll, color: 'pink' },
   { id: 'campaigns', name: 'Кампании', icon: Users, color: 'purple' },
   { id: 'items', name: 'Предметы', icon: Package, color: 'amber' },
   { id: 'bestiary', name: 'Бестиарий', icon: Shield, color: 'red' },

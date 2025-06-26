@@ -3,7 +3,7 @@
  * Самостоятельный кубомет с историей бросков
  */
 import React, { useState, useCallback } from 'react';
-import { Dice6, Trash2 } from 'lucide-react';
+import { Dice6, Trash2 } from '../../constants/icons';
 import { DiceUtils } from '../../utils/DiceUtils';
 import { DiceRoll } from '../../types';
 

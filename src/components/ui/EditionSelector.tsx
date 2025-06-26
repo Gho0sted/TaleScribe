@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Check } from 'lucide-react';
+import { ChevronDown, Check } from '../../constants/icons';
 import { DND_EDITIONS } from '../../constants';
 import { Edition } from '../../types';
 
