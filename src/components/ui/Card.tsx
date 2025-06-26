@@ -1,3 +1,7 @@
+/**
+ * Simple card container
+ * Простой контейнер карточки
+ */
 import React from 'react';
 
 export const Card = ({ children }: { children: React.ReactNode }) => (

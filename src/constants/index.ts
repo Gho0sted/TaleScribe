@@ -1,4 +1,6 @@
-import { 
+// Collection of static data used across the application
+// Коллекция статических данных, используемых во всем приложении
+import {
   Home, User, Sparkles, Dice6, Scroll, Users, Package,
   Shield, Sword, Save, Settings 
 } from 'lucide-react';

@@ -1,3 +1,7 @@
+/**
+ * Standalone dice roller with history
+ * Самостоятельный кубомет с историей бросков
+ */
 import React, { useState, useCallback } from 'react';
 import { Dice6, Trash2 } from 'lucide-react';
 import { DiceUtils } from '../../utils/DiceUtils';
