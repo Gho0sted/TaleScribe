@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import { CLASS_TALENTS, ClassTalent } from '../constants/CLASS_TALENTS';
 import { useTalentStore } from '../stores/useTalentStore';
-import { Download, Plus, Trash2, Edit3 } from '../constants/icons';
+import { IconDownload, IconPlus, IconTrash, IconEdit } from '../constants/icons';
 
 interface TalentTableProps {
   classId: string;
@@ -82,10 +82,10 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
           onChange={(e) => setLevel(e.target.value ? Number(e.target.value) : '')}
         />
         <button className="btn-primary" onClick={() => handleExport('csv')}>
-          <Download className="w-4 h-4 mr-1" />CSV
+          <IconDownload className="w-4 h-4 mr-1" />CSV
         </button>
         <button className="btn-primary" onClick={() => handleExport('markdown')}>
-          <Download className="w-4 h-4 mr-1" />MD
+          <IconDownload className="w-4 h-4 mr-1" />MD
         </button>
       </div>
       <table className="min-w-full text-left text-sm">
@@ -103,10 +103,10 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
               <td className="p-2" title={talent.description}>{talent.name}</td>
               <td className="p-2 space-x-2">
                 <button className="btn" onClick={() => { setEditId(talent.id); setEditTalent(talent); }}>
-                  <Edit3 className="w-4 h-4" />
+                  <IconEdit className="w-4 h-4" />
                 </button>
                 <button className="btn" onClick={() => removeTalent(classId, talent.id)}>
-                  <Trash2 className="w-4 h-4" />
+                  <IconTrash className="w-4 h-4" />
                 </button>
               </td>
             </tr>
@@ -166,7 +166,7 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
           onChange={(e) => setNewTalent({ ...newTalent, level: Number(e.target.value) })}
         />
         <button className="btn-primary" onClick={handleAdd}>
-          <Plus className="w-4 h-4 mr-1" />Добавить
+          <IconPlus className="w-4 h-4 mr-1" />Добавить
         </button>
       </div>
     </div>

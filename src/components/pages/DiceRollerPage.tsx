@@ -4,7 +4,7 @@
  */
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dice6, Trash2 } from '../../constants/icons';
+import { IconDice6, IconTrash } from '../../constants/icons';
 import { DiceUtils } from '../../utils/DiceUtils';
 import { DiceRoll } from '../../types';
 
@@ -34,7 +34,7 @@ const DiceRollerPage: React.FC = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="container">
         <div className="text-center mb-12">
           <div className="text-6xl mb-6">🎲</div>
           <h1 className="text-4xl font-bold gradient-text mb-4">{t('dicePage.title')}</h1>
@@ -59,7 +59,7 @@ const DiceRollerPage: React.FC = () => {
                   className={`bg-gradient-to-br ${die.color} hover:shadow-2xl text-white p-6 rounded-3xl font-bold transition-all text-center group transform hover:scale-105 active:scale-95 border-2 border-white/20`}
                 >
                   <div className="bg-white/20 rounded-2xl p-4 mb-4 backdrop-blur-sm">
-                    <Dice6 className="h-12 w-12 mx-auto group-hover:animate-spin" />
+                    <IconDice6 className="h-12 w-12 mx-auto group-hover:animate-spin" />
                   </div>
                   <div className="text-xl font-bold mb-1">{die.name}</div>
                   <div className="text-sm opacity-80 font-medium">1-{die.sides}</div>
@@ -124,7 +124,7 @@ const DiceRollerPage: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <h3 className="font-semibold text-white">{t('dicePage.lastRolls')}</h3>
                   <button onClick={() => setRollHistory([])} className="text-gray-400 hover:text-red-400 transition-colors">
-                    <Trash2 className="h-4 w-4" />
+                    <IconTrash className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -149,7 +149,7 @@ const DiceRollerPage: React.FC = () => {
                   </div>
                 ) : (
                   <div className="p-8 text-center">
-                    <Dice6 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                    <IconDice6 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                   <p className="text-gray-400 text-lg">{t('dicePage.emptyHistory')}</p>
                   <p className="text-gray-500 text-sm mt-2">{t('dicePage.makeFirstRoll')}</p>
                   </div>

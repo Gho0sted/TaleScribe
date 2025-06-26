@@ -4,7 +4,7 @@
  */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { User, PlusCircle, Search } from '../../constants/icons';
+import { IconUser, IconPlusCircle, IconSearch } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 
 const CharactersPage: React.FC = () => {
@@ -19,18 +19,18 @@ const CharactersPage: React.FC = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="container">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold text-white flex items-center">
-            <User className="h-10 w-10 mr-4 text-green-600" /> {t('charactersPage.title', { edition: selectedEdition.toUpperCase() })}
+            <IconUser className="h-10 w-10 mr-4 text-green-600" /> {t('charactersPage.title', { edition: selectedEdition.toUpperCase() })}
           </h1>
           <button className="btn-primary">
-            <PlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
+            <IconPlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
           </button>
         </div>
         <div className="card mb-8">
           <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            <IconSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <input
               type="text"
               placeholder={t('charactersPage.searchPlaceholder')}
@@ -42,11 +42,11 @@ const CharactersPage: React.FC = () => {
         </div>
         {filteredCharacters.length === 0 ? (
           <div className="text-center py-16">
-            <User className="h-20 w-20 text-gray-400 mx-auto mb-6" />
+            <IconUser className="h-20 w-20 text-gray-400 mx-auto mb-6" />
             <h3 className="text-2xl font-bold text-white mb-4">{t('charactersPage.emptyTitle', { edition: selectedEdition.toUpperCase() })}</h3>
             <p className="text-gray-400 mb-8 max-w-md mx-auto">{t('charactersPage.emptyText')}</p>
             <button className="btn-primary">
-              <PlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
+              <IconPlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
             </button>
           </div>
         ) : (

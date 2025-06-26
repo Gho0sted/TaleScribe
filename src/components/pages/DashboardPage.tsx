@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Sparkles, User, Dice6, Scroll, AlertTriangle } from '../../constants/icons';
+import { IconSparkles, IconUser, IconDice6, IconScroll, IconAlertTriangle } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { DND_EDITIONS } from '../../constants';
 import { DiceUtils } from '../../utils/DiceUtils';
@@ -24,7 +24,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="container p-8">
         <div className="text-center mb-12">
           <div className="text-6xl mb-6">🎲</div>
           <h1 className="text-5xl font-bold gradient-text mb-4">{t('dashboard.welcome')}</h1>
@@ -41,7 +41,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           {isOffline && (
             <div className="bg-yellow-900/20 border border-yellow-800 rounded-xl p-4 max-w-md mx-auto mb-8">
               <div className="flex items-center justify-center">
-                <AlertTriangle className="h-5 w-5 text-yellow-400 mr-2" />
+                <IconAlertTriangle className="h-5 w-5 text-yellow-400 mr-2" />
                 <span className="text-yellow-200">{t('dashboard.offlineMode')}</span>
               </div>
             </div>
@@ -52,7 +52,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('character-generator')}
             className="group bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 hover:from-emerald-600 hover:via-green-600 hover:to-teal-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-emerald-400/20"
           >
-            <Sparkles className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
+            <IconSparkles className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
             <h3 className="text-xl font-bold mb-3">{t('dashboard.characterGenerator')}</h3>
             <p className="text-sm opacity-90">{t('dashboard.characterGeneratorDesc')}</p>
           </button>
@@ -60,7 +60,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('characters')}
             className="group bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-blue-400/20"
           >
-            <User className="h-16 w-16 mx-auto mb-4 group-hover:animate-bounce" />
+            <IconUser className="h-16 w-16 mx-auto mb-4 group-hover:animate-bounce" />
             <h3 className="text-xl font-bold mb-3">{t('dashboard.characters')}</h3>
             <p className="text-sm opacity-90">{t('dashboard.charactersDesc')}</p>
           </button>
@@ -68,7 +68,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('dice')}
             className="group bg-gradient-to-br from-teal-500 via-cyan-500 to-blue-600 hover:from-teal-600 hover:via-cyan-600 hover:to-blue-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-teal-400/20"
           >
-            <Dice6 className="h-16 w-16 mx-auto mb-4 group-hover:animate-spin" />
+            <IconDice6 className="h-16 w-16 mx-auto mb-4 group-hover:animate-spin" />
             <h3 className="text-xl font-bold mb-3">{t('dashboard.dice')}</h3>
             <p className="text-sm opacity-90">{t('dashboard.diceDesc')}</p>
           </button>
@@ -76,7 +76,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('spells')}
             className="group bg-gradient-to-br from-purple-500 via-violet-500 to-indigo-600 hover:from-purple-600 hover:via-violet-600 hover:to-indigo-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-purple-400/20"
           >
-            <Scroll className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
+            <IconScroll className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
             <h3 className="text-xl font-bold mb-3">{t('dashboard.spells')}</h3>
             <p className="text-sm opacity-90">{t('dashboard.spellsDesc')}</p>
           </button>
@@ -85,7 +85,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <div className="card">
             <div className="flex items-center">
               <div className="p-4 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30 rounded-2xl mr-6">
-                <User className="h-10 w-10 text-green-600 dark:text-green-400" />
+                <IconUser className="h-10 w-10 text-green-600 dark:text-green-400" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('dashboard.characters')}</h3>
@@ -97,7 +97,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <div className="card">
             <div className="flex items-center">
               <div className="p-4 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30 rounded-2xl mr-6">
-                <Scroll className="h-10 w-10 text-purple-600 dark:text-purple-400" />
+                <IconScroll className="h-10 w-10 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('dashboard.spells')}</h3>
@@ -109,7 +109,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <div className="card">
             <div className="flex items-center">
               <div className="p-4 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/30 rounded-2xl mr-6">
-                <User className="h-10 w-10 text-red-600 dark:text-red-400" />
+                <IconUser className="h-10 w-10 text-red-600 dark:text-red-400" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Бестиарий</h3>
@@ -121,7 +121,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <div className="card">
             <div className="flex items-center">
               <div className="p-4 bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 rounded-2xl mr-6">
-                <User className="h-10 w-10 text-amber-600 dark:text-amber-400" />
+                <IconUser className="h-10 w-10 text-amber-600 dark:text-amber-400" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Предметы</h3>
@@ -133,7 +133,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
         </div>
         <div className="card">
           <h2 className="text-2xl font-bold text-white mb-8 flex items-center">
-            <Dice6 className="h-7 w-7 mr-3 text-teal-400" /> {t('dashboard.quickRolls')}
+            <IconDice6 className="h-7 w-7 mr-3 text-teal-400" /> {t('dashboard.quickRolls')}
           </h2>
           <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
             {[
@@ -154,7 +154,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 }}
                 className={`bg-gradient-to-br ${die.color} hover:shadow-lg text-white py-4 px-6 rounded-2xl font-bold transition-all text-center group transform hover:scale-105`}
               >
-                <Dice6 className="h-8 w-8 mx-auto mb-2 group-hover:animate-spin" />
+                <IconDice6 className="h-8 w-8 mx-auto mb-2 group-hover:animate-spin" />
                 <div className="text-sm font-bold">{die.name}</div>
               </button>
             ))}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Upload, RefreshCw } from '../../constants/icons';
+import { IconDownload, IconUpload, IconRefreshCw } from '../../constants/icons';
 import CloudSettings from '../ui/CloudSettings';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { exportCharacters, importCharacters, exportToFoundry } from '../../services/exportService';
@@ -40,10 +40,10 @@ const DataManagerPage: React.FC = () => {
 
       {tab === 'export' && (
         <div className="space-x-4">
-          <button className="btn-primary" onClick={() => handleExport('json')}><Download className="h-5 w-5 mr-2" />JSON</button>
-          <button className="btn-primary" onClick={() => handleExport('markdown')}><Download className="h-5 w-5 mr-2" />Markdown</button>
-          <button className="btn-primary" onClick={() => handleExport('csv')}><Download className="h-5 w-5 mr-2" />CSV</button>
-          <button className="btn-primary" onClick={() => handleExport('pdf')}><Download className="h-5 w-5 mr-2" />PDF</button>
+          <button className="btn-primary" onClick={() => handleExport('json')}><IconDownload className="h-5 w-5 mr-2" />JSON</button>
+          <button className="btn-primary" onClick={() => handleExport('markdown')}><IconDownload className="h-5 w-5 mr-2" />Markdown</button>
+          <button className="btn-primary" onClick={() => handleExport('csv')}><IconDownload className="h-5 w-5 mr-2" />CSV</button>
+          <button className="btn-primary" onClick={() => handleExport('pdf')}><IconDownload className="h-5 w-5 mr-2" />PDF</button>
           <button className="btn-primary" onClick={() => {
             const blob = exportToFoundry('characters', characters);
             const url = URL.createObjectURL(blob);
@@ -65,7 +65,7 @@ const DataManagerPage: React.FC = () => {
 
       {tab === 'integrations' && (
         <div className="space-y-4">
-          <p className="flex items-center"><RefreshCw className="h-5 w-5 mr-2" />D&D Beyond sync coming soon...</p>
+          <p className="flex items-center"><IconRefreshCw className="h-5 w-5 mr-2" />D&D Beyond sync coming soon...</p>
         </div>
       )}
 
