@@ -5,6 +5,7 @@ export const ROUTES = {
   dice: '/dice',
   quests: '/quests',
   combat: '/combat',
+  content: '/content',
   campaignsCalendar: '/campaigns/calendar',
   campaignsJournal: '/campaigns/journal',
 };

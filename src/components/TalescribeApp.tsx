@@ -13,6 +13,7 @@ import CharactersPage from './pages/CharactersPage';
 import QuestsPage from './pages/QuestsPage';
 import CampaignsPage from './pages/CampaignsPage';
 import CombatTrackerPage from './pages/CombatTrackerPage';
+import ContentGeneratorsPage from './pages/ContentGeneratorsPage';
 
 const TalescribeApp: React.FC = () => {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ const TalescribeApp: React.FC = () => {
     characters: ROUTES.characters,
     dice: ROUTES.dice,
     quests: ROUTES.quests,
+    content: ROUTES.content,
     'character-generator': ROUTES.generator,
     campaigns: ROUTES.campaignsCalendar,
     battle: ROUTES.combat,
@@ -140,6 +142,7 @@ const TalescribeApp: React.FC = () => {
             <Route path="/dice" element={<DiceRollerPage />} />
             <Route path="/combat" element={<CombatTrackerPage />} />
             <Route path="/quests" element={<QuestsPage />} />
+            <Route path="/content" element={<ContentGeneratorsPage />} />
             <Route path="/campaigns/*" element={<CampaignsPage />} />
             <Route path="/generator" element={<div className="p-8">{t('nav.development')}</div>} />
             <Route path="*" element={<div className="p-8">{t('nav.development')}</div>} />

@@ -169,6 +169,7 @@ export const NAVIGATION: NavigationItem[] = [
   { id: 'dice', name: 'Кости', icon: Dice6, color: 'teal' },
   { id: 'spells', name: 'Заклинания', icon: Scroll, color: 'indigo' },
   { id: 'quests', name: 'Квесты', icon: Scroll, color: 'pink' },
+  { id: 'content', name: 'Контент', icon: Sparkles, color: 'teal' },
   { id: 'campaigns', name: 'Кампании', icon: Users, color: 'purple' },
   { id: 'items', name: 'Предметы', icon: Package, color: 'amber' },
   { id: 'bestiary', name: 'Бестиарий', icon: Shield, color: 'red' },
