@@ -1,0 +1,73 @@
+import React, { useState } from 'react';
+import { Download, Upload, RefreshCw } from '../../constants/icons';
+import { useTalescribe } from '../../contexts/TalescribeContext';
+import { exportCharacters, importCharacters, exportToFoundry } from '../../services/exportService';
+
+const DataManagerPage: React.FC = () => {
+  const { characters, setCharacters } = useTalescribe();
+  const [tab, setTab] = useState<'export' | 'import' | 'integrations'>('export');
+  const [loading, setLoading] = useState(false);
+
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setLoading(true);
+    const data = await importCharacters(file);
+    if (data.length) setCharacters(data);
+    setLoading(false);
+  };
+
+  const handleExport = (format: 'json' | 'markdown' | 'csv' | 'pdf') => {
+    const blob = exportCharacters(characters, format);
+    const url = URL.createObjectURL(blob);
+    const ext = format === 'markdown' ? 'md' : format;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `characters.${ext}`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="p-8 text-white">
+      <div className="space-x-4 mb-6">
+        <button className={`btn-primary ${tab === 'export' ? '' : 'opacity-70'}`} onClick={() => setTab('export')}>Экспорт</button>
+        <button className={`btn-primary ${tab === 'import' ? '' : 'opacity-70'}`} onClick={() => setTab('import')}>Импорт</button>
+        <button className={`btn-primary ${tab === 'integrations' ? '' : 'opacity-70'}`} onClick={() => setTab('integrations')}>Интеграции</button>
+      </div>
+
+      {tab === 'export' && (
+        <div className="space-x-4">
+          <button className="btn-primary" onClick={() => handleExport('json')}><Download className="h-5 w-5 mr-2" />JSON</button>
+          <button className="btn-primary" onClick={() => handleExport('markdown')}><Download className="h-5 w-5 mr-2" />Markdown</button>
+          <button className="btn-primary" onClick={() => handleExport('csv')}><Download className="h-5 w-5 mr-2" />CSV</button>
+          <button className="btn-primary" onClick={() => handleExport('pdf')}><Download className="h-5 w-5 mr-2" />PDF</button>
+          <button className="btn-primary" onClick={() => {
+            const blob = exportToFoundry('characters', characters);
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'foundry-characters.json';
+            a.click();
+            URL.revokeObjectURL(url);
+          }}>Export to Foundry</button>
+        </div>
+      )}
+
+      {tab === 'import' && (
+        <div className="space-y-4">
+          <input type="file" accept=".json,.csv,.md,.markdown,.pdf" onChange={handleImport} />
+          {loading && <div className="text-gray-400">Loading...</div>}
+        </div>
+      )}
+
+      {tab === 'integrations' && (
+        <div className="space-y-4">
+          <p className="flex items-center"><RefreshCw className="h-5 w-5 mr-2" />D&D Beyond sync coming soon...</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default DataManagerPage;
