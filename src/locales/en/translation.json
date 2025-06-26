@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "dashboard": "Home",
+    "characters": "Characters",
+    "character-generator": "Generator",
+    "dice": "Dice",
+    "spells": "Spells",
+    "quests": "Quests",
+    "development": "Page under construction"
+  },
+  "header": {
+    "searchPlaceholder": "Search characters, spells, monsters...",
+    "offline": "Offline",
+    "gameMaster": "Game Master"
+  },
+  "dashboard": {
+    "welcome": "Welcome to Talescribe!",
+    "tagline": "Your advanced D&D assistant for characters, spells and campaigns. Supports D&D 5e, 3.5e, Pathfinder and Pathfinder 2e.",
+    "currentEdition": "Current edition",
+    "offlineMode": "Offline mode active",
+    "characterGenerator": "Character Generator",
+    "characterGeneratorDesc": "Create a random hero for adventures",
+    "characters": "Characters",
+    "charactersDesc": "Manage heroes and stats",
+    "dice": "Dice Roller",
+    "diceDesc": "Roll any dice with modifiers",
+    "spells": "Spells",
+    "spellsDesc": "Study schools of magic",
+    "quickRolls": "Quick Rolls"
+  },
+  "charactersPage": {
+    "title": "Characters {{edition}}",
+    "createButton": "Create character",
+    "searchPlaceholder": "Search characters...",
+    "emptyTitle": "No characters in {{edition}}",
+    "emptyText": "Create your first character to start adventures in this edition!"
+  },
+  "dicePage": {
+    "title": "Magic Dice",
+    "subtitle": "Roll dice with modifiers",
+    "quickRolls": "Quick Rolls",
+    "customRoll": "Custom Roll",
+    "count": "Count",
+    "sides": "Sides",
+    "modifier": "Modifier",
+    "roll": "Roll",
+    "formula": "Formula:",
+    "history": "Roll History",
+    "lastRolls": "Recent Rolls",
+    "emptyHistory": "Roll history is empty",
+    "makeFirstRoll": "Make the first roll!"
+  },
+  "questsPage": {
+    "generator": "Quest Generator",
+    "generate": "Generate",
+    "difficulty": "Difficulty"
+  }
+}

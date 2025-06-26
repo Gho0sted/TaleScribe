@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "dashboard": "Главная",
+    "characters": "Персонажи",
+    "character-generator": "Генератор",
+    "dice": "Кости",
+    "spells": "Заклинания",
+    "quests": "Квесты",
+    "development": "Страница в разработке"
+  },
+  "header": {
+    "searchPlaceholder": "Поиск персонажей, заклинаний, монстров...",
+    "offline": "Офлайн",
+    "gameMaster": "Мастер игры"
+  },
+  "dashboard": {
+    "welcome": "Добро пожаловать в Talescribe!",
+    "tagline": "Ваш продвинутый помощник для D&D с полным функционалом управления персонажами, заклинаниями и кампаниями. Поддерживаются редакции: D&D 5e, 3.5e, Pathfinder и Pathfinder 2e.",
+    "currentEdition": "Текущая редакция",
+    "offlineMode": "Работаем в оффлайн-режиме",
+    "characterGenerator": "Генератор персонажей",
+    "characterGeneratorDesc": "Создайте случайного героя для приключений",
+    "characters": "Персонажи",
+    "charactersDesc": "Управляйте героями и их характеристиками",
+    "dice": "Броски костей",
+    "diceDesc": "Бросайте любые кости с модификаторами",
+    "spells": "Заклинания",
+    "spellsDesc": "Изучайте магию разных школ",
+    "quickRolls": "Быстрые броски"
+  },
+  "charactersPage": {
+    "title": "Персонажи {{edition}}",
+    "createButton": "Создать персонажа",
+    "searchPlaceholder": "Поиск персонажей...",
+    "emptyTitle": "Нет персонажей в {{edition}}",
+    "emptyText": "Создайте своего первого персонажа для начала приключений в этой редакции!"
+  },
+  "dicePage": {
+    "title": "Магические кости",
+    "subtitle": "Бросайте кости с модификаторами",
+    "quickRolls": "Быстрые броски",
+    "customRoll": "Пользовательский бросок",
+    "count": "Количество",
+    "sides": "Стороны",
+    "modifier": "Модификатор",
+    "roll": "Бросить",
+    "formula": "Формула:",
+    "history": "История бросков",
+    "lastRolls": "Последние броски",
+    "emptyHistory": "История бросков пока пуста",
+    "makeFirstRoll": "Сделайте первый бросок!"
+  },
+  "questsPage": {
+    "generator": "Генератор квестов",
+    "generate": "Сгенерировать",
+    "difficulty": "Сложность"
+  }
+}

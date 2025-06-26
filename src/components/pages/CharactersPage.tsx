@@ -3,10 +3,12 @@
  * Страница со списком персонажей выбранной редакции
  */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { User, PlusCircle, Search } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 
 const CharactersPage: React.FC = () => {
+  const { t } = useTranslation();
   const { characters, selectedEdition } = useTalescribe();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -20,10 +22,10 @@ const CharactersPage: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold text-white flex items-center">
-            <User className="h-10 w-10 mr-4 text-green-600" /> Персонажи {selectedEdition.toUpperCase()}
+            <User className="h-10 w-10 mr-4 text-green-600" /> {t('charactersPage.title', { edition: selectedEdition.toUpperCase() })}
           </h1>
           <button className="btn-primary">
-            <PlusCircle className="h-5 w-5 mr-2" /> Создать персонажа
+            <PlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
           </button>
         </div>
         <div className="card mb-8">
@@ -31,7 +33,7 @@ const CharactersPage: React.FC = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <input
               type="text"
-              placeholder="Поиск персонажей..."
+              placeholder={t('charactersPage.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="input pl-10"
@@ -41,10 +43,10 @@ const CharactersPage: React.FC = () => {
         {filteredCharacters.length === 0 ? (
           <div className="text-center py-16">
             <User className="h-20 w-20 text-gray-400 mx-auto mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">Нет персонажей в {selectedEdition.toUpperCase()}</h3>
-            <p className="text-gray-400 mb-8 max-w-md mx-auto">Создайте своего первого персонажа для начала приключений в этой редакции!</p>
+            <h3 className="text-2xl font-bold text-white mb-4">{t('charactersPage.emptyTitle', { edition: selectedEdition.toUpperCase() })}</h3>
+            <p className="text-gray-400 mb-8 max-w-md mx-auto">{t('charactersPage.emptyText')}</p>
             <button className="btn-primary">
-              <PlusCircle className="h-5 w-5 mr-2" /> Создать персонажа
+              <PlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
             </button>
           </div>
         ) : (

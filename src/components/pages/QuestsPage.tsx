@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { Card } from '../ui/Card';
 import { Scroll, Star } from '../../constants/icons';
+import { useTranslation } from 'react-i18next';
 
 interface Quest {
   id: number;
@@ -48,6 +49,7 @@ const generateQuest = (level: number): Quest => {
 };
 
 const QuestGenerator: React.FC = () => {
+  const { t } = useTranslation();
   const { characters } = useTalescribe();
   const [quest, setQuest] = useState<Quest | null>(null);
 
@@ -64,13 +66,13 @@ const QuestGenerator: React.FC = () => {
   return (
     <Card>
       <div className="mb-6 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Генератор квестов</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('questsPage.generator')}</h2>
         <button
           onClick={createQuest}
           className="btn bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center space-x-2"
         >
           <Scroll className="w-5 h-5" />
-          <span>Сгенерировать</span>
+          <span>{t('questsPage.generate')}</span>
         </button>
       </div>
       {quest && (
@@ -78,7 +80,7 @@ const QuestGenerator: React.FC = () => {
           <h3 className="text-xl font-semibold text-white">{quest.title}</h3>
           <p className="text-gray-300">{quest.description}</p>
           <div className="flex items-center space-x-2 text-sm text-gray-400">
-            <span>Сложность: {quest.difficulty}</span>
+            <span>{t('questsPage.difficulty')}: {quest.difficulty}</span>
             <span>•</span>
             <span>{quest.createdAt}</span>
           </div>
