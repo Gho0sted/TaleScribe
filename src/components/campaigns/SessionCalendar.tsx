@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSessionStore } from '../../stores/sessionStore';
 import { format } from 'date-fns';
+import { scheduleNotification, requestPermission } from '../../services/notificationService';
 
 declare global {
   interface Window { gapi: any }
@@ -15,6 +16,7 @@ const SessionCalendar: React.FC = () => {
   const [date, setDate] = useState('');
 
   useEffect(() => {
+    requestPermission();
     const start = () => {
       if (!window.gapi) return;
       window.gapi.load('client:auth2', async () => {
@@ -69,6 +71,7 @@ const SessionCalendar: React.FC = () => {
         start: res.result.start.dateTime,
         end: res.result.end.dateTime,
       });
+      scheduleNotification(new Date(res.result.start.dateTime), res.result.summary, 'Session reminder');
       setTitle('');
     } catch (e) {
       console.error(e);

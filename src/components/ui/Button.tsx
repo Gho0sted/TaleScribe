@@ -4,6 +4,11 @@
  */
 import React from 'react';
 
-export const Button = ({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <button {...props}>{children}</button>
+export const Button = ({ children, className = '', ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <button
+    {...props}
+    className={`btn-primary text-base sm:text-sm ${className}`}
+  >
+    {children}
+  </button>
 );

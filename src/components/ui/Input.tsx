@@ -4,6 +4,6 @@
  */
 import React from 'react';
 
-export const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
-  <input {...props} />
+export const Input = ({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
+  <input {...props} className={`input text-base sm:text-sm ${className}`} />
 );

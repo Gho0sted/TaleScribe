@@ -22,7 +22,9 @@
     "papaparse": "^5.4.1",
     "jspdf": "^2.5.1",
     "howler": "^2.2.4",
-    "react-markdown": "^8.0.7"
+    "react-markdown": "^8.0.7",
+    "idb": "^7.1.1",
+    "workbox-window": "^6.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.22.15",
@@ -47,6 +49,7 @@
     "style-loader": "^3.3.3",
     "@types/react-beautiful-dnd": "^13.1.2",
     "webpack-bundle-analyzer": "^4.9.1",
-    "compression-webpack-plugin": "^10.0.0"
+    "compression-webpack-plugin": "^10.0.0",
+    "workbox-webpack-plugin": "^6.5.4"
   }
 }

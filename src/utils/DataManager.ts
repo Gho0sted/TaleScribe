@@ -1,9 +1,11 @@
 /**
- * Utility class for saving and loading application data using localStorage.
+ * Utility class for saving and loading application data using IndexedDB.
  * Provides a simple cache layer and automatic background saving.
- * Утилитный класс для сохранения и загрузки данных через localStorage,
+ * Утилитный класс для сохранения и загрузки данных через IndexedDB,
  * обеспечивающий кэш и автоматическое фоновое сохранение.
- */
+*/
+import { getFromDB, setToDB, addToQueue, getQueue, clearQueue } from './idb';
+
 export class DataManager {
   private cache = new Map<string, unknown>();
   private dirtyKeys = new Set<string>();
@@ -12,12 +14,19 @@ export class DataManager {
 
   constructor() {
     this.setupAutoSave();
+    if (navigator.onLine) {
+      this.flushQueue();
+    }
+    window.addEventListener('online', () => this.flushQueue());
   }
 
   async saveData(key: string, data: unknown): Promise<void> {
     try {
-      const serialized = JSON.stringify(data);
-      localStorage.setItem(key, serialized);
+      if (navigator.onLine) {
+        await setToDB(key, data);
+      } else {
+        await addToQueue({ key, data });
+      }
       this.cache.set(key, data);
       this.dirtyKeys.delete(key);
     } catch (error) {
@@ -30,15 +39,12 @@ export class DataManager {
       if (this.cache.has(key)) {
         return this.cache.get(key) as T;
       }
-
-      const stored = localStorage.getItem(key);
-      if (!stored) {
+      const stored = await getFromDB<T>(key);
+      if (stored === undefined) {
         return defaultValue;
       }
-
-      const data = JSON.parse(stored) as T;
-      this.cache.set(key, data);
-      return data;
+      this.cache.set(key, stored);
+      return stored;
     } catch (error) {
       console.error(`Failed to load ${key}:`, error);
       return defaultValue;
@@ -91,10 +97,18 @@ export class DataManager {
     this.dirtyKeys.forEach((key) => {
       const data = this.cache.get(key);
       if (data !== undefined) {
-        localStorage.setItem(key, JSON.stringify(data));
+        this.saveData(key, data);
       }
     });
     this.dirtyKeys.clear();
     this.lastSaveTime = Date.now();
+  }
+
+  private async flushQueue() {
+    const ops = await getQueue();
+    for (const op of ops) {
+      await setToDB(op.key, op.data);
+    }
+    if (ops.length) await clearQueue();
   }
 }
