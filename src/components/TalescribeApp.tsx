@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { Menu, Search, Bell, AlertTriangle } from '../constants/icons';
+import { IconMenu, IconSearch, IconBell, IconAlertTriangle } from '../constants/icons';
 import { Link, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useTalescribe } from '../contexts/TalescribeContext';
 import { NAVIGATION } from '../constants';
@@ -45,13 +45,13 @@ const TalescribeApp: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <header className="bg-gray-800 border-b border-gray-700 shadow-lg backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container">
           <div className="flex items-center justify-between h-16">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
               className="p-3 text-gray-400 hover:text-white lg:hidden rounded-xl transition-colors"
             >
-              <Menu className="h-6 w-6" />
+              <IconMenu className="h-6 w-6" />
             </button>
             <div className="flex items-center space-x-4">
               <Link
@@ -71,7 +71,7 @@ const TalescribeApp: React.FC = () => {
             </div>
             <div className="flex-1 max-w-xl mx-8 hidden md:block">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <IconSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
                   type="text"
                   placeholder={t('header.searchPlaceholder')}
@@ -84,19 +84,19 @@ const TalescribeApp: React.FC = () => {
             <div className="flex items-center space-x-4">
               {isOffline && (
                 <div className="flex items-center text-yellow-400">
-                  <AlertTriangle className="h-5 w-5 mr-2" />
+                  <IconAlertTriangle className="h-5 w-5 mr-2" />
                   <span className="text-sm hidden sm:block">{t('header.offline')}</span>
                 </div>
               )}
               <button className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors">
-                <Bell className="h-5 w-5" />
+                <IconBell className="h-5 w-5" />
               </button>
               {installPrompt && (
                 <button
                   onClick={promptInstall}
                   className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors"
                 >
-                  Install
+                  Установить
                 </button>
               )}
               <LanguageSwitcher />

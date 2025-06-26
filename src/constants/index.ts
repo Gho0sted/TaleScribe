@@ -1,18 +1,18 @@
 // Collection of static data used across the application
 // Коллекция статических данных, используемых во всем приложении
 import {
-  Home,
-  User,
-  Sparkles,
-  Dice6,
-  Scroll,
-  Users,
-  Package,
-  Shield,
-  Sword,
-  Lightbulb,
-  Save,
-  Settings,
+  IconHome,
+  IconUser,
+  IconSparkles,
+  IconDice6,
+  IconScroll,
+  IconUsers,
+  IconPackage,
+  IconShield,
+  IconSword,
+  IconLightbulb,
+  IconSave,
+  IconSettings,
 } from './icons';
 import { 
   DNDEdition,
@@ -166,19 +166,19 @@ export const SKILLS_DATA: Skill[] = [
 export { CLASS_TALENTS } from './CLASS_TALENTS';
 
 export const NAVIGATION: NavigationItem[] = [
-  { id: 'dashboard', name: 'Главная', icon: Home, color: 'blue' },
-  { id: 'characters', name: 'Персонажи', icon: User, color: 'green' },
-  { id: 'character-generator', name: 'Генератор', icon: Sparkles, color: 'emerald' },
-  { id: 'dice', name: 'Кости', icon: Dice6, color: 'teal' },
-  { id: 'spells', name: 'Заклинания', icon: Scroll, color: 'indigo' },
-  { id: 'quests', name: 'Квесты', icon: Scroll, color: 'pink' },
-  { id: 'content', name: 'Контент', icon: Sparkles, color: 'teal' },
-  { id: 'campaigns', name: 'Кампании', icon: Users, color: 'purple' },
-  { id: 'items', name: 'Предметы', icon: Package, color: 'amber' },
-  { id: 'bestiary', name: 'Бестиарий', icon: Shield, color: 'red' },
-  { id: 'battle', name: 'Бой', icon: Sword, color: 'orange' },
-  { id: 'talents', name: 'Таланты', icon: Lightbulb, color: 'yellow' },
-  { id: 'data-manager', name: 'Данные', icon: Save, color: 'cyan' },
-  { id: 'settings', name: 'Настройки', icon: Settings, color: 'gray' }
+  { id: 'dashboard', name: 'Главная', icon: IconHome, color: 'blue' },
+  { id: 'characters', name: 'Персонажи', icon: IconUser, color: 'green' },
+  { id: 'character-generator', name: 'Генератор', icon: IconSparkles, color: 'emerald' },
+  { id: 'dice', name: 'Кости', icon: IconDice6, color: 'teal' },
+  { id: 'spells', name: 'Заклинания', icon: IconScroll, color: 'indigo' },
+  { id: 'quests', name: 'Квесты', icon: IconScroll, color: 'pink' },
+  { id: 'content', name: 'Контент', icon: IconSparkles, color: 'teal' },
+  { id: 'campaigns', name: 'Кампании', icon: IconUsers, color: 'purple' },
+  { id: 'items', name: 'Предметы', icon: IconPackage, color: 'amber' },
+  { id: 'bestiary', name: 'Бестиарий', icon: IconShield, color: 'red' },
+  { id: 'battle', name: 'Бой', icon: IconSword, color: 'orange' },
+  { id: 'talents', name: 'Таланты', icon: IconLightbulb, color: 'yellow' },
+  { id: 'data-manager', name: 'Данные', icon: IconSave, color: 'cyan' },
+  { id: 'settings', name: 'Настройки', icon: IconSettings, color: 'gray' }
 ];
 

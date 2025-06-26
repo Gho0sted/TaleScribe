@@ -34,6 +34,9 @@
 }
 
 @layer components {
+  .container {
+    @apply mx-auto px-4 md:px-8 lg:px-16 max-w-screen-xl;
+  }
   /* Custom scrollbar */
   .scrollbar-thin {
     scrollbar-width: thin;

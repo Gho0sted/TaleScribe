@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Cloud, RefreshCw } from '../../constants/icons';
+import { IconCloud, IconRefreshCw } from '../../constants/icons';
 import { backupNow, listBackups, restoreBackup } from '../../services/backupService';
 import { BackupFile, cloudSync } from '../../services/cloudSyncService';
 
@@ -57,10 +57,10 @@ const CloudSettings: React.FC = () => {
       </button>
       <div className="space-x-2">
         <button onClick={doBackup} className="btn-primary">
-          <Cloud className="h-4 w-4 mr-2" />Backup Now
+          <IconCloud className="h-4 w-4 mr-2" />Backup Now
         </button>
         <button onClick={load} className="btn-primary">
-          <RefreshCw className="h-4 w-4 mr-2" />Refresh list
+          <IconRefreshCw className="h-4 w-4 mr-2" />Refresh list
         </button>
       </div>
       {loading && <div className="text-gray-400">Loading...</div>}

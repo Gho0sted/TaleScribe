@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { Card } from '../ui/Card';
-import { Scroll, Star } from '../../constants/icons';
+import { IconScroll, IconStar } from '../../constants/icons';
 import { useTranslation } from 'react-i18next';
 
 interface Quest {
@@ -71,7 +71,7 @@ const QuestGenerator: React.FC = () => {
           onClick={createQuest}
           className="btn bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center space-x-2"
         >
-          <Scroll className="w-5 h-5" />
+          <IconScroll className="w-5 h-5" />
           <span>{t('questsPage.generate')}</span>
         </button>
       </div>
@@ -89,7 +89,7 @@ const QuestGenerator: React.FC = () => {
             <ul className="list-disc list-inside space-y-1">
               {quest.rewards.map((r, i) => (
                 <li key={i} className="flex items-center space-x-1 text-gray-300">
-                  <Star className="w-4 h-4 text-yellow-400" />
+                  <IconStar className="w-4 h-4 text-yellow-400" />
                   <span>{r}</span>
                 </li>
               ))}
