@@ -6,7 +6,8 @@
     "dice": "Dice",
     "spells": "Spells",
     "quests": "Quests",
-    "development": "Page under construction"
+    "development": "Page under construction",
+    "battle": "Combat"
   },
   "header": {
     "searchPlaceholder": "Search characters, spells, monsters...",
