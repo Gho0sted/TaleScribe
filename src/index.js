@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { useThemeStore } from './stores/themeStore';
+import { registerServiceWorker } from './registerServiceWorker';
 
 // Применяем тему и акцент к тегу html
 const ThemeWrapper = () => {
@@ -21,3 +22,6 @@ createRoot(document.getElementById("root")).render(
     <ThemeWrapper />
   </BrowserRouter>
 );
+
+// Регистрируем service worker
+registerServiceWorker();

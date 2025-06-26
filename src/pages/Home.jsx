@@ -5,12 +5,14 @@ import { useCharactersStore } from '../stores/charactersStore';
 import { useThemeStore } from '../stores/themeStore';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { usePWAInstall } from '../hooks/usePWAInstall';
+import { useBackgroundSync } from '../hooks/useBackgroundSync';
 
 export const Home = () => {
   const { characters } = useCharactersStore();
   const { accentColor, currentAccent } = useThemeStore();
   const isOnline = useOnlineStatus();
   const { isInstallable, install } = usePWAInstall();
+  const { syncData } = useBackgroundSync();
 
   return (
     <div>
@@ -19,6 +21,7 @@ export const Home = () => {
       {isInstallable && (
         <button onClick={install}>Установить приложение</button>
       )}
+      <button onClick={syncData}>Синхронизировать данные</button>
       <p>Текущий акцент: {accentColor}</p>
       <ul>
         {characters.map((c) => (
