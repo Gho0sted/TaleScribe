@@ -9,12 +9,20 @@
   --font-family: "Inter, sans-serif";
   --primary-accent: #4f46e5;
   --secondary-accent: #d946ef;
+  --color-bg: #ffffff;
+  --color-text: #1f2937;
+}
+
+.dark {
+  --color-bg: #111827;
+  --color-text: #f9fafb;
 }
 
 @layer base {
   
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
  html {

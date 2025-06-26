@@ -13,6 +13,8 @@ module.exports = {
         'mono': ['JetBrains Mono', 'monospace'],
       },
       colors: {
+        bg: 'var(--color-bg)',
+        text: 'var(--color-text)',
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
