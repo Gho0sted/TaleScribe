@@ -12,27 +12,42 @@ const SCOPES = 'https://www.googleapis.com/auth/calendar';
 const SessionCalendar: React.FC = () => {
   const { sessions, addSession, setSessions } = useSessionStore();
   const [signedIn, setSignedIn] = useState(false);
+  const [gapiReady, setGapiReady] = useState(false);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
 
   useEffect(() => {
     requestPermission();
     const start = () => {
-      if (!window.gapi) return;
       window.gapi.load('client:auth2', async () => {
-        await window.gapi.client.init({
-          apiKey: process.env.GOOGLE_API_KEY,
-          clientId: process.env.GOOGLE_CLIENT_ID,
-          discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-          scope: SCOPES,
-        });
-        const auth = window.gapi.auth2.getAuthInstance();
-        setSignedIn(auth.isSignedIn.get());
-        auth.isSignedIn.listen(setSignedIn);
-        if (auth.isSignedIn.get()) loadEvents();
+        try {
+          await window.gapi.client.init({
+            apiKey: process.env.GOOGLE_API_KEY,
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+            scope: SCOPES,
+          });
+          const auth = window.gapi.auth2.getAuthInstance();
+          setSignedIn(auth.isSignedIn.get());
+          setGapiReady(true);
+          auth.isSignedIn.listen(setSignedIn);
+          if (auth.isSignedIn.get()) loadEvents();
+        } catch (e) {
+          console.error('Failed to init gapi:', e);
+        }
       });
     };
-    start();
+
+    if (window.gapi) {
+      start();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://apis.google.com/js/api.js';
+      script.async = true;
+      script.onload = start;
+      script.onerror = () => console.error('Failed to load Google API script');
+      document.body.appendChild(script);
+    }
   }, []);
 
   const loadEvents = async () => {
@@ -52,8 +67,21 @@ const SessionCalendar: React.FC = () => {
     }
   };
 
-  const signIn = () => window.gapi.auth2.getAuthInstance().signIn();
-  const signOut = () => window.gapi.auth2.getAuthInstance().signOut();
+  const signIn = () => {
+    const auth = window.gapi?.auth2?.getAuthInstance?.();
+    if (auth) {
+      auth.signIn();
+    } else {
+      console.error('GAPI auth2 not initialized');
+    }
+  };
+
+  const signOut = () => {
+    const auth = window.gapi?.auth2?.getAuthInstance?.();
+    if (auth) {
+      auth.signOut();
+    }
+  };
 
   const createEvent = async () => {
     const startDate = new Date(date);
@@ -81,10 +109,14 @@ const SessionCalendar: React.FC = () => {
   return (
     <div className="p-4 space-y-4">
       <div className="flex space-x-2">
-        {signedIn ? (
-          <button onClick={signOut} className="btn">Sign out</button>
+        {gapiReady ? (
+          signedIn ? (
+            <button onClick={signOut} className="btn">Sign out</button>
+          ) : (
+            <button onClick={signIn} className="btn">Sign in</button>
+          )
         ) : (
-          <button onClick={signIn} className="btn">Sign in</button>
+          <span>Loading...</span>
         )}
       </div>
       {signedIn && (
