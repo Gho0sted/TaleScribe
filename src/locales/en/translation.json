@@ -57,5 +57,11 @@
     "generator": "Quest Generator",
     "generate": "Generate",
     "difficulty": "Difficulty"
+  },
+  "generatorsPage": {
+    "noLoot": "No loot generated yet",
+    "noEvents": "No events generated yet",
+    "noNPCs": "No NPCs generated yet",
+    "countLabel": "Count"
   }
 }

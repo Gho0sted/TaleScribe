@@ -37,7 +37,7 @@ interface ContentState {
   npcs: NPCProfile[];
   generateLoot: (level: number, types: string[]) => void;
   generateEvent: (category: EventCategory) => void;
-  generateNPC: () => void;
+  generateNPC: (count?: number) => void;
   resetLoot: () => void;
   resetEvents: () => void;
   resetNPCs: () => void;
@@ -60,19 +60,22 @@ export const useContentStore = create<ContentState>((set) => ({
     const e = rand(EVENTS[category]);
     set({ events: [{ ...e, category }] });
   },
-  generateNPC: () => {
-    const npc: NPCProfile = {
-      id: Date.now().toString(),
-      name: rand(NAMES),
-      race: rand(RACES),
-      gender: rand(GENDERS),
-      occupation: rand(OCCUPATIONS),
-      personality: rand(PERSONALITIES),
-      motivation: rand(MOTIVATIONS),
-      connections: [rand(CONNECTIONS)],
-      voiceTraits: rand(VOICE_TRAITS),
-    };
-    set((s) => ({ npcs: [...s.npcs, npc] }));
+  generateNPC: (count = 1) => {
+    const npcs: NPCProfile[] = [];
+    for (let i = 0; i < count; i++) {
+      npcs.push({
+        id: Date.now().toString() + i,
+        name: rand(NAMES),
+        race: rand(RACES),
+        gender: rand(GENDERS),
+        occupation: rand(OCCUPATIONS),
+        personality: rand(PERSONALITIES),
+        motivation: rand(MOTIVATIONS),
+        connections: [rand(CONNECTIONS)],
+        voiceTraits: rand(VOICE_TRAITS),
+      });
+    }
+    set((s) => ({ npcs: [...s.npcs, ...npcs] }));
   },
   resetLoot: () => set({ loot: [] }),
   resetEvents: () => set({ events: [] }),
