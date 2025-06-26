@@ -3,7 +3,7 @@
  * Панель управления с быстрыми действиями и статистикой редакции
  */
 import React from 'react';
-import { Sparkles, User, Dice6, Scroll, AlertTriangle } from 'lucide-react';
+import { Sparkles, User, Dice6, Scroll, AlertTriangle } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { DND_EDITIONS } from '../../constants';
 import { DiceUtils } from '../../utils/DiceUtils';

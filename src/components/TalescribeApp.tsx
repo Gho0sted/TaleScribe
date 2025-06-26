@@ -1,39 +1,30 @@
-import React, { useState, useCallback } from 'react';
-import { Menu, Search, Bell, AlertTriangle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, Search, Bell, AlertTriangle } from '../constants/icons';
+import { Link, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useTalescribe } from '../contexts/TalescribeContext';
 import { NAVIGATION } from '../constants';
+import { ROUTES } from '../constants/routes';
 import EditionSelector from './ui/EditionSelector';
 import DiceRollerPage from './pages/DiceRollerPage';
 import DashboardPage from './pages/DashboardPage';
 import CharactersPage from './pages/CharactersPage';
+import QuestsPage from './pages/QuestsPage';
 
 const TalescribeApp: React.FC = () => {
   const { user, selectedEdition, setSelectedEdition } = useTalescribe();
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const location = useLocation();
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isOffline] = useState(!navigator.onLine);
 
-  const renderPage = useCallback(() => {
-    switch (currentPage) {
-      case 'dice':
-        return <DiceRollerPage />;
-      case 'dashboard':
-        return <DashboardPage onNavigate={setCurrentPage} />;
-      case 'characters':
-        return <CharactersPage />;
-      default:
-        return (
-          <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-8xl mb-6">🎲</div>
-              <h2 className="text-3xl font-bold text-white mb-4">Страница в разработке</h2>
-              <p className="text-gray-400 text-lg">Эта функция скоро будет добавлена!</p>
-            </div>
-          </div>
-        );
-    }
-  }, [currentPage]);
+  const PATH_MAP: Record<string, string> = {
+    dashboard: ROUTES.home,
+    characters: ROUTES.characters,
+    dice: ROUTES.dice,
+    quests: ROUTES.quests,
+    'character-generator': ROUTES.generator,
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -47,16 +38,19 @@ const TalescribeApp: React.FC = () => {
               <Menu className="h-6 w-6" />
             </button>
             <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setCurrentPage('dashboard')}
+              <Link
+                to="/"
                 className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+                onClick={() => {
+                  if (window.innerWidth < 1024) setSidebarOpen(false);
+                }}
               >
                 <div className="text-4xl">🎲</div>
                 <div>
                   <h1 className="text-2xl font-bold gradient-text">Talescribe</h1>
                   <p className="text-xs text-gray-400 hidden sm:block">D&D Assistant • Advanced Edition</p>
                 </div>
-              </button>
+              </Link>
               <EditionSelector selectedEdition={selectedEdition} setSelectedEdition={setSelectedEdition} />
             </div>
             <div className="flex-1 max-w-xl mx-8 hidden md:block">
@@ -104,25 +98,43 @@ const TalescribeApp: React.FC = () => {
           <nav className="p-6 space-y-3 mt-6">
             {NAVIGATION.map((item) => {
               const Icon = item.icon;
-              const isActive = currentPage === item.id;
+              const to = PATH_MAP[item.id] || `/${item.id}`;
+              const isActive = location.pathname === to;
               return (
-                <button
+                <Link
                   key={item.id}
+                  to={to}
                   onClick={() => {
-                    setCurrentPage(item.id);
                     if (window.innerWidth < 1024) setSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center space-x-4 px-6 py-4 rounded-2xl text-left transition-all font-medium ${isActive ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 text-white shadow-lg transform scale-105' : 'text-gray-300 hover:bg-gray-700/50 hover:transform hover:scale-105'}`}
+                  className={`w-full flex items-center space-x-4 px-6 py-4 rounded-2xl text-left transition-all font-medium ${isActive ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 text-white shadow-lg scale-105' : 'text-gray-300 hover:bg-gray-700/50 hover:scale-105'}`}
                 >
-                  <Icon className={`h-6 w-6 ${isActive ? 'text-white' : ''}`} />
+                  <Icon className="h-6 w-6" />
                   <span className="text-sm">{item.name}</span>
-                </button>
+                </Link>
               );
             })}
           </nav>
         </aside>
-        {sidebarOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden transition-opacity" onClick={() => setSidebarOpen(false)} />}
-        <main className="flex-1">{renderPage()}</main>
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden transition-opacity"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+        <main className="flex-1">
+          <Routes>
+            <Route
+              path="/"
+              element={<DashboardPage onNavigate={(page) => navigate(PATH_MAP[page] || `/${page}`)} />}
+            />
+            <Route path="/characters" element={<CharactersPage />} />
+            <Route path="/dice" element={<DiceRollerPage />} />
+            <Route path="/quests" element={<QuestsPage />} />
+            <Route path="/generator" element={<div className="p-8">Генератор в разработке</div>} />
+            <Route path="*" element={<div className="p-8">Страница в разработке</div>} />
+          </Routes>
+        </main>
       </div>
     </div>
   );

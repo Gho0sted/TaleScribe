@@ -3,7 +3,7 @@
  * Страница со списком персонажей выбранной редакции
  */
 import React, { useState } from 'react';
-import { User, PlusCircle, Search } from 'lucide-react';
+import { User, PlusCircle, Search } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 
 const CharactersPage: React.FC = () => {

@@ -3,4 +3,5 @@ export const ROUTES = {
   characters: '/characters',
   generator: '/generator',
   dice: '/dice',
+  quests: '/quests',
 };
