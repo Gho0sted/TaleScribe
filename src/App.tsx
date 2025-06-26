@@ -4,8 +4,12 @@ import TalescribeApp from './components/TalescribeApp';
 import AudioPlayer from './components/AudioPlayer';
 import { BrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
+import { useApplyTheme } from './hooks/useApplyTheme';
+import { usePluginLoader } from './hooks/usePluginLoader';
 
 function App() {
+  useApplyTheme();
+  usePluginLoader();
   return (
     <BrowserRouter>
       <ErrorBoundary>
