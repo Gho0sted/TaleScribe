@@ -18,7 +18,9 @@
     "react-i18next": "^13.0.0",
     "i18next-browser-languagedetector": "^7.0.0",
     "date-fns": "^2.30.0",
-    "react-beautiful-dnd": "^13.1.1"
+    "react-beautiful-dnd": "^13.1.1",
+    "papaparse": "^5.4.1",
+    "jspdf": "^2.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.15",
