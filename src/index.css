@@ -4,16 +4,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
+:root {
+  --app-scale: 1;
+  --font-family: "Inter, sans-serif";
+  --primary-accent: #4f46e5;
+  --secondary-accent: #d946ef;
+}
+
 @layer base {
   
   body {
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  
-  html {
+ html {
     scroll-behavior: smooth;
+    font-size: calc(var(--app-scale) * 100%);
+    font-family: var(--font-family);
   }
+
 }
 
 @layer components {
@@ -70,13 +79,14 @@
 
   /* Button variants */
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105;
+    background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent));
+    @apply text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105;
   }
   
   .btn-secondary {
     @apply bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-lg;
   }
-  
+
   .btn-ghost {
     @apply text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 font-medium py-3 px-6 rounded-xl transition-all duration-200;
   }
