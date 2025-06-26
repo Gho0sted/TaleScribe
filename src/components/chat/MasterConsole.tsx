@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import ChatMessage from './ChatMessage';
 import { useChat } from '../../stores/useChatStore';
+import { Hotbar, SpellList } from '../hotbar';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { useHotbarStore } from '../../stores/useHotbarStore';
 
 const MasterConsole: React.FC = () => {
   const { messages, addMessage, clearChat, exportTranscript } = useChat();
+  const slots = useHotbarStore((s) => s.slots);
+  const setSlot = useHotbarStore((s) => s.setSlot);
   const [text, setText] = useState('');
   const [author, setAuthor] = useState('GM');
   const [role, setRole] = useState<'NPC' | 'Player'>('NPC');
@@ -28,21 +33,43 @@ const MasterConsole: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const dest = result.destination.droppableId;
+    if (!dest.startsWith('slot-')) return;
+    const index = Number(dest.split('-')[1]);
+    if (result.source.droppableId === 'spells') {
+      setSlot(index, { type: 'spell', id: result.draggableId });
+    } else if (result.source.droppableId.startsWith('slot-')) {
+      const from = Number(result.source.droppableId.split('-')[1]);
+      const macro = slots[from];
+      setSlot(from, null);
+      setSlot(index, macro || null);
+    }
+  };
+
   return (
-    <div className="space-y-4">
-      <div className="max-h-80 overflow-y-auto border border-gray-700 p-2 rounded">
-        {messages.map((m) => (
-          <ChatMessage key={m.id} message={m} />
-        ))}
-      </div>
-      <div className="space-y-2">
-        <input
-          type="text"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          className="input w-full"
-          placeholder="Author"
-        />
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="space-y-4">
+        <Hotbar length={8} />
+        <div className="flex space-x-4">
+          <div className="flex-1 max-h-80 overflow-y-auto border border-gray-700 p-2 rounded">
+            {messages.map((m) => (
+              <ChatMessage key={m.id} message={m} />
+            ))}
+          </div>
+          <div className="w-48">
+            <SpellList />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <input
+            type="text"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className="input w-full"
+            placeholder="Author"
+          />
         <select
           className="input w-full"
           value={role}
@@ -71,8 +98,9 @@ const MasterConsole: React.FC = () => {
             Clear Chat
           </button>
         </div>
+        </div>
       </div>
-    </div>
+    </DragDropContext>
   );
 };
 
