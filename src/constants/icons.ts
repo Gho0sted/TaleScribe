@@ -88,6 +88,7 @@ export {
   Trash2,
   TrendingUp,
   Trophy,
+  Cloud,
   Upload,
   User,
   UserPlus,

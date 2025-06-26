@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import SessionCalendar from '../campaigns/SessionCalendar';
 import SessionJournal from '../campaigns/SessionJournal';
 import MasterConsole from '../chat/MasterConsole';
+import { backupNow } from '../../services/backupService';
 
 const CampaignsPage: React.FC = () => {
+  useEffect(() => {
+    backupNow('google', 'campaign').catch(() => {
+      console.error('Auto backup failed');
+    });
+  }, []);
   return (
     <div className="p-8">
       <div className="mb-4 space-x-4">

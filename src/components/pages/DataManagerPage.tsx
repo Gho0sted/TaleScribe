@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Download, Upload, RefreshCw } from '../../constants/icons';
+import CloudSettings from '../ui/CloudSettings';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { exportCharacters, importCharacters, exportToFoundry } from '../../services/exportService';
 
 const DataManagerPage: React.FC = () => {
   const { characters, setCharacters } = useTalescribe();
-  const [tab, setTab] = useState<'export' | 'import' | 'integrations'>('export');
+  const [tab, setTab] = useState<'export' | 'import' | 'integrations' | 'cloud'>('export');
   const [loading, setLoading] = useState(false);
 
   const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +35,7 @@ const DataManagerPage: React.FC = () => {
         <button className={`btn-primary ${tab === 'export' ? '' : 'opacity-70'}`} onClick={() => setTab('export')}>Экспорт</button>
         <button className={`btn-primary ${tab === 'import' ? '' : 'opacity-70'}`} onClick={() => setTab('import')}>Импорт</button>
         <button className={`btn-primary ${tab === 'integrations' ? '' : 'opacity-70'}`} onClick={() => setTab('integrations')}>Интеграции</button>
+        <button className={`btn-primary ${tab === 'cloud' ? '' : 'opacity-70'}`} onClick={() => setTab('cloud')}>Cloud</button>
       </div>
 
       {tab === 'export' && (
@@ -65,6 +67,10 @@ const DataManagerPage: React.FC = () => {
         <div className="space-y-4">
           <p className="flex items-center"><RefreshCw className="h-5 w-5 mr-2" />D&D Beyond sync coming soon...</p>
         </div>
+      )}
+
+      {tab === 'cloud' && (
+        <CloudSettings />
       )}
     </div>
   );
