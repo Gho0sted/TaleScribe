@@ -4,4 +4,6 @@ export const ROUTES = {
   generator: '/generator',
   dice: '/dice',
   quests: '/quests',
+  campaignsCalendar: '/campaigns/calendar',
+  campaignsJournal: '/campaigns/journal',
 };
