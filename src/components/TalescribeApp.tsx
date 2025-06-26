@@ -7,6 +7,7 @@ import { ROUTES } from '../constants/routes';
 import EditionSelector from './ui/EditionSelector';
 import LanguageSwitcher from './layout/LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
+import { usePWA } from '../hooks/usePWA';
 const DiceRollerPage = React.lazy(() => import('./pages/DiceRollerPage'));
 const DashboardPage = React.lazy(() => import('./pages/DashboardPage'));
 const CharactersPage = React.lazy(() => import('./pages/CharactersPage'));
@@ -26,6 +27,7 @@ const TalescribeApp: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isOffline] = useState(!navigator.onLine);
+  const { installPrompt, promptInstall } = usePWA();
 
   const PATH_MAP: Record<string, string> = {
     dashboard: ROUTES.home,
@@ -89,6 +91,14 @@ const TalescribeApp: React.FC = () => {
               <button className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors">
                 <Bell className="h-5 w-5" />
               </button>
+              {installPrompt && (
+                <button
+                  onClick={promptInstall}
+                  className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors"
+                >
+                  Install
+                </button>
+              )}
               <LanguageSwitcher />
               <div className="flex items-center space-x-3">
                 <div
