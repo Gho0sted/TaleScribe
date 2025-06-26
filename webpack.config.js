@@ -11,7 +11,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
+    filename: (pathData) =>
+      pathData.chunk.name === 'sw' ? 'sw.js' : '[name].[contenthash].js',
   },
   optimization: {
     splitChunks: {
