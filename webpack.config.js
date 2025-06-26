@@ -3,10 +3,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: {
+    main: './src/index.tsx',
+    sw: './src/sw.ts',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
     // Правила обработки файлов
 
@@ -30,12 +33,18 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
   ],
   devServer: {
-    static: './dist',
+    static: [
+      { directory: path.join(__dirname, 'dist') },
+      { directory: path.join(__dirname, 'public') },
+    ],
     hot: true,
   },
 };

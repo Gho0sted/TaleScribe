@@ -3,6 +3,7 @@
  * Панель управления с быстрыми действиями и статистикой редакции
  */
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Sparkles, User, Dice6, Scroll, AlertTriangle } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { DND_EDITIONS } from '../../constants';
@@ -13,6 +14,7 @@ interface DashboardPageProps {
 }
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
+  const { t } = useTranslation();
   const { selectedEdition, characters, spells, bestiary, items } = useTalescribe();
   const [isOffline] = React.useState(!navigator.onLine);
 
@@ -25,15 +27,14 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto p-8">
         <div className="text-center mb-12">
           <div className="text-6xl mb-6">🎲</div>
-          <h1 className="text-5xl font-bold gradient-text mb-4">Добро пожаловать в Talescribe!</h1>
+          <h1 className="text-5xl font-bold gradient-text mb-4">{t('dashboard.welcome')}</h1>
           <p className="text-gray-400 text-xl max-w-4xl mx-auto">
-            Ваш продвинутый помощник для D&D с полным функционалом управления персонажами, заклинаниями и кампаниями.
-            Поддерживаются редакции: D&D 5e, 3.5e, Pathfinder и Pathfinder 2e.
+            {t('dashboard.tagline')}
           </p>
           <div className="inline-flex items-center bg-gray-800 rounded-2xl shadow-lg px-6 py-4 border border-gray-700 mb-8 mt-8">
             <span className="text-2xl mr-3">{currentEdition?.icon}</span>
             <div className="text-left">
-              <div className="text-sm text-gray-400">Текущая редакция</div>
+              <div className="text-sm text-gray-400">{t('dashboard.currentEdition')}</div>
               <div className="font-bold text-white">{currentEdition?.name}</div>
             </div>
           </div>
@@ -41,7 +42,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             <div className="bg-yellow-900/20 border border-yellow-800 rounded-xl p-4 max-w-md mx-auto mb-8">
               <div className="flex items-center justify-center">
                 <AlertTriangle className="h-5 w-5 text-yellow-400 mr-2" />
-                <span className="text-yellow-200">Работаем в оффлайн-режиме</span>
+                <span className="text-yellow-200">{t('dashboard.offlineMode')}</span>
               </div>
             </div>
           )}
@@ -52,32 +53,32 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             className="group bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 hover:from-emerald-600 hover:via-green-600 hover:to-teal-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-emerald-400/20"
           >
             <Sparkles className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
-            <h3 className="text-xl font-bold mb-3">Генератор персонажей</h3>
-            <p className="text-sm opacity-90">Создайте случайного героя для приключений</p>
+            <h3 className="text-xl font-bold mb-3">{t('dashboard.characterGenerator')}</h3>
+            <p className="text-sm opacity-90">{t('dashboard.characterGeneratorDesc')}</p>
           </button>
           <button
             onClick={() => onNavigate('characters')}
             className="group bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-blue-400/20"
           >
             <User className="h-16 w-16 mx-auto mb-4 group-hover:animate-bounce" />
-            <h3 className="text-xl font-bold mb-3">Персонажи</h3>
-            <p className="text-sm opacity-90">Управляйте героями и их характеристиками</p>
+            <h3 className="text-xl font-bold mb-3">{t('dashboard.characters')}</h3>
+            <p className="text-sm opacity-90">{t('dashboard.charactersDesc')}</p>
           </button>
           <button
             onClick={() => onNavigate('dice')}
             className="group bg-gradient-to-br from-teal-500 via-cyan-500 to-blue-600 hover:from-teal-600 hover:via-cyan-600 hover:to-blue-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-teal-400/20"
           >
             <Dice6 className="h-16 w-16 mx-auto mb-4 group-hover:animate-spin" />
-            <h3 className="text-xl font-bold mb-3">Броски костей</h3>
-            <p className="text-sm opacity-90">Бросайте любые кости с модификаторами</p>
+            <h3 className="text-xl font-bold mb-3">{t('dashboard.dice')}</h3>
+            <p className="text-sm opacity-90">{t('dashboard.diceDesc')}</p>
           </button>
           <button
             onClick={() => onNavigate('spells')}
             className="group bg-gradient-to-br from-purple-500 via-violet-500 to-indigo-600 hover:from-purple-600 hover:via-violet-600 hover:to-indigo-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-purple-400/20"
           >
             <Scroll className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
-            <h3 className="text-xl font-bold mb-3">Заклинания</h3>
-            <p className="text-sm opacity-90">Изучайте магию разных школ</p>
+            <h3 className="text-xl font-bold mb-3">{t('dashboard.spells')}</h3>
+            <p className="text-sm opacity-90">{t('dashboard.spellsDesc')}</p>
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -87,7 +88,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <User className="h-10 w-10 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Персонажи</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('dashboard.characters')}</h3>
                 <p className="text-4xl font-bold text-green-600 mb-1">{editionCharacters.length}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">в {selectedEdition.toUpperCase()}</p>
               </div>
@@ -99,7 +100,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <Scroll className="h-10 w-10 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Заклинания</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('dashboard.spells')}</h3>
                 <p className="text-4xl font-bold text-purple-600 mb-1">{editionSpells.length}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">в {selectedEdition.toUpperCase()}</p>
               </div>
@@ -132,7 +133,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
         </div>
         <div className="card">
           <h2 className="text-2xl font-bold text-white mb-8 flex items-center">
-            <Dice6 className="h-7 w-7 mr-3 text-teal-400" /> Быстрые броски
+            <Dice6 className="h-7 w-7 mr-3 text-teal-400" /> {t('dashboard.quickRolls')}
           </h2>
           <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
             {[

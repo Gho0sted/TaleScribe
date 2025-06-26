@@ -3,11 +3,13 @@
  * Самостоятельный кубомет с историей бросков
  */
 import React, { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Dice6, Trash2 } from '../../constants/icons';
 import { DiceUtils } from '../../utils/DiceUtils';
 import { DiceRoll } from '../../types';
 
 const DiceRollerPage: React.FC = () => {
+  const { t } = useTranslation();
   const [rollHistory, setRollHistory] = useState<DiceRoll[]>([]);
   const [customDice, setCustomDice] = useState({ count: 1, sides: 20, modifier: 0 });
 
@@ -27,7 +29,7 @@ const DiceRollerPage: React.FC = () => {
   );
 
   const rollCustomDice = () => {
-    rollDice(customDice.count, customDice.sides, customDice.modifier, 'Пользовательский бросок');
+    rollDice(customDice.count, customDice.sides, customDice.modifier, t('dicePage.customRoll'));
   };
 
   return (
@@ -35,12 +37,12 @@ const DiceRollerPage: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="text-6xl mb-6">🎲</div>
-          <h1 className="text-4xl font-bold gradient-text mb-4">Магические кости</h1>
-          <p className="text-gray-400 text-lg">Бросайте кости с модификаторами</p>
+          <h1 className="text-4xl font-bold gradient-text mb-4">{t('dicePage.title')}</h1>
+          <p className="text-gray-400 text-lg">{t('dicePage.subtitle')}</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-semibold text-gray-100 mb-6 text-center">Быстрые броски</h2>
+            <h2 className="text-2xl font-semibold text-gray-100 mb-6 text-center">{t('dicePage.quickRolls')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
               {[
                 { name: 'd4', sides: 4, color: 'from-red-400 to-red-600' },
@@ -65,10 +67,10 @@ const DiceRollerPage: React.FC = () => {
               ))}
             </div>
             <div className="card bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700">
-              <h3 className="text-2xl font-semibold text-white mb-6 text-center">Пользовательский бросок</h3>
+              <h3 className="text-2xl font-semibold text-white mb-6 text-center">{t('dicePage.customRoll')}</h3>
               <div className="grid grid-cols-4 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-3">Количество</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-3">{t('dicePage.count')}</label>
                   <input
                     type="number"
                     min="1"
@@ -79,7 +81,7 @@ const DiceRollerPage: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-3">Стороны</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-3">{t('dicePage.sides')}</label>
                   <input
                     type="number"
                     min="2"
@@ -90,7 +92,7 @@ const DiceRollerPage: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-3">Модификатор</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-3">{t('dicePage.modifier')}</label>
                   <input
                     type="number"
                     min="-20"
@@ -102,12 +104,12 @@ const DiceRollerPage: React.FC = () => {
                 </div>
                 <div className="flex items-end">
                   <button onClick={rollCustomDice} className="w-full btn-primary bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600">
-                    Бросить
+                    {t('dicePage.roll')}
                   </button>
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-slate-400 text-sm mb-2">Формула:</div>
+                <div className="text-slate-400 text-sm mb-2">{t('dicePage.formula')}</div>
                 <div className="text-white font-mono text-lg bg-slate-700/50 rounded-lg px-4 py-2 border border-slate-600">
                   {customDice.count}d{customDice.sides}
                   {DiceUtils.formatModifier(customDice.modifier)}
@@ -116,11 +118,11 @@ const DiceRollerPage: React.FC = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-semibold text-gray-100 mb-6 text-center">История бросков</h2>
+            <h2 className="text-2xl font-semibold text-gray-100 mb-6 text-center">{t('dicePage.history')}</h2>
             <div className="card bg-gray-800 border-gray-700 max-h-[600px] overflow-hidden p-0">
               <div className="p-4 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-700">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-white">Последние броски</h3>
+                  <h3 className="font-semibold text-white">{t('dicePage.lastRolls')}</h3>
                   <button onClick={() => setRollHistory([])} className="text-gray-400 hover:text-red-400 transition-colors">
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -148,8 +150,8 @@ const DiceRollerPage: React.FC = () => {
                 ) : (
                   <div className="p-8 text-center">
                     <Dice6 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-400 text-lg">История бросков пока пуста</p>
-                    <p className="text-gray-500 text-sm mt-2">Сделайте первый бросок!</p>
+                  <p className="text-gray-400 text-lg">{t('dicePage.emptyHistory')}</p>
+                  <p className="text-gray-500 text-sm mt-2">{t('dicePage.makeFirstRoll')}</p>
                   </div>
                 )}
               </div>
