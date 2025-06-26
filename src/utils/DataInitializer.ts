@@ -1,5 +1,12 @@
 import { Character, Spell, BestiaryCreature, Item, Edition } from '../types';
 
+/**
+ * Provides example data used when the application is first loaded.
+ * This helps showcase functionality in offline mode.
+ * Предоставляет пример данных для первого запуска приложения и демонстрации
+ * возможностей в офлайн-режиме.
+ */
+
 export class DataInitializer {
   static getInitialCharacters(edition: Edition): Character[] {
     return [

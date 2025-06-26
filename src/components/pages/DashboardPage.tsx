@@ -1,3 +1,7 @@
+/**
+ * Dashboard with quick actions and edition statistics
+ * Панель управления с быстрыми действиями и статистикой редакции
+ */
 import React from 'react';
 import { Sparkles, User, Dice6, Scroll, AlertTriangle } from 'lucide-react';
 import { useTalescribe } from '../../contexts/TalescribeContext';

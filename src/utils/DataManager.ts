@@ -1,8 +1,14 @@
+/**
+ * Utility class for saving and loading application data using localStorage.
+ * Provides a simple cache layer and automatic background saving.
+ * Утилитный класс для сохранения и загрузки данных через localStorage,
+ * обеспечивающий кэш и автоматическое фоновое сохранение.
+ */
 export class DataManager {
   private cache = new Map<string, unknown>();
   private dirtyKeys = new Set<string>();
   private lastSaveTime = Date.now();
-  private autoSaveInterval: NodeJS.Timeout | null = null;
+  private autoSaveInterval: ReturnType<typeof setInterval> | null = null;
 
   constructor() {
     this.setupAutoSave();
@@ -39,15 +45,27 @@ export class DataManager {
     }
   }
 
+  /**
+   * Mark specific key as changed to trigger auto save
+   * Пометить ключ измененным для последующего автосохранения
+   */
   markDirty(key: string): void {
     this.dirtyKeys.add(key);
   }
 
+  /**
+   * Remove all cached values
+   * Очистить все закешированные значения
+   */
   clearCache(): void {
     this.cache.clear();
     this.dirtyKeys.clear();
   }
 
+  /**
+   * Stop auto saving and clean timer
+   * Остановить автосохранение и очистить таймер
+   */
   destroy(): void {
     if (this.autoSaveInterval) {
       clearInterval(this.autoSaveInterval);
@@ -63,6 +81,10 @@ export class DataManager {
     }, 5000);
   }
 
+  /**
+   * Actually persist dirty keys to localStorage
+   * Непосредственно сохранить измененные ключи в localStorage
+   */
   private performAutoSave(): void {
     if (this.dirtyKeys.size === 0) return;
     console.log('Auto-saving dirty keys:', Array.from(this.dirtyKeys));

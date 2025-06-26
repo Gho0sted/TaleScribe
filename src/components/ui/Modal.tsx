@@ -1,3 +1,7 @@
+/**
+ * Generic modal wrapper
+ * Универсальная обертка модального окна
+ */
 import React from 'react';
 
 export const Modal = ({ open, children }: { open: boolean; children: React.ReactNode }) => {

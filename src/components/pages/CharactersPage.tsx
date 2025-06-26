@@ -1,3 +1,7 @@
+/**
+ * Page listing characters for current edition
+ * Страница со списком персонажей выбранной редакции
+ */
 import React, { useState } from 'react';
 import { User, PlusCircle, Search } from 'lucide-react';
 import { useTalescribe } from '../../contexts/TalescribeContext';

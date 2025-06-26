@@ -1,3 +1,9 @@
+/**
+ * Global React context storing all Talescribe state including
+ * characters, spells, items and UI preferences.
+ * Глобальный контекст React, хранящий состояние Talescribe: персонажей,
+ * заклинания, предметы и настройки интерфейса.
+ */
 import React, {
   createContext,
   useContext,
