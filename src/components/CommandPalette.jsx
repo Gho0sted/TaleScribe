@@ -20,6 +20,7 @@ export const CommandPalette = ({ palette }) => {
               palette.setOpen(false);
             }}
           >
+            {cmd.icon && <cmd.icon size={16} style={{ marginRight: 4 }} />}
             {cmd.label}
           </li>
         ))}
