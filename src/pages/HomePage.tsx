@@ -1,12 +1,12 @@
 // Домашняя страница
 // Главная страница приложения
 import React from 'react';
-import { useCharactersStore } from '../stores/charactersStore';
-import { useThemeStore } from '../stores/themeStore';
+import { useCharactersStore } from '../store/charactersStore';
+import { useThemeStore } from '../store/themeStore';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 
-export const Home = () => {
+export const HomePage = () => {
   const { characters } = useCharactersStore();
   const { accentColor, currentAccent } = useThemeStore();
   const isOnline = useOnlineStatus();

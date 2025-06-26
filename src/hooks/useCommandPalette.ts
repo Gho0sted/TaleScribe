@@ -2,7 +2,7 @@
 import { useState, useMemo } from 'react';
 import { Home as HomeIcon, Users, Moon, Palette } from 'lucide-react';
 import { useAppNavigation } from './useAppNavigation';
-import { useThemeStore } from '../stores/themeStore';
+import { useThemeStore } from '../store/themeStore';
 
 const createCommand = (id, label, action, icon) => ({ id, label, action, icon });
 
