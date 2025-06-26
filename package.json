@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack serve --mode development",
+    "start": "rimraf dist && webpack serve --mode development",
     "build": "webpack --mode production"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
+    "rimraf": "^5.0.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

@@ -13,6 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: (pathData) =>
       pathData.chunk.name === 'sw' ? 'sw.js' : '[name].[contenthash].js',
+    clean: true,
   },
   optimization: {
     splitChunks: {
@@ -53,10 +54,10 @@ module.exports = {
     new HtmlWebpackPlugin({ template: './public/index.html' }),
     new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
     new CompressionPlugin({ algorithm: 'gzip' }),
+    // new (require('clean-webpack-plugin').CleanWebpackPlugin)(),
   ],
   devServer: {
     static: [
-      { directory: path.join(__dirname, 'dist') },
       { directory: path.join(__dirname, 'public') },
       { directory: path.join(__dirname, 'plugins') },
     ],
