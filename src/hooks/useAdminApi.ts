@@ -3,9 +3,11 @@ export interface ApiOptions {
   body?: any;
 }
 
+import { authFetch } from '../utils/authFetch';
+
 export const useAdminApi = () => {
   const callApi = async <T>(path: string, options: ApiOptions = {}): Promise<T> => {
-    const res = await fetch(`/api/admin${path}`, {
+    const res = await authFetch(`/api/admin${path}`, {
       method: options.method || 'GET',
       headers: { 'Content-Type': 'application/json' },
       body: options.body ? JSON.stringify(options.body) : undefined,

@@ -24,6 +24,10 @@ export const useThemeStore = create<ThemeSettingsState>(
       setPrimaryColor: (color) => set({ primaryColor: color }),
       setSecondaryColor: (color) => set({ secondaryColor: color }),
     }),
-    { name: 'theme-settings' }
+    {
+      name: 'theme-settings',
+      version: 2,
+      migrate: (state) => ({ ...state }),
+    }
   )
 );

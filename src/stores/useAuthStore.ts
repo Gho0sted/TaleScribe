@@ -11,7 +11,9 @@ export interface AuthUser {
 
 interface AuthState {
   user?: AuthUser;
+  token?: string;
   setUser: (u: AuthUser) => void;
+  setToken: (t: string | undefined) => void;
   logout: () => void;
 }
 
@@ -24,8 +26,10 @@ export const useAuthStore = create<AuthState>(
         role: 'admin',
         status: 'active',
       },
+      token: undefined,
       setUser: (u) => set({ user: u }),
-      logout: () => set({ user: undefined }),
+      setToken: (t) => set({ token: t }),
+      logout: () => set({ user: undefined, token: undefined }),
     }),
     { name: 'auth-store' }
   )
