@@ -10,4 +10,5 @@ export const ROUTES = {
   campaignsJournal: '/campaigns/journal',
   dataManager: '/data-manager',
   talents: '/talents',
+  admin: '/admin',
 };
