@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useThemeStore } from './stores/themeStore';
-import { Home } from './pages/Home';
+import { useThemeStore } from './store/themeStore';
+import { HomePage } from './pages/HomePage';
 import { CharactersPage } from './pages/CharactersPage';
 import { useCommandPalette } from './hooks/useCommandPalette';
-import { CommandPalette } from './components/CommandPalette';
+import { CommandPalette } from './components/layout/CommandPalette';
 
-// Основной роутер приложения
 const AppRouter = () => {
   const palette = useCommandPalette();
   const { theme } = useThemeStore();
@@ -23,7 +22,7 @@ const AppRouter = () => {
         <button onClick={() => palette.setOpen(!palette.open)}>Команды</button>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/characters" element={<CharactersPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

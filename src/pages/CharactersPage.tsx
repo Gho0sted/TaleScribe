@@ -1,6 +1,6 @@
 // Страница с персонажами
 import React from 'react';
-import { useCharactersStore } from '../stores/charactersStore';
+import { useCharactersStore } from '../store/charactersStore';
 
 export const CharactersPage = () => {
   const { characters } = useCharactersStore();

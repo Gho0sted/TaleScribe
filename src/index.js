@@ -3,9 +3,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { useThemeStore } from './stores/themeStore';
+import { useThemeStore } from './store/themeStore';
 
-// Применяем тему и акцент к тегу html
 const ThemeWrapper = () => {
   const { theme, accentColor } = useThemeStore();
   React.useEffect(() => {
@@ -14,7 +13,6 @@ const ThemeWrapper = () => {
   }, [theme, accentColor]);
   return <App />;
 };
-// Монтируем React-компонент в элемент root
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
