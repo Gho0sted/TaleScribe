@@ -99,7 +99,7 @@ npm run build
 ### Добавление новой страницы
 - Создайте компонент в `src/components/pages/`
 - Добавьте маршрут в `NAVIGATION` в `src/constants/index.ts`
-- Обновите роутинг в `TalescribeApp.tsx`
+- Обновите пути в `src/constants/routes.ts` и роутинг в `TalescribeApp.tsx`
 
 ### Настройка Google API
 1. Создайте проект в [Google Cloud Console](https://console.cloud.google.com/).
