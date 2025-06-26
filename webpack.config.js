@@ -36,6 +36,10 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.(mp3|wav)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
