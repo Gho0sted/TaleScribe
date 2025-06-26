@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useEventGenerator } from '../stores/useContentStore';
+import { useTranslation } from 'react-i18next';
 
 const EventGenerator: React.FC = () => {
+  const { t } = useTranslation();
   const { events, generateEvent, resetEvents } = useEventGenerator();
   const [category, setCategory] = useState<'weather'|'road'|'intrigue'>('weather');
 
@@ -22,12 +24,16 @@ const EventGenerator: React.FC = () => {
         <button className="btn-secondary" onClick={resetEvents}>Reset</button>
       </div>
       <div className="mt-4 space-y-4">
-        {events.map((e) => (
-          <div key={e.id} className="card animate-slideUp">
-            <div className="font-bold mb-2">{e.title}</div>
-            <p className="text-sm text-gray-400">{e.description}</p>
-          </div>
-        ))}
+        {events.length === 0 ? (
+          <p className="text-gray-400">{t('generatorsPage.noEvents')}</p>
+        ) : (
+          events.map((e) => (
+            <div key={e.id} className="card animate-slideUp">
+              <div className="font-bold mb-2">{e.title}</div>
+              <p className="text-sm text-gray-400">{e.description}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

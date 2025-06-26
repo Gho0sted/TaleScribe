@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useLootGenerator } from '../stores/useContentStore';
+import { useTranslation } from 'react-i18next';
 
 const LootGenerator: React.FC = () => {
+  const { t } = useTranslation();
   const { loot, generateLoot, resetLoot } = useLootGenerator();
   const [level, setLevel] = useState(1);
   const [filters, setFilters] = useState<{[k:string]: boolean}>({ weapon:false, artifact:false, potion:false });
@@ -35,14 +37,18 @@ const LootGenerator: React.FC = () => {
         <button className="btn-secondary" onClick={resetLoot}>Reset</button>
       </div>
       <div className="mt-4 grid gap-4">
-        {loot.map((item) => (
-          <div key={item.id} className="card animate-slideUp">
-            <div className="font-bold">{item.name}</div>
-            <div className="text-sm text-gray-400">
-              {item.rarity} - {item.value} gp x{item.quantity}
+        {loot.length === 0 ? (
+          <p className="text-gray-400">{t('generatorsPage.noLoot')}</p>
+        ) : (
+          loot.map((item) => (
+            <div key={item.id} className="card animate-slideUp">
+              <div className="font-bold">{item.name}</div>
+              <div className="text-sm text-gray-400">
+                {item.rarity} - {item.value} gp x{item.quantity}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
