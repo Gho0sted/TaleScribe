@@ -64,5 +64,20 @@
     "noEvents": "Событий пока нет",
     "noNPCs": "НПС ещё не сгенерированы",
     "countLabel": "Количество"
+  },
+  "tools": {
+    "abilityCalculatorTitle": "Калькулятор характеристик",
+    "chooseRace": "Выберите расу",
+    "anyBonus": "+1 к",
+    "method": {
+      "random": "Случайно",
+      "pointBuy": "Очки",
+      "standard": "Стандарт",
+      "manual": "Ручной бросок"
+    },
+    "roll": "Бросить",
+    "reroll": "Перебросить",
+    "pointsRemaining": "Осталось очков",
+    "modifier": "Модификатор"
   }
 }

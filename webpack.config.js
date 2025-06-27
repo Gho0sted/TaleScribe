@@ -7,6 +7,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   mode: isProd ? "production" : "development",
+  devtool: "source-map",
   entry: {
     main: "./src/index.tsx",
     sw: "./src/sw.ts",
