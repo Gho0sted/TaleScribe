@@ -23,7 +23,7 @@
     "react-i18next": "^15.5.3",
     "i18next-browser-languagedetector": "^7.0.0",
     "date-fns": "^2.30.0",
-    "@hello-pangea/dnd": "^13.1.0",
+    "@hello-pangea/dnd": "^18.0.1",
     "papaparse": "^5.4.1",
     "jspdf": "^3.0.1",
     "howler": "^2.2.4",
