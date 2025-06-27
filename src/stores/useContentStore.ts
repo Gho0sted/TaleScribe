@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { LOOT_TABLES, LootTableKey } from '../data/lootTables';
 import { EVENTS, EventCategory } from '../data/events';
 import {

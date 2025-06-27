@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { formatISO } from 'date-fns';
 
 export interface SessionEvent {
