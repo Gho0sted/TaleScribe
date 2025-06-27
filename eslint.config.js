@@ -1,26 +1,37 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const compat = new FlatCompat({ baseDirectory: __dirname });
+import { FlatCompat } from '@eslint/eslintrc';
 
-module.exports = [
-  ...compat.config({
-    parser: '@typescript-eslint/parser',
-    extends: [
-      'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:react/recommended',
-      'plugin:security/recommended',
-      'plugin:prettier/recommended'
-    ],
-    plugins: ['react', 'security', '@typescript-eslint'],
+// Adapter for classic shareable configs
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+export default [
+  // Apply recommended presets via FlatCompat
+  ...compat.extends(
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:security/recommended',
+    'plugin:prettier/recommended'
+  ),
+  {
+    plugins: {
+      react: require('eslint-plugin-react'),
+      '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
+      security: require('eslint-plugin-security'),
+      prettier: require('eslint-plugin-prettier'),
+    },
+    languageOptions: {
+      parser: require('@typescript-eslint/parser'),
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+      },
+    },
     settings: { react: { version: 'detect' } },
     rules: {
-      'no-console': 'warn'
-    }
-  }),
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parserOptions: { project: './tsconfig.json' }
-    }
-  }
+      'no-console': 'warn',
+      'prettier/prettier': 'error',
+    },
+  },
 ];
