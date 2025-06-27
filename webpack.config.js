@@ -6,6 +6,7 @@ const isProd = process.env.NODE_ENV === "production";
 const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
+  mode: isProd ? "production" : "development",
   entry: {
     main: "./src/index.tsx",
     sw: "./src/sw.ts",
