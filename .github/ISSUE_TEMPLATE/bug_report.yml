@@ -1,0 +1,25 @@
+name: Bug report
+description: Сообщить об ошибке
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Опишите ошибку
+      description: Кратко опишите вашу проблему
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги для воспроизведения
+      description: Перечислите шаги, повторяющие баг
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ожидаемое поведение
+      description: Что должно быть по вашему мнению
+  - type: textarea
+    id: environment
+    attributes:
+      label: Окружение
+      description: Система, браузер, версия

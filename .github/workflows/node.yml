@@ -17,7 +17,12 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run lint:fix || true
-      - run: npm run format || true
+      - run: npm run format:check
+      - run: npm run coverage
       - run: npx webpack --config webpack.config.js
       - name: Audit dependencies
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=high
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
