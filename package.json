@@ -30,7 +30,7 @@
     "react-markdown": "^8.0.7",
     "rehype-sanitize": "^5.0.1",
     "idb": "^8.0.3",
-    "workbox-window": "^7.3.2",
+    "workbox-window": "^6.5.4",
     "@capacitor/core": "^5.0.0"
   },
   "devDependencies": {
