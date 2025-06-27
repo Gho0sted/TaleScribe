@@ -203,8 +203,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
               <button
                 key={die.sides}
                 onClick={async () => {
-                  const result = await DiceUtils.rollDiceAsync(1, die.sides);
-                  console.log(`${die.name}: ${result.total}`);
+                  await DiceUtils.rollDiceAsync(1, die.sides);
                 }}
                 className={`bg-gradient-to-br ${die.color} hover:shadow-lg text-white py-4 px-6 rounded-2xl font-bold transition-all text-center group transform hover:scale-105`}
               >

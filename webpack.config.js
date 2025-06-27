@@ -81,5 +81,6 @@ module.exports = {
       { directory: path.join(__dirname, "plugins") },
     ],
     hot: true,
+    historyApiFallback: true,
   },
 };

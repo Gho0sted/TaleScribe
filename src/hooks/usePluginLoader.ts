@@ -2,9 +2,19 @@ import { useEffect } from 'react';
 import { usePluginStore } from '../stores/usePluginStore';
 
 const createApi = () => ({
-  addButton: (label: string) => console.log('Add button', label),
-  addCommand: (cmd: { id: string; run: () => void }) =>
-    console.log('Add command', cmd.id),
+  addButton: (label: string) => {
+    const btn = document.createElement('button');
+    btn.textContent = label;
+    btn.className = 'btn';
+    document.body.appendChild(btn);
+  },
+  addCommand: (cmd: { id: string; run: () => void }) => {
+    window.addEventListener('message', (e) => {
+      if (e.data === cmd.id) {
+        cmd.run();
+      }
+    });
+  },
 });
 
 export const usePluginLoader = () => {

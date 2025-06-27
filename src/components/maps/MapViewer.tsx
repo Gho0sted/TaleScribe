@@ -150,6 +150,7 @@ const MapViewer: React.FC = () => {
             <img
               key={t.id}
               src={t.src}
+              alt="token"
               className="absolute w-8 h-8 cursor-move select-none"
               style={{
                 left: `${t.x * 100}%`,

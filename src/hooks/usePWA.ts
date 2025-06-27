@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Workbox } from 'workbox-window';
+import { BeforeInstallPromptEvent } from '../types/pwa';
 
 export const usePWA = () => {
-  const [installPrompt, setInstallPrompt] = useState<any>(null);
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [installed, setInstalled] = useState(false);
 
   useEffect(() => {
-    const handler = (e: any) => {
+    const handler = (e: BeforeInstallPromptEvent) => {
       e.preventDefault();
       setInstallPrompt(e);
     };
-    window.addEventListener('beforeinstallprompt', handler);
-    window.addEventListener('appinstalled', () => {
+    const appInstalled = () => {
       setInstalled(true);
       setInstallPrompt(null);
-    });
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('appinstalled', appInstalled);
     return () => {
       window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener('appinstalled', appInstalled);
     };
   }, []);
 

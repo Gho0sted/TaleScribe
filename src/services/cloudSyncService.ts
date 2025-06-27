@@ -171,7 +171,7 @@ class CloudSyncService {
       },
     );
     const data = await res.json();
-    return (data.entries || []).map((e: any) => ({ id: e.id, name: e.name }));
+    return (data.entries || []).map((e: { id: string; name: string }) => ({ id: e.id, name: e.name }));
   }
 
   async downloadBackup(provider: CloudProvider, id: string): Promise<Blob> {
