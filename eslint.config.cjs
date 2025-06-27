@@ -1,11 +1,11 @@
-import { FlatCompat } from '@eslint/eslintrc';
+const { FlatCompat } = require('@eslint/eslintrc');
 
 // Adapter for classic shareable configs
 const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-export default [
+module.exports = [
   // Apply recommended presets via FlatCompat
   ...compat.extends(
     'eslint:recommended',
