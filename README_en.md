@@ -1,5 +1,9 @@
 # 🎲 Talescribe - Advanced D&D Assistant
 
+![CI](https://github.com/your-org/TaleScribe/actions/workflows/node.yml/badge.svg)
+![Coverage](https://codecov.io/gh/your-org/TaleScribe/branch/main/graph/badge.svg)
+![Dependencies](https://img.shields.io/librariesio/release/npm/dnd-talescribe)
+
 Full-featured application for playing Dungeons & Dragons with support for multiple editions, character management, dice rolls, spells and more.
 
 ## ✨ Features
@@ -58,6 +62,15 @@ npm install -D webpack-cli
 In an isolated environment the command may fail with `403` due to no access to registry.npmjs.org.
 
 Important: run `npm start` and `npm run build` separately.
+
+## 🧪 Testing
+
+```bash
+npm test
+npm run coverage
+```
+
+Tests are executed with Vitest and the coverage report is uploaded to Codecov.
 
 ## 🖥️ Working in Visual Studio Code
 
@@ -179,6 +192,7 @@ Strict typing for all components, utilities and game data.
 
 MIT License - free for personal and commercial projects.
 
-🤝 Contributions are welcome! Follow the existing code style and add tests for new functionality.
+🤝 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Before committing run `npm run lint && npm run format:check && npm test`.
 
 Created with ❤️ for the D&D community

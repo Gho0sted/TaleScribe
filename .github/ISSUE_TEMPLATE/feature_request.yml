@@ -1,0 +1,10 @@
+name: Feature Request
+description: Предложить новую функцию или улучшение
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Опишите вашу идею
+      description: Поделитесь как это можно реализовать
