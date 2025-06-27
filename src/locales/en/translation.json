@@ -64,5 +64,20 @@
     "noEvents": "No events generated yet",
     "noNPCs": "No NPCs generated yet",
     "countLabel": "Count"
+  },
+  "tools": {
+    "abilityCalculatorTitle": "Ability Score Calculator",
+    "chooseRace": "Choose race",
+    "anyBonus": "Apply +1 to",
+    "method": {
+      "random": "Random",
+      "pointBuy": "Point Buy",
+      "standard": "Standard",
+      "manual": "Manual Roll"
+    },
+    "roll": "Roll",
+    "reroll": "Re-roll",
+    "pointsRemaining": "Points remaining",
+    "modifier": "Modifier"
   }
 }
