@@ -5,8 +5,8 @@
   "scripts": {
     "start": "rimraf dist && webpack serve --mode development",
     "build": "webpack --mode production",
-    "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
-    "lint:fix": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
+    "lint": "eslint -c eslint.config.js --ext .js,.jsx,.ts,.tsx src",
+    "lint:fix": "eslint -c eslint.config.js --ext .js,.jsx,.ts,.tsx src --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,md,json}'"
   },
   "dependencies": {

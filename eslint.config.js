@@ -1,15 +1,18 @@
 const { FlatCompat } = require('@eslint/eslintrc');
+const js = require('@eslint/js');
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const reactPlugin = require('eslint-plugin-react');
 const securityPlugin = require('eslint-plugin-security');
 const prettierPlugin = require('eslint-plugin-prettier');
 
-const compat = new FlatCompat();
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+});
 
 module.exports = [
   ...compat.extends(
-    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:security/recommended',
