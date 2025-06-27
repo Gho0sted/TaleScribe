@@ -1,11 +1,6 @@
 import React from 'react';
-import TabNavigation from '../components/TabNavigation';
+import ClassesComponent from '../components/classes/ClassesComponent';
 
-const ClassesPage: React.FC = () => (
-  <div className="p-8 text-white">
-    <TabNavigation />
-    <h1 className="text-2xl font-bold">Классы</h1>
-  </div>
-);
+const ClassesPage: React.FC = () => <ClassesComponent />;
 
 export default ClassesPage;
