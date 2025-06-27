@@ -9,7 +9,8 @@
     "content": "Контент",
     "talents": "Таланты",
     "development": "Страница в разработке",
-    "battle": "Бой"
+    "battle": "Бой",
+    "settings": "Настройки"
   },
   "header": {
     "searchPlaceholder": "Поиск персонажей, заклинаний, монстров...",

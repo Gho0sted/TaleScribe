@@ -9,7 +9,8 @@
     "content": "Content Generators",
     "talents": "Talents",
     "development": "Page under construction",
-    "battle": "Combat"
+    "battle": "Combat",
+    "settings": "Settings"
   },
   "header": {
     "searchPlaceholder": "Search characters, spells, monsters...",
