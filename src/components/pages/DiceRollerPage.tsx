@@ -32,12 +32,7 @@ const DiceRollerPage: React.FC = () => {
   };
 
   const rollDice = useCallback(
-    async (
-      count: number,
-      sides: number,
-      modifier = 0,
-      label = '',
-    ) => {
+    async (count: number, sides: number, modifier = 0, label = '') => {
       const result = await DiceUtils.rollDiceAsync(count, sides, modifier);
       const rollData: DiceRoll = {
         id: Date.now(),
