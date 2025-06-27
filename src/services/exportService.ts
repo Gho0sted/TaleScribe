@@ -42,14 +42,14 @@ export function exportCharacters(
 export async function importCharacters(file: File): Promise<Character[]> {
   const ext = file.name.split('.').pop()?.toLowerCase();
   const text = await file.text();
-  let data: any[] = [];
+  let data: Record<string, unknown>[] = [];
   try {
     switch (ext) {
       case 'json':
         data = JSON.parse(text);
         break;
       case 'csv':
-        data = Papa.parse(text, { header: true }).data as any[];
+        data = Papa.parse(text, { header: true }).data as Record<string, unknown>[];
         break;
       case 'md':
       case 'markdown': {

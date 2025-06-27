@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useJournalStore } from '../../stores/journalStore';
 
-const markdownToHtml = (md: string) => {
-  return md
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
-    .replace(/\*(.*)\*/gim, '<i>$1</i>')
-    .replace(/\n$/gim, '<br />');
-};
 
 const SessionJournal: React.FC<{ sessionId: string }> = ({ sessionId }) => {
   const { notes, setNote } = useJournalStore();
@@ -35,10 +27,9 @@ const SessionJournal: React.FC<{ sessionId: string }> = ({ sessionId }) => {
           className="w-full h-64 p-2 bg-gray-800 text-white rounded"
         />
       ) : (
-        <div
-          className="prose prose-invert"
-          dangerouslySetInnerHTML={{ __html: markdownToHtml(content) }}
-        />
+        <div className="prose prose-invert">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
       )}
       <div className="space-x-2">
         <button onClick={() => setEdit(!edit)} className="btn">

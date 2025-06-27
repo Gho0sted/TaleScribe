@@ -96,7 +96,6 @@ export class DataManager {
    */
   private performAutoSave(): void {
     if (this.dirtyKeys.size === 0) return;
-    console.log('Auto-saving dirty keys:', Array.from(this.dirtyKeys));
     this.dirtyKeys.forEach((key) => {
       const data = this.cache.get(key);
       if (data !== undefined) {
