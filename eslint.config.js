@@ -37,7 +37,15 @@ module.exports = [
       prettier: require('eslint-plugin-prettier'),
       import: importPlugin,
     },
-    settings: { react: { version: 'detect' } },
+    settings: {
+      react: { version: 'detect' },
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+        typescript: {},
+      },
+    },
     rules: {
       'no-console': 'warn',
       'react/prop-types': 'off',
