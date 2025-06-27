@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const isProd = process.env.NODE_ENV === 'production';
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
@@ -52,7 +53,16 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
-    new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
+    // анализ бандла только для production-сборки
+    ...(isProd
+      ? [
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false,
+            reportFilename: 'report.html',
+          }),
+        ]
+      : []),
     new CompressionPlugin({ algorithm: 'gzip' }),
     // new (require('clean-webpack-plugin').CleanWebpackPlugin)(),
   ],

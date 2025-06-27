@@ -1,4 +1,5 @@
 import { Character, DiceRoll } from '../types';
+import { rollDice as baseRoll } from './diceShared';
 
 export class DiceUtils {
   static getModifier(score: number): number {
@@ -10,7 +11,7 @@ export class DiceUtils {
   }
 
   static rollDice(count: number, sides: number, modifier: number = 0): Omit<DiceRoll, 'id' | 'timestamp'> {
-    const rolls = Array.from({ length: count }, () => Math.floor(Math.random() * sides) + 1);
+    const rolls = baseRoll(count, sides);
     const total = rolls.reduce((sum, roll) => sum + roll, 0) + modifier;
     return {
       rolls,
