@@ -3,7 +3,7 @@ import { TalescribeProvider } from './contexts/TalescribeContext';
 import TalescribeApp from './components/TalescribeApp';
 import AudioPlayer from './components/AudioPlayer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AdminDashboard from './admin/AdminDashboard';
+const AdminDashboard = React.lazy(() => import('./admin/AdminDashboard'));
 import ForbiddenPage from './components/pages/ForbiddenPage';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
@@ -19,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
+        <React.Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route
             path="/admin/*"
@@ -41,6 +42,7 @@ function App() {
             }
           />
         </Routes>
+        </React.Suspense>
       </ErrorBoundary>
     </BrowserRouter>
   );
