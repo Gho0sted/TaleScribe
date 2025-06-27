@@ -17,6 +17,7 @@ const CombatTrackerPage = React.lazy(() => import('./pages/CombatTrackerPage'));
 const ContentGeneratorsPage = React.lazy(() => import('./pages/ContentGeneratorsPage'));
 const DataManagerPage = React.lazy(() => import('./pages/DataManagerPage'));
 const TalentsPage = React.lazy(() => import('./pages/TalentsPage'));
+const SettingsPage = React.lazy(() => import('./pages/SettingsPage'));
 import { LoadingSpinner } from './ui/LoadingSpinner';
 
 const TalescribeApp: React.FC = () => {
@@ -40,6 +41,7 @@ const TalescribeApp: React.FC = () => {
     battle: ROUTES.combat,
     talents: ROUTES.talents,
     'data-manager': ROUTES.dataManager,
+    settings: ROUTES.settings,
   };
 
   return (
@@ -161,6 +163,7 @@ const TalescribeApp: React.FC = () => {
             <Route path="/content" element={<ContentGeneratorsPage />} />
             <Route path="/talents" element={<TalentsPage />} />
             <Route path="/data-manager" element={<DataManagerPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
             <Route path="/campaigns/*" element={<CampaignsPage />} />
             <Route path="/generator" element={<div className="p-8">{t('nav.development')}</div>} />
             <Route path="*" element={<div className="p-8">{t('nav.development')}</div>} />
