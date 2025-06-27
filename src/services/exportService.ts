@@ -5,18 +5,27 @@ import { validateCharacter } from '../utils/validation';
 
 export type ExportFormat = 'json' | 'markdown' | 'csv' | 'pdf';
 
+function createBlob(parts: BlobPart[], type: string): Blob {
+  const blob = new Blob(parts, { type });
+  if (typeof (blob as any).text !== 'function') {
+    (blob as any).text = async () => {
+      const buffer = await blob.arrayBuffer();
+      return new TextDecoder().decode(buffer);
+    };
+  }
+  return blob;
+}
+
 export function exportCharacters(
   characters: Character[],
   format: ExportFormat,
 ): Blob {
   switch (format) {
     case 'json':
-      return new Blob([JSON.stringify(characters, null, 2)], {
-        type: 'application/json',
-      });
+      return createBlob([JSON.stringify(characters, null, 2)], 'application/json');
     case 'csv': {
       const csv = Papa.unparse(characters);
-      return new Blob([csv], { type: 'text/csv' });
+      return createBlob([csv], 'text/csv');
     }
     case 'markdown': {
       const headers = ['Name', 'Class', 'Race', 'Level', 'HP', 'AC'];
@@ -25,7 +34,7 @@ export function exportCharacters(
       characters.forEach((c) => {
         md += `| ${c.name} | ${c.class} | ${c.race} | ${c.level} | ${c.hitPoints.current}/${c.hitPoints.max} | ${c.armorClass} |\n`;
       });
-      return new Blob([md], { type: 'text/markdown' });
+      return createBlob([md], 'text/markdown');
     }
     case 'pdf': {
       const doc = new jsPDF();
@@ -34,7 +43,7 @@ export function exportCharacters(
         doc.text(`${c.name} (${c.class} ${c.level})`, 10, 20 + i * 10);
       });
       const blob = doc.output('blob');
-      return blob as Blob;
+      return createBlob([blob], 'application/pdf');
     }
   }
 }
@@ -102,7 +111,5 @@ export function exportToFoundry(
       data: { description: i.description },
     })),
   }));
-  return new Blob([JSON.stringify(payload, null, 2)], {
-    type: 'application/json',
-  });
+  return createBlob([JSON.stringify(payload, null, 2)], 'application/json');
 }
