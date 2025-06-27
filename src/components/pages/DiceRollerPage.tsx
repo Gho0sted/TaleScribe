@@ -28,8 +28,13 @@ const DiceRollerPage: React.FC = () => {
   };
 
   const rollDice = useCallback(
-    (count: number, sides: number, modifier: number = 0, label: string = '') => {
-      const result = DiceUtils.rollDice(count, sides, modifier);
+    async (
+      count: number,
+      sides: number,
+      modifier: number = 0,
+      label: string = ''
+    ) => {
+      const result = await DiceUtils.rollDiceAsync(count, sides, modifier);
       const rollData: DiceRoll = {
         id: Date.now(),
         ...result,
@@ -37,13 +42,17 @@ const DiceRollerPage: React.FC = () => {
         timestamp: new Date().toLocaleTimeString(),
       };
       setRollHistory((prev) => [rollData, ...prev.slice(0, 19)]);
-      return result;
     },
     []
   );
 
-  const rollCustomDice = () => {
-    rollDice(customDice.count, customDice.sides, customDice.modifier, t('dicePage.customRoll'));
+  const rollCustomDice = async () => {
+    await rollDice(
+      customDice.count,
+      customDice.sides,
+      customDice.modifier,
+      t('dicePage.customRoll')
+    );
   };
 
   return (

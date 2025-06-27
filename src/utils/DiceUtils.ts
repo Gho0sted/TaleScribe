@@ -20,6 +20,21 @@ export class DiceUtils {
     };
   }
 
+  static rollDiceAsync(
+    count: number,
+    sides: number,
+    modifier: number = 0
+  ): Promise<Omit<DiceRoll, 'id' | 'timestamp'>> {
+    const worker = new Worker(new URL('../workers/DiceWorker.ts', import.meta.url), { type: 'module' });
+    return new Promise((resolve) => {
+      worker.addEventListener('message', (e) => {
+        resolve(e.data);
+        worker.terminate();
+      });
+      worker.postMessage({ count, sides, modifier });
+    });
+  }
+
   static formatModifier(modifier: number): string {
     return modifier >= 0 ? `+${modifier}` : `${modifier}`;
   }
