@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable } from '@hello-pangea/dnd';
 import { useHotbar, Macro } from '../../stores/useHotbarStore';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { useChat } from '../../stores/useChatStore';

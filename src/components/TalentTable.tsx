@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import { downloadFile } from '../utils/downloadFile';
 import { CLASS_TALENTS, ClassTalent } from '../constants/CLASS_TALENTS';
 import { useTalentStore } from '../stores/useTalentStore';
 import {
@@ -67,12 +68,7 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
     const blob = new Blob([data], {
       type: format === 'csv' ? 'text/csv' : 'text/markdown',
     });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `talents.${format === 'csv' ? 'csv' : 'md'}`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadFile(blob, `talents.${format === 'csv' ? 'csv' : 'md'}`);
   };
 
   return (

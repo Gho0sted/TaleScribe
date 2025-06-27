@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
 import { useJournalStore } from '../../stores/journalStore';
+import { downloadFile } from '../../utils/downloadFile';
 
 
 const SessionJournal: React.FC<{ sessionId: string }> = ({ sessionId }) => {
@@ -10,12 +12,7 @@ const SessionJournal: React.FC<{ sessionId: string }> = ({ sessionId }) => {
 
   const exportMd = () => {
     const blob = new Blob([content], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `session-${sessionId}.md`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadFile(blob, `session-${sessionId}.md`);
   };
 
   return (
@@ -28,7 +25,7 @@ const SessionJournal: React.FC<{ sessionId: string }> = ({ sessionId }) => {
         />
       ) : (
         <div className="prose prose-invert">
-          <ReactMarkdown>{content}</ReactMarkdown>
+          <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{content}</ReactMarkdown>
         </div>
       )}
       <div className="space-x-2">

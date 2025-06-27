@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IconDownload, IconUpload, IconRefreshCw } from '../../constants/icons';
 import CloudSettings from '../ui/CloudSettings';
 import { useTalescribe } from '../../contexts/TalescribeContext';
+import { downloadFile } from '../../utils/downloadFile';
 import {
   exportCharacters,
   importCharacters,
@@ -26,13 +27,8 @@ const DataManagerPage: React.FC = () => {
 
   const handleExport = (format: 'json' | 'markdown' | 'csv' | 'pdf') => {
     const blob = exportCharacters(characters, format);
-    const url = URL.createObjectURL(blob);
     const ext = format === 'markdown' ? 'md' : format;
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `characters.${ext}`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadFile(blob, `characters.${ext}`);
   };
 
   return (
@@ -89,12 +85,7 @@ const DataManagerPage: React.FC = () => {
             className="btn-primary"
             onClick={() => {
               const blob = exportToFoundry('characters', characters);
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = 'foundry-characters.json';
-              a.click();
-              URL.revokeObjectURL(url);
+              downloadFile(blob, 'foundry-characters.json');
             }}
           >
             Export to Foundry
