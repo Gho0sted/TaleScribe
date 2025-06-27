@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import ChatMessage from './ChatMessage';
 import { useChat } from '../../stores/useChatStore';
 import { Hotbar, SpellList } from '../hotbar';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from '@hello-pangea/dnd';
+import { downloadFile } from '../../utils/downloadFile';
 import { useHotbarStore } from '../../stores/useHotbarStore';
 
 const MasterConsole: React.FC = () => {
@@ -24,13 +25,8 @@ const MasterConsole: React.FC = () => {
     const blob = new Blob([data], {
       type: format === 'json' ? 'application/json' : 'text/markdown',
     });
-    const url = URL.createObjectURL(blob);
     const ext = format === 'json' ? 'json' : 'md';
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `transcript.${ext}`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadFile(blob, `transcript.${ext}`);
   };
 
   const onDragEnd = (result: DropResult) => {

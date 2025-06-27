@@ -4,7 +4,7 @@ import {
   Droppable,
   Draggable,
   DropResult,
-} from 'react-beautiful-dnd';
+} from '@hello-pangea/dnd';
 import { useInitiative, useStatuses, Status } from '../../stores/combatStore';
 
 const TURN_TIME = 30;
