@@ -1,3 +1,7 @@
+/**
+ * Main user interface shell with navigation and routing.
+ * Главная оболочка пользовательского интерфейса с навигацией и маршрутами.
+ */
 import React, { useState, Suspense } from 'react';
 import {
   IconMenu,
@@ -17,7 +21,7 @@ import { NAVIGATION } from '../constants';
 import { ROUTES } from '../constants/routes';
 import EditionSelector from './ui/EditionSelector';
 import LanguageSwitcher from './layout/LanguageSwitcher';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 import { usePWA } from '../hooks/usePWA';
 const DiceRollerPage = React.lazy(() => import('./pages/DiceRollerPage'));
 const DashboardPage = React.lazy(() => import('./pages/DashboardPage'));
@@ -47,7 +51,7 @@ const ToolsPage = React.lazy(() => import('../pages/ToolsPage'));
 import { LoadingSpinner } from './ui/LoadingSpinner';
 
 const TalescribeApp: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { user, selectedEdition, setSelectedEdition } = useTalescribe();
   const location = useLocation();
   const navigate = useNavigate();

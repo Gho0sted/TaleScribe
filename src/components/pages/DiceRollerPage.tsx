@@ -3,13 +3,13 @@
  * Самостоятельный кубомет с историей бросков
  */
 import React, { useState, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 import { IconDice6, IconTrash } from '../../constants/icons';
 import { DiceUtils } from '../../utils/DiceUtils';
 import { DiceRoll } from '../../types';
 
 const DiceRollerPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const [rollHistory, setRollHistory] = useState<DiceRoll[]>([]);
   const [customDice, setCustomDice] = useState({
     count: 1,

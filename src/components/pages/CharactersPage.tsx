@@ -3,12 +3,12 @@
  * Страница со списком персонажей выбранной редакции
  */
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 import { IconUser, IconPlusCircle, IconSearch } from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 
 const CharactersPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { characters, selectedEdition } = useTalescribe();
   const [searchTerm, setSearchTerm] = useState('');
 

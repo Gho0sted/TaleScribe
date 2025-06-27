@@ -1,9 +1,13 @@
+/**
+ * Generates random treasure suitable for the party level.
+ * Генерирует случайные сокровища, подходящие для уровня партии.
+ */
 import React, { useState } from 'react';
 import { useLootGenerator } from '../stores/useContentStore';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 
 const LootGenerator: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { loot, generateLoot, resetLoot } = useLootGenerator();
   const [level, setLevel] = useState(1);
   const [filters, setFilters] = useState<{ [k: string]: boolean }>({

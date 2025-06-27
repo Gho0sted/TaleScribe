@@ -1,3 +1,7 @@
+/**
+ * Application entry component configuring providers and routing.
+ * Главный компонент приложения, настраивающий провайдеры и маршрутизацию.
+ */
 import React from 'react';
 import { TalescribeProvider } from './contexts/TalescribeContext';
 import TalescribeApp from './components/TalescribeApp';
