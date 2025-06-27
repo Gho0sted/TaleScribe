@@ -28,13 +28,14 @@ export const useHotbarStore = create<HotbarState>(
       setSlotCount: (count) =>
         set((state) => {
           const slots = [...state.slots];
-          if (slots.length < count) slots.push(...Array(count - slots.length).fill(null));
+          if (slots.length < count)
+            slots.push(...Array(count - slots.length).fill(null));
           else if (slots.length > count) slots.length = count;
           return { slots };
         }),
     }),
-    { name: 'hotbar-store' }
-  )
+    { name: 'hotbar-store' },
+  ),
 );
 
 export const useHotbar = () =>

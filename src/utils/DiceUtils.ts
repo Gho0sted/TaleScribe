@@ -1,5 +1,5 @@
-import { Character, DiceRoll } from "../types";
-import { rollDice as baseRoll } from "./diceShared";
+import { Character, DiceRoll } from '../types';
+import { rollDice as baseRoll } from './diceShared';
 
 export class DiceUtils {
   static getModifier(score: number): number {
@@ -14,14 +14,14 @@ export class DiceUtils {
     count: number,
     sides: number,
     modifier: number = 0,
-  ): Omit<DiceRoll, "id" | "timestamp"> {
+  ): Omit<DiceRoll, 'id' | 'timestamp'> {
     const rolls = baseRoll(count, sides);
     const total = rolls.reduce((sum, roll) => sum + roll, 0) + modifier;
     return {
       rolls,
       total,
       modifier,
-      formula: `${count}d${sides}${modifier !== 0 ? this.formatModifier(modifier) : ""}`,
+      formula: `${count}d${sides}${modifier !== 0 ? this.formatModifier(modifier) : ''}`,
     };
   }
 
@@ -29,13 +29,13 @@ export class DiceUtils {
     count: number,
     sides: number,
     modifier: number = 0,
-  ): Promise<Omit<DiceRoll, "id" | "timestamp">> {
+  ): Promise<Omit<DiceRoll, 'id' | 'timestamp'>> {
     const worker = new Worker(
-      new URL("../workers/DiceWorker.ts", import.meta.url),
-      { type: "module" },
+      new URL('../workers/DiceWorker.ts', import.meta.url),
+      { type: 'module' },
     );
     return new Promise((resolve) => {
-      worker.addEventListener("message", (e) => {
+      worker.addEventListener('message', (e) => {
         resolve(e.data);
         worker.terminate();
       });
@@ -49,24 +49,24 @@ export class DiceUtils {
 
   static calculateSkillModifier(character: Character, skillId: string): number {
     const skillsData = [
-      { id: "acrobatics", ability: "dexterity" },
-      { id: "animalHandling", ability: "wisdom" },
-      { id: "arcana", ability: "intelligence" },
-      { id: "athletics", ability: "strength" },
-      { id: "deception", ability: "charisma" },
-      { id: "history", ability: "intelligence" },
-      { id: "insight", ability: "wisdom" },
-      { id: "intimidation", ability: "charisma" },
-      { id: "investigation", ability: "intelligence" },
-      { id: "medicine", ability: "wisdom" },
-      { id: "nature", ability: "intelligence" },
-      { id: "perception", ability: "wisdom" },
-      { id: "performance", ability: "charisma" },
-      { id: "persuasion", ability: "charisma" },
-      { id: "religion", ability: "intelligence" },
-      { id: "sleightOfHand", ability: "dexterity" },
-      { id: "stealth", ability: "dexterity" },
-      { id: "survival", ability: "wisdom" },
+      { id: 'acrobatics', ability: 'dexterity' },
+      { id: 'animalHandling', ability: 'wisdom' },
+      { id: 'arcana', ability: 'intelligence' },
+      { id: 'athletics', ability: 'strength' },
+      { id: 'deception', ability: 'charisma' },
+      { id: 'history', ability: 'intelligence' },
+      { id: 'insight', ability: 'wisdom' },
+      { id: 'intimidation', ability: 'charisma' },
+      { id: 'investigation', ability: 'intelligence' },
+      { id: 'medicine', ability: 'wisdom' },
+      { id: 'nature', ability: 'intelligence' },
+      { id: 'perception', ability: 'wisdom' },
+      { id: 'performance', ability: 'charisma' },
+      { id: 'persuasion', ability: 'charisma' },
+      { id: 'religion', ability: 'intelligence' },
+      { id: 'sleightOfHand', ability: 'dexterity' },
+      { id: 'stealth', ability: 'dexterity' },
+      { id: 'survival', ability: 'wisdom' },
     ];
 
     const skill = skillsData.find((s) => s.id === skillId);
@@ -99,6 +99,6 @@ export class DiceUtils {
   }
 
   static calculatePassivePerception(character: Character): number {
-    return 10 + this.calculateSkillModifier(character, "perception");
+    return 10 + this.calculateSkillModifier(character, 'perception');
   }
 }

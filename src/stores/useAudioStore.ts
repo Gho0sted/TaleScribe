@@ -80,6 +80,6 @@ export const useAudioStore = create<AudioState>(
         set((state) => ({ playlists: [...state.playlists, pl] })),
       setPlaylists: (pls) => set({ playlists: pls }),
     }),
-    { name: 'audio-store' }
-  )
+    { name: 'audio-store' },
+  ),
 );

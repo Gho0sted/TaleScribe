@@ -7,7 +7,11 @@ const SpellList: React.FC = () => {
   return (
     <Droppable droppableId="spells">
       {(provided) => (
-        <div ref={provided.innerRef} {...provided.droppableProps} className="space-y-2 max-h-60 overflow-y-auto p-2 bg-gray-800 rounded">
+        <div
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          className="space-y-2 max-h-60 overflow-y-auto p-2 bg-gray-800 rounded"
+        >
           {spells.map((spell, i) => (
             <Draggable key={spell.id} draggableId={spell.id} index={i}>
               {(p) => (

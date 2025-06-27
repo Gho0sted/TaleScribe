@@ -20,11 +20,11 @@ export const usePluginStore = create<PluginState>(
       togglePlugin: (name) =>
         set((state) => ({
           plugins: state.plugins.map((p) =>
-            p.name === name ? { ...p, enabled: !p.enabled } : p
+            p.name === name ? { ...p, enabled: !p.enabled } : p,
           ),
         })),
       setPlugins: (plugins) => set({ plugins }),
     }),
-    { name: 'plugin-store' }
-  )
+    { name: 'plugin-store' },
+  ),
 );

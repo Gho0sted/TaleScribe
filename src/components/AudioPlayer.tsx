@@ -87,7 +87,11 @@ const AudioPlayer: React.FC = () => {
     useAudioStore.setState((state) => ({
       playlists: [
         ...state.playlists,
-        { ...activePlaylist, id: newId, name: `${activePlaylist.name} (копия)` },
+        {
+          ...activePlaylist,
+          id: newId,
+          name: `${activePlaylist.name} (копия)`,
+        },
       ],
     }));
   };
@@ -100,7 +104,10 @@ const AudioPlayer: React.FC = () => {
   return (
     <div className="p-4 bg-gray-800 text-gray-200 space-y-2 rounded-md">
       <div className="flex space-x-2 items-center">
-        <button onClick={togglePlay} className="px-2 py-1 bg-indigo-500 rounded">
+        <button
+          onClick={togglePlay}
+          className="px-2 py-1 bg-indigo-500 rounded"
+        >
           {isPlaying ? 'Pause' : 'Play'}
         </button>
         <span>{track.name}</span>
@@ -130,7 +137,10 @@ const AudioPlayer: React.FC = () => {
             </option>
           ))}
         </select>
-        <button onClick={savePlaylist} className="px-2 py-1 bg-indigo-500 rounded">
+        <button
+          onClick={savePlaylist}
+          className="px-2 py-1 bg-indigo-500 rounded"
+        >
           Сохранить плейлист
         </button>
       </div>

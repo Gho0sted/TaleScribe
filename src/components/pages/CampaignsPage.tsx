@@ -14,13 +14,31 @@ const CampaignsPage: React.FC = () => {
   return (
     <div className="p-8">
       <div className="mb-4 space-x-4">
-        <NavLink to="calendar" className={({isActive}) => isActive ? 'btn' : 'btn bg-gray-700'}>Календарь</NavLink>
-        <NavLink to="journal" className={({isActive}) => isActive ? 'btn' : 'btn bg-gray-700'}>Журнал</NavLink>
-        <NavLink to="console" className={({isActive}) => isActive ? 'btn' : 'btn bg-gray-700'}>Консоль</NavLink>
+        <NavLink
+          to="calendar"
+          className={({ isActive }) => (isActive ? 'btn' : 'btn bg-gray-700')}
+        >
+          Календарь
+        </NavLink>
+        <NavLink
+          to="journal"
+          className={({ isActive }) => (isActive ? 'btn' : 'btn bg-gray-700')}
+        >
+          Журнал
+        </NavLink>
+        <NavLink
+          to="console"
+          className={({ isActive }) => (isActive ? 'btn' : 'btn bg-gray-700')}
+        >
+          Консоль
+        </NavLink>
       </div>
       <Routes>
         <Route path="calendar" element={<SessionCalendar />} />
-        <Route path="journal" element={<SessionJournal sessionId="default" />} />
+        <Route
+          path="journal"
+          element={<SessionJournal sessionId="default" />}
+        />
         <Route path="console" element={<MasterConsole />} />
       </Routes>
     </div>

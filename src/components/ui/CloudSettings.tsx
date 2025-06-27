@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { IconCloud, IconRefreshCw } from '../../constants/icons';
-import { backupNow, listBackups, restoreBackup } from '../../services/backupService';
+import {
+  backupNow,
+  listBackups,
+  restoreBackup,
+} from '../../services/backupService';
 import { BackupFile, cloudSync } from '../../services/cloudSyncService';
 
 const CloudSettings: React.FC = () => {
@@ -52,23 +56,33 @@ const CloudSettings: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <button onClick={() => cloudSync.authorizeGoogle()} className="btn-primary">
+      <button
+        onClick={() => cloudSync.authorizeGoogle()}
+        className="btn-primary"
+      >
         Connect Google Drive
       </button>
       <div className="space-x-2">
         <button onClick={doBackup} className="btn-primary">
-          <IconCloud className="h-4 w-4 mr-2" />Backup Now
+          <IconCloud className="h-4 w-4 mr-2" />
+          Backup Now
         </button>
         <button onClick={load} className="btn-primary">
-          <IconRefreshCw className="h-4 w-4 mr-2" />Refresh list
+          <IconRefreshCw className="h-4 w-4 mr-2" />
+          Refresh list
         </button>
       </div>
       {loading && <div className="text-gray-400">Loading...</div>}
       <ul className="space-y-2">
         {files.map((f) => (
-          <li key={f.id} className="flex items-center justify-between border p-2 rounded">
+          <li
+            key={f.id}
+            className="flex items-center justify-between border p-2 rounded"
+          >
             <span>{f.name}</span>
-            <button onClick={() => doRestore(f.id)} className="btn-primary">Restore</button>
+            <button onClick={() => doRestore(f.id)} className="btn-primary">
+              Restore
+            </button>
           </li>
         ))}
       </ul>

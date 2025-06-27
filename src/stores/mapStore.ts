@@ -52,11 +52,13 @@ export const useMapStore = create<MapState>(
         })),
       updateToken: (id, data) =>
         set((state) => ({
-          tokens: state.tokens.map((tok) => (tok.id === id ? { ...tok, ...data } : tok)),
+          tokens: state.tokens.map((tok) =>
+            tok.id === id ? { ...tok, ...data } : tok,
+          ),
         })),
       removeToken: (id) =>
         set((state) => ({ tokens: state.tokens.filter((t) => t.id !== id) })),
     }),
-    { name: 'map-store' }
-  )
+    { name: 'map-store' },
+  ),
 );

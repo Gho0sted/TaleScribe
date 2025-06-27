@@ -23,12 +23,17 @@ export const useLogStore = create<LogState>(
       addLog: (level, message) =>
         set((state) => ({
           logs: [
-            { id: Date.now().toString(), level, message, timestamp: Date.now() },
+            {
+              id: Date.now().toString(),
+              level,
+              message,
+              timestamp: Date.now(),
+            },
             ...state.logs,
           ].slice(0, 100),
         })),
       clearLogs: () => set({ logs: [] }),
     }),
-    { name: 'log-store' }
-  )
+    { name: 'log-store' },
+  ),
 );

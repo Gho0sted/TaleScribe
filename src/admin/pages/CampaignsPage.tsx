@@ -27,7 +27,9 @@ const CampaignsPage: React.FC = () => {
             <tr key={c.id} className="border-t border-gray-700">
               <td className="px-2 py-1">{c.name}</td>
               <td className="px-2 py-1">{c.dmId}</td>
-              <td className="px-2 py-1">{new Date(c.createdAt).toLocaleDateString()}</td>
+              <td className="px-2 py-1">
+                {new Date(c.createdAt).toLocaleDateString()}
+              </td>
               <td className="px-2 py-1 space-x-2">
                 <Button onClick={() => deleteCampaign(c.id)}>Удалить</Button>
                 <Button>Экспорт</Button>

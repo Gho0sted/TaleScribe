@@ -35,13 +35,18 @@ const SessionJournal: React.FC<{ sessionId: string }> = ({ sessionId }) => {
           className="w-full h-64 p-2 bg-gray-800 text-white rounded"
         />
       ) : (
-        <div className="prose prose-invert" dangerouslySetInnerHTML={{ __html: markdownToHtml(content) }} />
+        <div
+          className="prose prose-invert"
+          dangerouslySetInnerHTML={{ __html: markdownToHtml(content) }}
+        />
       )}
       <div className="space-x-2">
         <button onClick={() => setEdit(!edit)} className="btn">
           {edit ? 'Preview' : 'Edit'}
         </button>
-        <button onClick={exportMd} className="btn">Export MD</button>
+        <button onClick={exportMd} className="btn">
+          Export MD
+        </button>
       </div>
     </div>
   );

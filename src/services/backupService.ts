@@ -34,11 +34,23 @@ export function mergeState(data: FullBackup) {
   Object.entries(data.local).forEach(([k, v]) => {
     localStorage.setItem(k, JSON.stringify(v));
   });
-  useSessionStore.setState({ sessions: mergeArray(useSessionStore.getState().sessions, data.sessions, 'id') });
-  useJournalStore.setState({ notes: { ...useJournalStore.getState().notes, ...data.notes } });
+  useSessionStore.setState({
+    sessions: mergeArray(
+      useSessionStore.getState().sessions,
+      data.sessions,
+      'id',
+    ),
+  });
+  useJournalStore.setState({
+    notes: { ...useJournalStore.getState().notes, ...data.notes },
+  });
 }
 
-function mergeArray<T extends Record<string, any>>(a: T[], b: T[], key: keyof T): T[] {
+function mergeArray<T extends Record<string, any>>(
+  a: T[],
+  b: T[],
+  key: keyof T,
+): T[] {
   const existing = new Map(a.map((i) => [i[key], i]));
   b.forEach((i) => {
     if (!existing.has(i[key])) existing.set(i[key], i);

@@ -98,7 +98,11 @@ class CloudSyncService {
     });
   }
 
-  private async request(provider: CloudProvider, input: RequestInfo, init: RequestInit) {
+  private async request(
+    provider: CloudProvider,
+    input: RequestInfo,
+    init: RequestInit,
+  ) {
     const token = await this.getToken(provider);
     if (!token) throw new Error('Not authorized');
     const headers = new Headers(init.headers);
@@ -114,48 +118,79 @@ class CloudSyncService {
     if (provider === 'google') {
       const metadata = { name };
       const form = new FormData();
-      form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+      form.append(
+        'metadata',
+        new Blob([JSON.stringify(metadata)], { type: 'application/json' }),
+      );
       form.append('file', data);
-      await this.request(provider, 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-        method: 'POST',
-        body: form,
-      });
-    } else {
-      await this.request(provider, 'https://content.dropboxapi.com/2/files/upload', {
-        method: 'POST',
-        headers: {
-          'Dropbox-API-Arg': JSON.stringify({ path: '/' + name, mode: 'add', autorename: true }),
-          'Content-Type': 'application/octet-stream',
+      await this.request(
+        provider,
+        'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
+        {
+          method: 'POST',
+          body: form,
         },
-        body: data,
-      });
+      );
+    } else {
+      await this.request(
+        provider,
+        'https://content.dropboxapi.com/2/files/upload',
+        {
+          method: 'POST',
+          headers: {
+            'Dropbox-API-Arg': JSON.stringify({
+              path: '/' + name,
+              mode: 'add',
+              autorename: true,
+            }),
+            'Content-Type': 'application/octet-stream',
+          },
+          body: data,
+        },
+      );
     }
   }
 
   async listBackups(provider: CloudProvider): Promise<BackupFile[]> {
     if (provider === 'google') {
-      const res = await this.request(provider, 'https://www.googleapis.com/drive/v3/files?q=name%20contains%20%27_backup_%27&fields=files(id,name,modifiedTime)', { method: 'GET' });
+      const res = await this.request(
+        provider,
+        'https://www.googleapis.com/drive/v3/files?q=name%20contains%20%27_backup_%27&fields=files(id,name,modifiedTime)',
+        { method: 'GET' },
+      );
       const json = await res.json();
       return json.files as BackupFile[];
     }
-    const res = await this.request(provider, 'https://api.dropboxapi.com/2/files/list_folder', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ path: '' }),
-    });
+    const res = await this.request(
+      provider,
+      'https://api.dropboxapi.com/2/files/list_folder',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: '' }),
+      },
+    );
     const data = await res.json();
     return (data.entries || []).map((e: any) => ({ id: e.id, name: e.name }));
   }
 
   async downloadBackup(provider: CloudProvider, id: string): Promise<Blob> {
     if (provider === 'google') {
-      const res = await this.request(provider, `https://www.googleapis.com/drive/v3/files/${id}?alt=media`, { method: 'GET' });
+      const res = await this.request(
+        provider,
+        `https://www.googleapis.com/drive/v3/files/${id}?alt=media`,
+        { method: 'GET' },
+      );
       return res.blob();
     }
-    const res = await this.request(provider, 'https://content.dropboxapi.com/2/files/download', {
-      method: 'POST',
-      headers: { 'Dropbox-API-Arg': JSON.stringify({ path: id }) },
-    });
+    const res = await this.request(
+      provider,
+      'https://content.dropboxapi.com/2/files/download',
+      {
+        method: 'POST',
+        headers: { 'Dropbox-API-Arg': JSON.stringify({ path: id }) },
+      },
+    );
     return res.blob();
   }
 }

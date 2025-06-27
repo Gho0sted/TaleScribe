@@ -47,7 +47,7 @@ interface TalescribeContextType {
 }
 
 const TalescribeContext = createContext<TalescribeContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useTalescribe = () => {
@@ -128,7 +128,7 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
 
   const updateCharacter = (id: string, updates: Partial<Character>) => {
     setCharacters((prev) =>
-      prev.map((char) => (char.id === id ? { ...char, ...updates } : char))
+      prev.map((char) => (char.id === id ? { ...char, ...updates } : char)),
     );
   };
 

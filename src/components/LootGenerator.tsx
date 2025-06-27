@@ -6,9 +6,14 @@ const LootGenerator: React.FC = () => {
   const { t } = useTranslation();
   const { loot, generateLoot, resetLoot } = useLootGenerator();
   const [level, setLevel] = useState(1);
-  const [filters, setFilters] = useState<{[k:string]: boolean}>({ weapon:false, artifact:false, potion:false });
+  const [filters, setFilters] = useState<{ [k: string]: boolean }>({
+    weapon: false,
+    artifact: false,
+    potion: false,
+  });
 
-  const toggle = (key: string) => setFilters({ ...filters, [key]: !filters[key] });
+  const toggle = (key: string) =>
+    setFilters({ ...filters, [key]: !filters[key] });
 
   const onGenerate = () => {
     const selected = Object.keys(filters).filter((k) => filters[k]);
@@ -25,16 +30,24 @@ const LootGenerator: React.FC = () => {
           onChange={(e) => setLevel(Number(e.target.value))}
           className="input w-24"
         />
-        {['weapon','artifact','potion'].map((t) => (
+        {['weapon', 'artifact', 'potion'].map((t) => (
           <label key={t} className="flex items-center space-x-2">
-            <input type="checkbox" checked={filters[t]} onChange={() => toggle(t)} />
+            <input
+              type="checkbox"
+              checked={filters[t]}
+              onChange={() => toggle(t)}
+            />
             <span className="capitalize">{t}</span>
           </label>
         ))}
       </div>
       <div className="space-x-3">
-        <button className="btn-primary" onClick={onGenerate}>Generate</button>
-        <button className="btn-secondary" onClick={resetLoot}>Reset</button>
+        <button className="btn-primary" onClick={onGenerate}>
+          Generate
+        </button>
+        <button className="btn-secondary" onClick={resetLoot}>
+          Reset
+        </button>
       </div>
       <div className="mt-4 grid gap-4">
         {loot.length === 0 ? (

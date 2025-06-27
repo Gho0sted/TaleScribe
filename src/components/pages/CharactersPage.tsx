@@ -12,9 +12,12 @@ const CharactersPage: React.FC = () => {
   const { characters, selectedEdition } = useTalescribe();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const editionCharacters = characters.filter((char) => char.edition === selectedEdition);
+  const editionCharacters = characters.filter(
+    (char) => char.edition === selectedEdition,
+  );
   const filteredCharacters = editionCharacters.filter(
-    (char) => !searchTerm || char.name.toLowerCase().includes(searchTerm.toLowerCase())
+    (char) =>
+      !searchTerm || char.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -22,10 +25,14 @@ const CharactersPage: React.FC = () => {
       <div className="container">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold text-white flex items-center">
-            <IconUser className="h-10 w-10 mr-4 text-green-600" /> {t('charactersPage.title', { edition: selectedEdition.toUpperCase() })}
+            <IconUser className="h-10 w-10 mr-4 text-green-600" />{' '}
+            {t('charactersPage.title', {
+              edition: selectedEdition.toUpperCase(),
+            })}
           </h1>
           <button className="btn-primary">
-            <IconPlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
+            <IconPlusCircle className="h-5 w-5 mr-2" />{' '}
+            {t('charactersPage.createButton')}
           </button>
         </div>
         <div className="card mb-8">
@@ -43,10 +50,17 @@ const CharactersPage: React.FC = () => {
         {filteredCharacters.length === 0 ? (
           <div className="text-center py-16">
             <IconUser className="h-20 w-20 text-gray-400 mx-auto mb-6" />
-            <h3 className="text-2xl font-bold text-white mb-4">{t('charactersPage.emptyTitle', { edition: selectedEdition.toUpperCase() })}</h3>
-            <p className="text-gray-400 mb-8 max-w-md mx-auto">{t('charactersPage.emptyText')}</p>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              {t('charactersPage.emptyTitle', {
+                edition: selectedEdition.toUpperCase(),
+              })}
+            </h3>
+            <p className="text-gray-400 mb-8 max-w-md mx-auto">
+              {t('charactersPage.emptyText')}
+            </p>
             <button className="btn-primary">
-              <IconPlusCircle className="h-5 w-5 mr-2" /> {t('charactersPage.createButton')}
+              <IconPlusCircle className="h-5 w-5 mr-2" />{' '}
+              {t('charactersPage.createButton')}
             </button>
           </div>
         ) : (
@@ -63,7 +77,9 @@ const CharactersPage: React.FC = () => {
                   <div className="grid grid-cols-3 gap-4 mb-4">
                     <div className="text-center">
                       <div className="text-xs text-gray-400 mb-1">КД</div>
-                      <div className="text-xl font-bold">{character.armorClass}</div>
+                      <div className="text-xl font-bold">
+                        {character.armorClass}
+                      </div>
                     </div>
                     <div className="text-center">
                       <div className="text-xs text-gray-400 mb-1">ХИТЫ</div>
@@ -76,7 +92,11 @@ const CharactersPage: React.FC = () => {
                       <div className="text-xl font-bold">{character.speed}</div>
                     </div>
                   </div>
-                  {character.background && <p className="text-sm text-gray-500 dark:text-gray-400">{character.background}</p>}
+                  {character.background && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {character.background}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}

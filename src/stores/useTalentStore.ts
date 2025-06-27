@@ -26,14 +26,19 @@ export const useTalentStore = create<TalentState>(
         set((state) => ({
           talents: {
             ...state.talents,
-            [cls]: [...(state.talents[cls] || []), { ...talent, id: Date.now().toString() }],
+            [cls]: [
+              ...(state.talents[cls] || []),
+              { ...talent, id: Date.now().toString() },
+            ],
           },
         })),
       updateTalent: (cls, id, updates) =>
         set((state) => ({
           talents: {
             ...state.talents,
-            [cls]: (state.talents[cls] || []).map((t) => (t.id === id ? { ...t, ...updates } : t)),
+            [cls]: (state.talents[cls] || []).map((t) =>
+              t.id === id ? { ...t, ...updates } : t,
+            ),
           },
         })),
       removeTalent: (cls, id) =>
@@ -44,6 +49,6 @@ export const useTalentStore = create<TalentState>(
           },
         })),
     }),
-    { name: 'talent-store' }
-  )
+    { name: 'talent-store' },
+  ),
 );

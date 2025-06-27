@@ -29,15 +29,12 @@ const descriptions = [
   'Древние руины хранят множество тайн.',
 ];
 
-const rewardsList = [
-  'Золото',
-  'Опыт',
-  'Магический предмет',
-];
+const rewardsList = ['Золото', 'Опыт', 'Магический предмет'];
 
 const generateQuest = (level: number): Quest => {
   const idx = Math.floor(Math.random() * titles.length);
-  const difficulty = difficulties[Math.min(difficulties.length - 1, Math.floor(level / 7))];
+  const difficulty =
+    difficulties[Math.min(difficulties.length - 1, Math.floor(level / 7))];
   return {
     id: Date.now(),
     title: titles[idx],
@@ -66,7 +63,9 @@ const QuestGenerator: React.FC = () => {
   return (
     <Card>
       <div className="mb-6 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('questsPage.generator')}</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          {t('questsPage.generator')}
+        </h2>
         <button
           onClick={createQuest}
           className="btn bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center space-x-2"
@@ -80,7 +79,9 @@ const QuestGenerator: React.FC = () => {
           <h3 className="text-xl font-semibold text-white">{quest.title}</h3>
           <p className="text-gray-300">{quest.description}</p>
           <div className="flex items-center space-x-2 text-sm text-gray-400">
-            <span>{t('questsPage.difficulty')}: {quest.difficulty}</span>
+            <span>
+              {t('questsPage.difficulty')}: {quest.difficulty}
+            </span>
             <span>•</span>
             <span>{quest.createdAt}</span>
           </div>
@@ -88,7 +89,10 @@ const QuestGenerator: React.FC = () => {
             <h4 className="font-semibold text-gray-300 mb-1">Награды</h4>
             <ul className="list-disc list-inside space-y-1">
               {quest.rewards.map((r, i) => (
-                <li key={i} className="flex items-center space-x-1 text-gray-300">
+                <li
+                  key={i}
+                  className="flex items-center space-x-1 text-gray-300"
+                >
                   <IconStar className="w-4 h-4 text-yellow-400" />
                   <span>{r}</span>
                 </li>

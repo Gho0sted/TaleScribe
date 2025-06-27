@@ -22,7 +22,9 @@ const EditionSelector: React.FC<EditionSelectorProps> = ({
         className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-500 rounded-xl transition-all shadow-sm border border-gray-300 dark:border-gray-600 text-sm font-medium"
       >
         <span className="text-xl">{currentEdition?.icon}</span>
-        <span className="text-gray-900 dark:text-white">{currentEdition?.name}</span>
+        <span className="text-gray-900 dark:text-white">
+          {currentEdition?.name}
+        </span>
         <ChevronDown
           className={`h-4 w-4 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
@@ -47,7 +49,9 @@ const EditionSelector: React.FC<EditionSelectorProps> = ({
                 <span className="text-xl">{edition.icon}</span>
                 <div className="flex-1">
                   <div className="font-medium text-sm">{edition.name}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">{edition.description}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    {edition.description}
+                  </div>
                 </div>
                 {selectedEdition === edition.id && (
                   <Check className="h-4 w-4 text-blue-600" />

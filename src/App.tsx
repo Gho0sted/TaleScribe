@@ -11,7 +11,6 @@ import { useApplyTheme } from './hooks/useApplyTheme';
 import { usePluginLoader } from './hooks/usePluginLoader';
 import { usePWA } from './hooks/usePWA';
 
-
 function App() {
   useApplyTheme();
   usePluginLoader();

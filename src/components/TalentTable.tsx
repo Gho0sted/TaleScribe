@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import { CLASS_TALENTS, ClassTalent } from '../constants/CLASS_TALENTS';
 import { useTalentStore } from '../stores/useTalentStore';
-import { IconDownload, IconPlus, IconTrash, IconEdit } from '../constants/icons';
+import {
+  IconDownload,
+  IconPlus,
+  IconTrash,
+  IconEdit,
+} from '../constants/icons';
 
 interface TalentTableProps {
   classId: string;
@@ -29,7 +34,10 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
     if (!talents.length && CLASS_TALENTS[classId]) {
       setClassTalents(
         classId,
-        CLASS_TALENTS[classId].map((t) => ({ ...t, id: Date.now().toString() + Math.random() }))
+        CLASS_TALENTS[classId].map((t) => ({
+          ...t,
+          id: Date.now().toString() + Math.random(),
+        })),
       );
     }
   }, [classId]);
@@ -37,7 +45,7 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
   const filtered = talents.filter(
     (t) =>
       (!search || t.name.toLowerCase().includes(search.toLowerCase())) &&
-      (!level || t.level === Number(level))
+      (!level || t.level === Number(level)),
   );
 
   const handleAdd = () => {
@@ -56,7 +64,9 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
         data += `| ${t.level} | ${t.name} | ${t.description} |\n`;
       });
     }
-    const blob = new Blob([data], { type: format === 'csv' ? 'text/csv' : 'text/markdown' });
+    const blob = new Blob([data], {
+      type: format === 'csv' ? 'text/csv' : 'text/markdown',
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -79,13 +89,20 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
           type="number"
           placeholder="Уровень"
           value={level}
-          onChange={(e) => setLevel(e.target.value ? Number(e.target.value) : '')}
+          onChange={(e) =>
+            setLevel(e.target.value ? Number(e.target.value) : '')
+          }
         />
         <button className="btn-primary" onClick={() => handleExport('csv')}>
-          <IconDownload className="w-4 h-4 mr-1" />CSV
+          <IconDownload className="w-4 h-4 mr-1" />
+          CSV
         </button>
-        <button className="btn-primary" onClick={() => handleExport('markdown')}>
-          <IconDownload className="w-4 h-4 mr-1" />MD
+        <button
+          className="btn-primary"
+          onClick={() => handleExport('markdown')}
+        >
+          <IconDownload className="w-4 h-4 mr-1" />
+          MD
         </button>
       </div>
       <table className="min-w-full text-left text-sm">
@@ -100,12 +117,23 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
           {filtered.map((talent) => (
             <tr key={talent.id} className="border-b border-gray-700">
               <td className="p-2">{talent.level}</td>
-              <td className="p-2" title={talent.description}>{talent.name}</td>
+              <td className="p-2" title={talent.description}>
+                {talent.name}
+              </td>
               <td className="p-2 space-x-2">
-                <button className="btn" onClick={() => { setEditId(talent.id); setEditTalent(talent); }}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setEditId(talent.id);
+                    setEditTalent(talent);
+                  }}
+                >
                   <IconEdit className="w-4 h-4" />
                 </button>
-                <button className="btn" onClick={() => removeTalent(classId, talent.id)}>
+                <button
+                  className="btn"
+                  onClick={() => removeTalent(classId, talent.id)}
+                >
                   <IconTrash className="w-4 h-4" />
                 </button>
               </td>
@@ -119,20 +147,26 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
             className="input"
             placeholder="Название"
             value={editTalent.name}
-            onChange={(e) => setEditTalent({ ...editTalent, name: e.target.value })}
+            onChange={(e) =>
+              setEditTalent({ ...editTalent, name: e.target.value })
+            }
           />
           <textarea
             className="input"
             placeholder="Описание"
             value={editTalent.description}
-            onChange={(e) => setEditTalent({ ...editTalent, description: e.target.value })}
+            onChange={(e) =>
+              setEditTalent({ ...editTalent, description: e.target.value })
+            }
           />
           <input
             className="input"
             type="number"
             placeholder="Уровень"
             value={editTalent.level}
-            onChange={(e) => setEditTalent({ ...editTalent, level: Number(e.target.value) })}
+            onChange={(e) =>
+              setEditTalent({ ...editTalent, level: Number(e.target.value) })
+            }
           />
           <button
             className="btn-primary"
@@ -157,16 +191,21 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
           className="input"
           placeholder="Описание"
           value={newTalent.description}
-          onChange={(e) => setNewTalent({ ...newTalent, description: e.target.value })}
+          onChange={(e) =>
+            setNewTalent({ ...newTalent, description: e.target.value })
+          }
         />
         <input
           className="input"
           type="number"
           value={newTalent.level}
-          onChange={(e) => setNewTalent({ ...newTalent, level: Number(e.target.value) })}
+          onChange={(e) =>
+            setNewTalent({ ...newTalent, level: Number(e.target.value) })
+          }
         />
         <button className="btn-primary" onClick={handleAdd}>
-          <IconPlus className="w-4 h-4 mr-1" />Добавить
+          <IconPlus className="w-4 h-4 mr-1" />
+          Добавить
         </button>
       </div>
     </div>
