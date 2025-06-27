@@ -52,6 +52,12 @@ npm run build
 ```bash
 npx webpack --config webpack.config.js
 ```
+Если при запуске webpack появится сообщение об отсутствии CLI, установите его
+командой:
+
+```bash
+npm install -D webpack-cli
+```
 
 В изолированной среде команда может закончиться ошибкой `403` из-за отсутствия доступа к registry.npmjs.org.
 

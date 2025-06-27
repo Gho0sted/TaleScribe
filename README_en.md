@@ -49,6 +49,11 @@ You can also run webpack manually:
 ```bash
 npx webpack --config webpack.config.js
 ```
+If webpack prompts that the CLI is missing, install it with:
+
+```bash
+npm install -D webpack-cli
+```
 
 In an isolated environment the command may fail with `403` due to no access to registry.npmjs.org.
 
