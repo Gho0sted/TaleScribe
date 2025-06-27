@@ -31,6 +31,19 @@ const ContentGeneratorsPage = React.lazy(
 const DataManagerPage = React.lazy(() => import('./pages/DataManagerPage'));
 const TalentsPage = React.lazy(() => import('./pages/TalentsPage'));
 const SettingsPage = React.lazy(() => import('./pages/SettingsPage'));
+const ClassesPage = React.lazy(() => import('../pages/ClassesPage'));
+const RacesPage = React.lazy(() => import('../pages/RacesPage'));
+const TraitsPage = React.lazy(() => import('../pages/TraitsPage'));
+const ClassFeaturesPage = React.lazy(() => import('../pages/ClassFeaturesPage'));
+const BackgroundsPage = React.lazy(() => import('../pages/BackgroundsPage'));
+const SpellsPage = React.lazy(() => import('../pages/SpellsPage'));
+const WeaponsPage = React.lazy(() => import('../pages/WeaponsPage'));
+const ArmorPage = React.lazy(() => import('../pages/ArmorPage'));
+const EquipmentPage = React.lazy(() => import('../pages/EquipmentPage'));
+const MagicItemsPage = React.lazy(() => import('../pages/MagicItemsPage'));
+const BestiaryPage = React.lazy(() => import('../pages/BestiaryPage'));
+const GlossaryPage = React.lazy(() => import('../pages/GlossaryPage'));
+const ToolsPage = React.lazy(() => import('../pages/ToolsPage'));
 import { LoadingSpinner } from './ui/LoadingSpinner';
 
 const TalescribeApp: React.FC = () => {
@@ -194,6 +207,19 @@ const TalescribeApp: React.FC = () => {
               <Route path="/quests" element={<QuestsPage />} />
               <Route path="/content" element={<ContentGeneratorsPage />} />
               <Route path="/talents" element={<TalentsPage />} />
+              <Route path="/classes" element={<ClassesPage />} />
+              <Route path="/races" element={<RacesPage />} />
+              <Route path="/traits" element={<TraitsPage />} />
+              <Route path="/class-features" element={<ClassFeaturesPage />} />
+              <Route path="/backgrounds" element={<BackgroundsPage />} />
+              <Route path="/spells" element={<SpellsPage />} />
+              <Route path="/weapons" element={<WeaponsPage />} />
+              <Route path="/armor" element={<ArmorPage />} />
+              <Route path="/equipment" element={<EquipmentPage />} />
+              <Route path="/magic-items" element={<MagicItemsPage />} />
+              <Route path="/bestiary" element={<BestiaryPage />} />
+              <Route path="/glossary" element={<GlossaryPage />} />
+              <Route path="/tools" element={<ToolsPage />} />
               <Route path="/data-manager" element={<DataManagerPage />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="/campaigns/*" element={<CampaignsPage />} />

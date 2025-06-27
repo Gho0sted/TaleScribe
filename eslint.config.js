@@ -1,14 +1,15 @@
 const { FlatCompat } = require('@eslint/eslintrc');
-const js = require('@eslint/js');
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const reactPlugin = require('eslint-plugin-react');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
 const securityPlugin = require('eslint-plugin-security');
+const importPlugin = require('eslint-plugin-import');
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
+  recommendedConfig: true,
+  recommendedEslint: true,
 });
 
 module.exports = [
@@ -16,7 +17,9 @@ module.exports = [
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:security/recommended'
+    'plugin:security/recommended',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended',
   ),
   {
     languageOptions: {
@@ -31,11 +34,15 @@ module.exports = [
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
       security: securityPlugin,
+      prettier: require('eslint-plugin-prettier'),
+      import: importPlugin,
     },
     settings: { react: { version: 'detect' } },
     rules: {
       'no-console': 'warn',
       'react/prop-types': 'off',
+      'prettier/prettier': 'error',
+      'import/order': 'error',
     },
   },
 ];
