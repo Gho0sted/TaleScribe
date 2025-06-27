@@ -1,9 +1,9 @@
-self.addEventListener('install', (event) => {
-  event.waitUntil(self.skipWaiting());
+self.addEventListener('install', (event: ExtendableEvent) => {
+  event.waitUntil((self as ServiceWorkerGlobalScope).skipWaiting());
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
+self.addEventListener('activate', (event: ExtendableEvent) => {
+  event.waitUntil((self as ServiceWorkerGlobalScope).clients.claim());
 });
 
 self.addEventListener('fetch', (event: FetchEvent) => {
@@ -14,6 +14,8 @@ self.addEventListener('fetch', (event: FetchEvent) => {
 
 self.addEventListener('message', (event: ExtendableMessageEvent) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+    (self as ServiceWorkerGlobalScope).skipWaiting();
   }
 });
+
+export {};
