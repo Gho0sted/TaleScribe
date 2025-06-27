@@ -107,7 +107,7 @@ export class DataManager {
   }
 
   private async flushQueue() {
-    const ops = await getQueue();
+    const ops = await getQueue<{ key: string; data: unknown }>();
     for (const op of ops) {
       await setToDB(op.key, op.data);
     }
