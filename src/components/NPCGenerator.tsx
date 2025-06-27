@@ -23,8 +23,12 @@ const NPCGenerator: React.FC = () => {
             onChange={(e) => setCount(Number(e.target.value))}
           />
         </label>
-        <button className="btn-primary" onClick={onGenerate}>Generate</button>
-        <button className="btn-secondary" onClick={resetNPCs}>Reset</button>
+        <button className="btn-primary" onClick={onGenerate}>
+          Generate
+        </button>
+        <button className="btn-secondary" onClick={resetNPCs}>
+          Reset
+        </button>
       </div>
       <div className="grid gap-4">
         {npcs.length === 0 ? (
@@ -33,8 +37,12 @@ const NPCGenerator: React.FC = () => {
           npcs.map((npc) => (
             <div key={npc.id} className="card animate-slideUp">
               <div className="font-bold mb-1">{npc.name}</div>
-              <div className="text-sm text-gray-400">{npc.race} {npc.occupation}</div>
-              <div className="text-sm text-gray-400">Voice: {npc.voiceTraits}</div>
+              <div className="text-sm text-gray-400">
+                {npc.race} {npc.occupation}
+              </div>
+              <div className="text-sm text-gray-400">
+                Voice: {npc.voiceTraits}
+              </div>
             </div>
           ))
         )}

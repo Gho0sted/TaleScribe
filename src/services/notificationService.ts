@@ -4,11 +4,10 @@ export const requestPermission = async () => {
   return perm === 'granted';
 };
 
-
 export const scheduleNotification = async (
   date: Date,
   title: string,
-  body: string
+  body: string,
 ) => {
   if (!('Notification' in window)) return;
   const delay = date.getTime() - Date.now();

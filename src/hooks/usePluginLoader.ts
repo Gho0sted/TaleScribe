@@ -24,7 +24,7 @@ export const usePluginLoader = () => {
           iframe.onload = () => {
             iframe.contentWindow?.postMessage(
               { type: 'init', api: createApi() },
-              '*'
+              '*',
             );
           };
           document.body.appendChild(iframe);

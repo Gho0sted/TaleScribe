@@ -5,7 +5,7 @@ import './i18n';
 import App from './App';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 
 root.render(
@@ -13,7 +13,7 @@ root.render(
     <Suspense fallback={null}>
       <App />
     </Suspense>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
@@ -21,4 +21,3 @@ if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   });
 }
-

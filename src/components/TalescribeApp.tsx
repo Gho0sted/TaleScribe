@@ -1,6 +1,17 @@
 import React, { useState, Suspense } from 'react';
-import { IconMenu, IconSearch, IconBell, IconAlertTriangle } from '../constants/icons';
-import { Link, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import {
+  IconMenu,
+  IconSearch,
+  IconBell,
+  IconAlertTriangle,
+} from '../constants/icons';
+import {
+  Link,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { useTalescribe } from '../contexts/TalescribeContext';
 import { NAVIGATION } from '../constants';
 import { ROUTES } from '../constants/routes';
@@ -14,7 +25,9 @@ const CharactersPage = React.lazy(() => import('./pages/CharactersPage'));
 const QuestsPage = React.lazy(() => import('./pages/QuestsPage'));
 const CampaignsPage = React.lazy(() => import('./pages/CampaignsPage'));
 const CombatTrackerPage = React.lazy(() => import('./pages/CombatTrackerPage'));
-const ContentGeneratorsPage = React.lazy(() => import('./pages/ContentGeneratorsPage'));
+const ContentGeneratorsPage = React.lazy(
+  () => import('./pages/ContentGeneratorsPage'),
+);
 const DataManagerPage = React.lazy(() => import('./pages/DataManagerPage'));
 const TalentsPage = React.lazy(() => import('./pages/TalentsPage'));
 const SettingsPage = React.lazy(() => import('./pages/SettingsPage'));
@@ -65,11 +78,18 @@ const TalescribeApp: React.FC = () => {
               >
                 <div className="text-4xl">🎲</div>
                 <div>
-                  <h1 className="text-2xl font-bold gradient-text">Talescribe</h1>
-                  <p className="text-xs text-gray-400 hidden sm:block">D&D Assistant • Advanced Edition</p>
+                  <h1 className="text-2xl font-bold gradient-text">
+                    Talescribe
+                  </h1>
+                  <p className="text-xs text-gray-400 hidden sm:block">
+                    D&D Assistant • Advanced Edition
+                  </p>
                 </div>
               </Link>
-              <EditionSelector selectedEdition={selectedEdition} setSelectedEdition={setSelectedEdition} />
+              <EditionSelector
+                selectedEdition={selectedEdition}
+                setSelectedEdition={setSelectedEdition}
+              />
             </div>
             <div className="flex-1 max-w-xl mx-8 hidden md:block">
               <div className="relative">
@@ -87,7 +107,9 @@ const TalescribeApp: React.FC = () => {
               {isOffline && (
                 <div className="flex items-center text-yellow-400">
                   <IconAlertTriangle className="h-5 w-5 mr-2" />
-                  <span className="text-sm hidden sm:block">{t('header.offline')}</span>
+                  <span className="text-sm hidden sm:block">
+                    {t('header.offline')}
+                  </span>
                 </div>
               )}
               <button className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors">
@@ -110,8 +132,12 @@ const TalescribeApp: React.FC = () => {
                   {user.name.charAt(0)}
                 </div>
                 <div className="hidden sm:block">
-                  <div className="text-sm font-medium text-white">{user.name}</div>
-                  <div className="text-xs text-gray-400">{t('header.gameMaster')}</div>
+                  <div className="text-sm font-medium text-white">
+                    {user.name}
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    {t('header.gameMaster')}
+                  </div>
                 </div>
               </div>
             </div>
@@ -152,22 +178,34 @@ const TalescribeApp: React.FC = () => {
         <main className="flex-1">
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
-            <Route
-              path="/"
-              element={<DashboardPage onNavigate={(page) => navigate(PATH_MAP[page] || `/${page}`)} />}
-            />
-            <Route path="/characters" element={<CharactersPage />} />
-            <Route path="/dice" element={<DiceRollerPage />} />
-            <Route path="/combat" element={<CombatTrackerPage />} />
-            <Route path="/quests" element={<QuestsPage />} />
-            <Route path="/content" element={<ContentGeneratorsPage />} />
-            <Route path="/talents" element={<TalentsPage />} />
-            <Route path="/data-manager" element={<DataManagerPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
-            <Route path="/campaigns/*" element={<CampaignsPage />} />
-            <Route path="/generator" element={<div className="p-8">{t('nav.development')}</div>} />
-            <Route path="*" element={<div className="p-8">{t('nav.development')}</div>} />
-          </Routes>
+              <Route
+                path="/"
+                element={
+                  <DashboardPage
+                    onNavigate={(page) =>
+                      navigate(PATH_MAP[page] || `/${page}`)
+                    }
+                  />
+                }
+              />
+              <Route path="/characters" element={<CharactersPage />} />
+              <Route path="/dice" element={<DiceRollerPage />} />
+              <Route path="/combat" element={<CombatTrackerPage />} />
+              <Route path="/quests" element={<QuestsPage />} />
+              <Route path="/content" element={<ContentGeneratorsPage />} />
+              <Route path="/talents" element={<TalentsPage />} />
+              <Route path="/data-manager" element={<DataManagerPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/campaigns/*" element={<CampaignsPage />} />
+              <Route
+                path="/generator"
+                element={<div className="p-8">{t('nav.development')}</div>}
+              />
+              <Route
+                path="*"
+                element={<div className="p-8">{t('nav.development')}</div>}
+              />
+            </Routes>
           </Suspense>
         </main>
       </div>

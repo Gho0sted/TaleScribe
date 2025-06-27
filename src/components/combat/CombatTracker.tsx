@@ -9,7 +9,10 @@ import { useInitiative, useStatuses, Status } from '../../stores/combatStore';
 
 const TURN_TIME = 30;
 
-const StatusBadge: React.FC<{ status: Status; cid: string }> = ({ status, cid }) => {
+const StatusBadge: React.FC<{ status: Status; cid: string }> = ({
+  status,
+  cid,
+}) => {
   const { removeStatus, adjustStatus } = useStatuses(cid);
   return (
     <div
@@ -26,7 +29,8 @@ const StatusBadge: React.FC<{ status: Status; cid: string }> = ({ status, cid })
 };
 
 const CombatTracker: React.FC = () => {
-  const { combatants, currentIndex, reorderCombatants, nextTurn } = useInitiative();
+  const { combatants, currentIndex, reorderCombatants, nextTurn } =
+    useInitiative();
   const [timeLeft, setTimeLeft] = useState(TURN_TIME);
 
   useEffect(() => {
@@ -53,7 +57,11 @@ const CombatTracker: React.FC = () => {
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="initiative">
           {(provided) => (
-            <ul {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
+            <ul
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="space-y-2"
+            >
               {combatants.map((c, i) => (
                 <Draggable key={c.id} draggableId={c.id} index={i}>
                   {(p) => (
@@ -66,7 +74,9 @@ const CombatTracker: React.FC = () => {
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="font-bold">{c.name}</div>
-                          <div className="text-sm text-gray-400">Init: {c.initiative}</div>
+                          <div className="text-sm text-gray-400">
+                            Init: {c.initiative}
+                          </div>
                         </div>
                         <div className="flex space-x-1">
                           {c.statuses.map((s) => (
@@ -78,7 +88,9 @@ const CombatTracker: React.FC = () => {
                         <div className="mt-2 h-2 bg-gray-700 rounded">
                           <div
                             className="h-2 bg-blue-500 rounded"
-                            style={{ width: `${(timeLeft / TURN_TIME) * 100}%` }}
+                            style={{
+                              width: `${(timeLeft / TURN_TIME) * 100}%`,
+                            }}
                           />
                         </div>
                       )}

@@ -3,7 +3,7 @@
  * Provides a simple cache layer and automatic background saving.
  * Утилитный класс для сохранения и загрузки данных через IndexedDB,
  * обеспечивающий кэш и автоматическое фоновое сохранение.
-*/
+ */
 import { getFromDB, setToDB, addToQueue, getQueue, clearQueue } from './idb';
 
 export class DataManager {
@@ -34,7 +34,10 @@ export class DataManager {
     }
   }
 
-  async loadData<T>(key: string, defaultValue: T | null = null): Promise<T | null> {
+  async loadData<T>(
+    key: string,
+    defaultValue: T | null = null,
+  ): Promise<T | null> {
     try {
       if (this.cache.has(key)) {
         return this.cache.get(key) as T;

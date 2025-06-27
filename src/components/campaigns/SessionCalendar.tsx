@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSessionStore } from '../../stores/sessionStore';
 import { format } from 'date-fns';
-import { scheduleNotification, requestPermission } from '../../services/notificationService';
+import {
+  scheduleNotification,
+  requestPermission,
+} from '../../services/notificationService';
 
 declare global {
-  interface Window { gapi: any }
+  interface Window {
+    gapi: any;
+  }
 }
 
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
@@ -24,7 +29,9 @@ const SessionCalendar: React.FC = () => {
           await window.gapi.client.init({
             apiKey: process.env.GOOGLE_API_KEY,
             clientId: process.env.GOOGLE_CLIENT_ID,
-            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+            discoveryDocs: [
+              'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
+            ],
             scope: SCOPES,
           });
           const auth = window.gapi.auth2.getAuthInstance();
@@ -52,7 +59,9 @@ const SessionCalendar: React.FC = () => {
 
   const loadEvents = async () => {
     try {
-      const res = await window.gapi.client.calendar.events.list({ calendarId: 'primary' });
+      const res = await window.gapi.client.calendar.events.list({
+        calendarId: 'primary',
+      });
       const items = res.result.items || [];
       const ev = items.map((i: any) => ({
         id: i.id,
@@ -88,10 +97,15 @@ const SessionCalendar: React.FC = () => {
     const event = {
       summary: title,
       start: { dateTime: startDate.toISOString() },
-      end: { dateTime: new Date(startDate.getTime() + 60 * 60 * 1000).toISOString() },
+      end: {
+        dateTime: new Date(startDate.getTime() + 60 * 60 * 1000).toISOString(),
+      },
     };
     try {
-      const res = await window.gapi.client.calendar.events.insert({ calendarId: 'primary', resource: event });
+      const res = await window.gapi.client.calendar.events.insert({
+        calendarId: 'primary',
+        resource: event,
+      });
       addSession({
         id: res.result.id,
         title: res.result.summary,
@@ -99,7 +113,11 @@ const SessionCalendar: React.FC = () => {
         start: res.result.start.dateTime,
         end: res.result.end.dateTime,
       });
-      scheduleNotification(new Date(res.result.start.dateTime), res.result.summary, 'Session reminder');
+      scheduleNotification(
+        new Date(res.result.start.dateTime),
+        res.result.summary,
+        'Session reminder',
+      );
       setTitle('');
     } catch (e) {
       console.error(e);
@@ -111,9 +129,13 @@ const SessionCalendar: React.FC = () => {
       <div className="flex space-x-2">
         {gapiReady ? (
           signedIn ? (
-            <button onClick={signOut} className="btn">Sign out</button>
+            <button onClick={signOut} className="btn">
+              Sign out
+            </button>
           ) : (
-            <button onClick={signIn} className="btn">Sign in</button>
+            <button onClick={signIn} className="btn">
+              Sign in
+            </button>
           )
         ) : (
           <span>Loading...</span>
@@ -122,15 +144,30 @@ const SessionCalendar: React.FC = () => {
       {signedIn && (
         <div className="space-y-4">
           <div className="flex space-x-2">
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="input" />
-            <input type="datetime-local" value={date} onChange={(e) => setDate(e.target.value)} className="input" />
-            <button onClick={createEvent} className="btn">Add</button>
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="input"
+            />
+            <input
+              type="datetime-local"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="input"
+            />
+            <button onClick={createEvent} className="btn">
+              Add
+            </button>
           </div>
           <ul className="space-y-2">
             {sessions.map((s) => (
               <li key={s.id} className="border p-2 rounded-lg">
                 <div className="font-semibold">{s.title}</div>
-                <div className="text-sm text-gray-400">{format(new Date(s.start), 'PPpp')}</div>
+                <div className="text-sm text-gray-400">
+                  {format(new Date(s.start), 'PPpp')}
+                </div>
               </li>
             ))}
           </ul>

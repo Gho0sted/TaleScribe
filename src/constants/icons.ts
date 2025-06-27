@@ -25,5 +25,5 @@ export {
   LightBulbIcon as IconLightbulb,
   ArrowDownOnSquareIcon as IconSave,
   Cog6ToothIcon as IconSettings,
-  CloudArrowUpIcon as IconCloud
+  CloudArrowUpIcon as IconCloud,
 } from '@heroicons/react/24/outline';

@@ -4,7 +4,13 @@
  */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconSparkles, IconUser, IconDice6, IconScroll, IconAlertTriangle } from '../../constants/icons';
+import {
+  IconSparkles,
+  IconUser,
+  IconDice6,
+  IconScroll,
+  IconAlertTriangle,
+} from '../../constants/icons';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { DND_EDITIONS } from '../../constants';
 import { DiceUtils } from '../../utils/DiceUtils';
@@ -15,26 +21,35 @@ interface DashboardPageProps {
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
   const { t } = useTranslation();
-  const { selectedEdition, characters, spells, bestiary, items } = useTalescribe();
+  const { selectedEdition, characters, spells, bestiary, items } =
+    useTalescribe();
   const [isOffline] = React.useState(!navigator.onLine);
 
   const currentEdition = DND_EDITIONS.find((e) => e.id === selectedEdition);
-  const editionCharacters = characters.filter((char) => char.edition === selectedEdition);
-  const editionSpells = spells.filter((spell) => spell.edition === selectedEdition);
+  const editionCharacters = characters.filter(
+    (char) => char.edition === selectedEdition,
+  );
+  const editionSpells = spells.filter(
+    (spell) => spell.edition === selectedEdition,
+  );
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       <div className="container p-8">
         <div className="text-center mb-12">
           <div className="text-6xl mb-6">🎲</div>
-          <h1 className="text-5xl font-bold gradient-text mb-4">{t('dashboard.welcome')}</h1>
+          <h1 className="text-5xl font-bold gradient-text mb-4">
+            {t('dashboard.welcome')}
+          </h1>
           <p className="text-gray-400 text-xl max-w-4xl mx-auto">
             {t('dashboard.tagline')}
           </p>
           <div className="inline-flex items-center bg-gray-800 rounded-2xl shadow-lg px-6 py-4 border border-gray-700 mb-8 mt-8">
             <span className="text-2xl mr-3">{currentEdition?.icon}</span>
             <div className="text-left">
-              <div className="text-sm text-gray-400">{t('dashboard.currentEdition')}</div>
+              <div className="text-sm text-gray-400">
+                {t('dashboard.currentEdition')}
+              </div>
               <div className="font-bold text-white">{currentEdition?.name}</div>
             </div>
           </div>
@@ -42,7 +57,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             <div className="bg-yellow-900/20 border border-yellow-800 rounded-xl p-4 max-w-md mx-auto mb-8">
               <div className="flex items-center justify-center">
                 <IconAlertTriangle className="h-5 w-5 text-yellow-400 mr-2" />
-                <span className="text-yellow-200">{t('dashboard.offlineMode')}</span>
+                <span className="text-yellow-200">
+                  {t('dashboard.offlineMode')}
+                </span>
               </div>
             </div>
           )}
@@ -53,16 +70,24 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             className="group bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 hover:from-emerald-600 hover:via-green-600 hover:to-teal-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-emerald-400/20"
           >
             <IconSparkles className="h-16 w-16 mx-auto mb-4 group-hover:animate-pulse" />
-            <h3 className="text-xl font-bold mb-3">{t('dashboard.characterGenerator')}</h3>
-            <p className="text-sm opacity-90">{t('dashboard.characterGeneratorDesc')}</p>
+            <h3 className="text-xl font-bold mb-3">
+              {t('dashboard.characterGenerator')}
+            </h3>
+            <p className="text-sm opacity-90">
+              {t('dashboard.characterGeneratorDesc')}
+            </p>
           </button>
           <button
             onClick={() => onNavigate('characters')}
             className="group bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-700 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border border-blue-400/20"
           >
             <IconUser className="h-16 w-16 mx-auto mb-4 group-hover:animate-bounce" />
-            <h3 className="text-xl font-bold mb-3">{t('dashboard.characters')}</h3>
-            <p className="text-sm opacity-90">{t('dashboard.charactersDesc')}</p>
+            <h3 className="text-xl font-bold mb-3">
+              {t('dashboard.characters')}
+            </h3>
+            <p className="text-sm opacity-90">
+              {t('dashboard.charactersDesc')}
+            </p>
           </button>
           <button
             onClick={() => onNavigate('dice')}
@@ -88,9 +113,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <IconUser className="h-10 w-10 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('dashboard.characters')}</h3>
-                <p className="text-4xl font-bold text-green-600 mb-1">{editionCharacters.length}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">в {selectedEdition.toUpperCase()}</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                  {t('dashboard.characters')}
+                </h3>
+                <p className="text-4xl font-bold text-green-600 mb-1">
+                  {editionCharacters.length}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  в {selectedEdition.toUpperCase()}
+                </p>
               </div>
             </div>
           </div>
@@ -100,9 +131,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <IconScroll className="h-10 w-10 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('dashboard.spells')}</h3>
-                <p className="text-4xl font-bold text-purple-600 mb-1">{editionSpells.length}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">в {selectedEdition.toUpperCase()}</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                  {t('dashboard.spells')}
+                </h3>
+                <p className="text-4xl font-bold text-purple-600 mb-1">
+                  {editionSpells.length}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  в {selectedEdition.toUpperCase()}
+                </p>
               </div>
             </div>
           </div>
@@ -112,9 +149,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <IconUser className="h-10 w-10 text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Бестиарий</h3>
-                <p className="text-4xl font-bold text-red-600 mb-1">{bestiary.length}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">существ</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                  Бестиарий
+                </h3>
+                <p className="text-4xl font-bold text-red-600 mb-1">
+                  {bestiary.length}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  существ
+                </p>
               </div>
             </div>
           </div>
@@ -124,16 +167,23 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
                 <IconUser className="h-10 w-10 text-amber-600 dark:text-amber-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Предметы</h3>
-                <p className="text-4xl font-bold text-amber-600 mb-1">{items.length}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">в базе</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                  Предметы
+                </h3>
+                <p className="text-4xl font-bold text-amber-600 mb-1">
+                  {items.length}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  в базе
+                </p>
               </div>
             </div>
           </div>
         </div>
         <div className="card">
           <h2 className="text-2xl font-bold text-white mb-8 flex items-center">
-            <IconDice6 className="h-7 w-7 mr-3 text-teal-400" /> {t('dashboard.quickRolls')}
+            <IconDice6 className="h-7 w-7 mr-3 text-teal-400" />{' '}
+            {t('dashboard.quickRolls')}
           </h2>
           <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
             {[
@@ -142,7 +192,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
               { name: 'd8', sides: 8, color: 'from-yellow-400 to-yellow-600' },
               { name: 'd10', sides: 10, color: 'from-green-400 to-green-600' },
               { name: 'd12', sides: 12, color: 'from-blue-400 to-blue-600' },
-              { name: 'd20', sides: 20, color: 'from-purple-400 to-purple-600' },
+              {
+                name: 'd20',
+                sides: 20,
+                color: 'from-purple-400 to-purple-600',
+              },
               { name: 'd100', sides: 100, color: 'from-pink-400 to-pink-600' },
               { name: 'd2', sides: 2, color: 'from-gray-400 to-gray-600' },
             ].map((die) => (

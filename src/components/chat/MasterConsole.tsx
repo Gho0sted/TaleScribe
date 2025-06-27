@@ -70,34 +70,34 @@ const MasterConsole: React.FC = () => {
             className="input w-full"
             placeholder="Author"
           />
-        <select
-          className="input w-full"
-          value={role}
-          onChange={(e) => setRole(e.target.value as 'NPC' | 'Player')}
-        >
-          <option value="NPC">NPC</option>
-          <option value="Player">Player</option>
-        </select>
-        <textarea
-          className="input w-full h-24"
-          placeholder="Enter message (Markdown supported)"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <div className="space-x-2">
-          <button className="btn-primary" onClick={handleSend}>
-            Send
-          </button>
-          <button className="btn" onClick={() => handleExport('markdown')}>
-            Save MD
-          </button>
-          <button className="btn" onClick={() => handleExport('json')}>
-            Save JSON
-          </button>
-          <button className="btn" onClick={clearChat}>
-            Clear Chat
-          </button>
-        </div>
+          <select
+            className="input w-full"
+            value={role}
+            onChange={(e) => setRole(e.target.value as 'NPC' | 'Player')}
+          >
+            <option value="NPC">NPC</option>
+            <option value="Player">Player</option>
+          </select>
+          <textarea
+            className="input w-full h-24"
+            placeholder="Enter message (Markdown supported)"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <div className="space-x-2">
+            <button className="btn-primary" onClick={handleSend}>
+              Send
+            </button>
+            <button className="btn" onClick={() => handleExport('markdown')}>
+              Save MD
+            </button>
+            <button className="btn" onClick={() => handleExport('json')}>
+              Save JSON
+            </button>
+            <button className="btn" onClick={clearChat}>
+              Clear Chat
+            </button>
+          </div>
         </div>
       </div>
     </DragDropContext>

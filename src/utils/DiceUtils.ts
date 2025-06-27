@@ -1,4 +1,5 @@
 import { Character, DiceRoll } from '../types';
+import { rollDice as baseRoll } from './diceShared';
 
 export class DiceUtils {
   static getModifier(score: number): number {
@@ -9,8 +10,12 @@ export class DiceUtils {
     return Math.ceil(level / 4) + 1;
   }
 
-  static rollDice(count: number, sides: number, modifier: number = 0): Omit<DiceRoll, 'id' | 'timestamp'> {
-    const rolls = Array.from({ length: count }, () => Math.floor(Math.random() * sides) + 1);
+  static rollDice(
+    count: number,
+    sides: number,
+    modifier = 0,
+  ): Omit<DiceRoll, 'id' | 'timestamp'> {
+    const rolls = baseRoll(count, sides);
     const total = rolls.reduce((sum, roll) => sum + roll, 0) + modifier;
     return {
       rolls,
@@ -23,9 +28,12 @@ export class DiceUtils {
   static rollDiceAsync(
     count: number,
     sides: number,
-    modifier: number = 0
+    modifier = 0,
   ): Promise<Omit<DiceRoll, 'id' | 'timestamp'>> {
-    const worker = new Worker(new URL('../workers/DiceWorker.ts', import.meta.url), { type: 'module' });
+    const worker = new Worker(
+      new URL('../workers/DiceWorker.ts', import.meta.url),
+      { type: 'module' },
+    );
     return new Promise((resolve) => {
       worker.addEventListener('message', (e) => {
         resolve(e.data);
@@ -64,14 +72,29 @@ export class DiceUtils {
     const skill = skillsData.find((s) => s.id === skillId);
     if (!skill) return 0;
 
-    const abilityMod = this.getModifier(character.abilityScores[skill.ability as keyof typeof character.abilityScores]);
-    const profBonus = character.skills?.[skillId] ? character.proficiencyBonus : 0;
+    const abilityMod = this.getModifier(
+      character.abilityScores[
+        skill.ability as keyof typeof character.abilityScores
+      ],
+    );
+    const profBonus = character.skills?.[skillId]
+      ? character.proficiencyBonus
+      : 0;
     return abilityMod + profBonus;
   }
 
-  static calculateSavingThrowModifier(character: Character, abilityId: string): number {
-    const abilityMod = this.getModifier(character.abilityScores[abilityId as keyof typeof character.abilityScores]);
-    const profBonus = character.savingThrows?.[abilityId] ? character.proficiencyBonus : 0;
+  static calculateSavingThrowModifier(
+    character: Character,
+    abilityId: string,
+  ): number {
+    const abilityMod = this.getModifier(
+      character.abilityScores[
+        abilityId as keyof typeof character.abilityScores
+      ],
+    );
+    const profBonus = character.savingThrows?.[abilityId]
+      ? character.proficiencyBonus
+      : 0;
     return abilityMod + profBonus;
   }
 

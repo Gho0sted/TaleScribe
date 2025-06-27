@@ -13,7 +13,7 @@ const PluginManager: React.FC = () => {
           list.map((p) => ({
             ...p,
             enabled: plugins.find((pl) => pl.name === p.name)?.enabled || false,
-          }))
+          })),
         );
       })
       .catch(() => undefined);

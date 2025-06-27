@@ -2,20 +2,31 @@ import { openDB } from 'idb';
 
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();
-const secret = (process.env.DB_SECRET || 'talescribe_secret').padEnd(32, '0').slice(0, 32);
+const secret = (process.env.DB_SECRET || 'talescribe_secret')
+  .padEnd(32, '0')
+  .slice(0, 32);
 
 const importKey = async () => {
-  return crypto.subtle.importKey('raw', textEncoder.encode(secret), { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);
+  return crypto.subtle.importKey(
+    'raw',
+    textEncoder.encode(secret),
+    { name: 'AES-GCM' },
+    false,
+    ['encrypt', 'decrypt'],
+  );
 };
 
 const toBase64 = (arr: Uint8Array) => btoa(String.fromCharCode(...arr));
-const fromBase64 = (str: string) => Uint8Array.from(atob(str), c => c.charCodeAt(0));
+const fromBase64 = (str: string) =>
+  Uint8Array.from(atob(str), (c) => c.charCodeAt(0));
 
 const encrypt = async (data: unknown) => {
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await importKey();
   const encoded = textEncoder.encode(JSON.stringify(data));
-  const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded));
+  const cipher = new Uint8Array(
+    await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded),
+  );
   return `${toBase64(iv)}.${toBase64(cipher)}`;
 };
 
@@ -24,7 +35,9 @@ const decrypt = async (cipherText: string) => {
   const iv = fromBase64(ivStr);
   const data = fromBase64(dataStr);
   const key = await importKey();
-  const plain = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data));
+  const plain = new Uint8Array(
+    await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data),
+  );
   return JSON.parse(textDecoder.decode(plain));
 };
 

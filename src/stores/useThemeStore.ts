@@ -28,6 +28,6 @@ export const useThemeStore = create<ThemeSettingsState>(
       name: 'theme-settings',
       version: 2,
       migrate: (state) => ({ ...state }),
-    }
-  )
+    },
+  ),
 );

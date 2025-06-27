@@ -5,10 +5,15 @@ import { validateCharacter } from '../utils/validation';
 
 export type ExportFormat = 'json' | 'markdown' | 'csv' | 'pdf';
 
-export function exportCharacters(characters: Character[], format: ExportFormat): Blob {
+export function exportCharacters(
+  characters: Character[],
+  format: ExportFormat,
+): Blob {
   switch (format) {
     case 'json':
-      return new Blob([JSON.stringify(characters, null, 2)], { type: 'application/json' });
+      return new Blob([JSON.stringify(characters, null, 2)], {
+        type: 'application/json',
+      });
     case 'csv': {
       const csv = Papa.unparse(characters);
       return new Blob([csv], { type: 'text/csv' });
@@ -50,8 +55,17 @@ export async function importCharacters(file: File): Promise<Character[]> {
       case 'markdown': {
         const lines = text.trim().split('\n').slice(2);
         data = lines.map((l) => {
-          const [name, cls, race, level] = l.split('|').map((c) => c.trim()).filter(Boolean);
-          return { id: Date.now().toString(), name, class: cls, race, level: Number(level) };
+          const [name, cls, race, level] = l
+            .split('|')
+            .map((c) => c.trim())
+            .filter(Boolean);
+          return {
+            id: Date.now().toString(),
+            name,
+            class: cls,
+            race,
+            level: Number(level),
+          };
         });
         break;
       }
@@ -66,7 +80,10 @@ export async function importCharacters(file: File): Promise<Character[]> {
   return data.filter((c) => validateCharacter(c));
 }
 
-export function exportToFoundry(type: 'monsters' | 'characters', items: any[]): Blob {
+export function exportToFoundry(
+  type: 'monsters' | 'characters',
+  items: any[],
+): Blob {
   const payload = items.map((c) => ({
     name: c.name,
     type: type === 'characters' ? 'character' : 'npc',
@@ -79,7 +96,13 @@ export function exportToFoundry(type: 'monsters' | 'characters', items: any[]): 
         level: c.level,
       },
     },
-    items: (c.inventory || []).map((i: any) => ({ name: i.name, type: i.type, data: { description: i.description } })),
+    items: (c.inventory || []).map((i: any) => ({
+      name: i.name,
+      type: i.type,
+      data: { description: i.description },
+    })),
   }));
-  return new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  return new Blob([JSON.stringify(payload, null, 2)], {
+    type: 'application/json',
+  });
 }

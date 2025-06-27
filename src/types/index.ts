@@ -198,7 +198,13 @@ export interface Item {
   id: string;
   name: string;
   type: 'weapon' | 'armor' | 'potion' | 'misc' | 'tool';
-  rarity: 'common' | 'uncommon' | 'rare' | 'very rare' | 'legendary' | 'artifact';
+  rarity:
+    | 'common'
+    | 'uncommon'
+    | 'rare'
+    | 'very rare'
+    | 'legendary'
+    | 'artifact';
   weight: number;
   value: number;
   damage?: string;

@@ -25,6 +25,6 @@ export const useFeatureFlagStore = create<FeatureFlagState>(
           flags: { ...state.flags, [name]: value },
         })),
     }),
-    { name: 'feature-flags' }
-  )
+    { name: 'feature-flags' },
+  ),
 );

@@ -1,7 +1,16 @@
 import create from 'zustand';
 import { LOOT_TABLES, LootTableKey } from '../data/lootTables';
 import { EVENTS, EventCategory } from '../data/events';
-import { NAMES, RACES, GENDERS, OCCUPATIONS, PERSONALITIES, MOTIVATIONS, CONNECTIONS, VOICE_TRAITS } from '../data/npcTemplates';
+import {
+  NAMES,
+  RACES,
+  GENDERS,
+  OCCUPATIONS,
+  PERSONALITIES,
+  MOTIVATIONS,
+  CONNECTIONS,
+  VOICE_TRAITS,
+} from '../data/npcTemplates';
 
 export interface LootItem {
   id: string;
@@ -43,14 +52,15 @@ interface ContentState {
   resetNPCs: () => void;
 }
 
-const rand = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+const rand = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 export const useContentStore = create<ContentState>((set) => ({
   loot: [],
   events: [],
   npcs: [],
   generateLoot: (level, types) => {
-    const rarity: LootTableKey = level > 10 ? 'epic' : level > 5 ? 'rare' : 'common';
+    const rarity: LootTableKey =
+      level > 10 ? 'epic' : level > 5 ? 'rare' : 'common';
     let table = LOOT_TABLES[rarity];
     if (types.length) table = table.filter((i) => types.includes(i.type));
     const loot = table.map((i) => ({ ...i, rarity, quantity: 1 }));

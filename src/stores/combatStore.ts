@@ -58,7 +58,7 @@ export const useCombatStore = create<CombatState>((set, get) => ({
   addStatus: (cid, status) =>
     set((state) => ({
       combatants: state.combatants.map((c) =>
-        c.id === cid ? { ...c, statuses: [...c.statuses, status] } : c
+        c.id === cid ? { ...c, statuses: [...c.statuses, status] } : c,
       ),
     })),
   removeStatus: (cid, sid) =>
@@ -66,7 +66,7 @@ export const useCombatStore = create<CombatState>((set, get) => ({
       combatants: state.combatants.map((c) =>
         c.id === cid
           ? { ...c, statuses: c.statuses.filter((s) => s.id !== sid) }
-          : c
+          : c,
       ),
     })),
   adjustStatus: (cid, sid, delta) =>
@@ -76,10 +76,10 @@ export const useCombatStore = create<CombatState>((set, get) => ({
           ? {
               ...c,
               statuses: c.statuses.map((s) =>
-                s.id === sid ? { ...s, duration: s.duration + delta } : s
+                s.id === sid ? { ...s, duration: s.duration + delta } : s,
               ),
             }
-          : c
+          : c,
       ),
     })),
 }));

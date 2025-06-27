@@ -31,6 +31,6 @@ export const useAuthStore = create<AuthState>(
       setToken: (t) => set({ token: t }),
       logout: () => set({ user: undefined, token: undefined }),
     }),
-    { name: 'auth-store' }
-  )
+    { name: 'auth-store' },
+  ),
 );

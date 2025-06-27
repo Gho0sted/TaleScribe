@@ -43,13 +43,13 @@ export const useChatStore = create<ChatState>(
         return msgs
           .map(
             (m) =>
-              `[${new Date(m.timestamp).toLocaleString()}] **${m.author}**: ${m.text}`
+              `[${new Date(m.timestamp).toLocaleString()}] **${m.author}**: ${m.text}`,
           )
           .join('\n');
       },
     }),
-    { name: 'chat-store' }
-  )
+    { name: 'chat-store' },
+  ),
 );
 
 export const useChat = () =>

@@ -8,7 +8,7 @@ type Scores = Record<string, number>;
 const PriorityCalculator: React.FC = () => {
   const initialScores: Scores = ABILITY_SCORES_DATA.reduce(
     (acc, a) => ({ ...acc, [a.id]: 10 }),
-    {} as Scores
+    {} as Scores,
   );
   const [scores, setScores] = useState<Scores>(initialScores);
   const [bonus, setBonus] = useState(2);
@@ -62,7 +62,9 @@ const PriorityCalculator: React.FC = () => {
               <input
                 type="checkbox"
                 checked={!!profs[s.id]}
-                onChange={(e) => setProfs({ ...profs, [s.id]: e.target.checked })}
+                onChange={(e) =>
+                  setProfs({ ...profs, [s.id]: e.target.checked })
+                }
               />
               <span>{s.name}</span>
             </label>

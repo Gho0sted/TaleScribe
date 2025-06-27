@@ -27,7 +27,6 @@ const Hotbar: React.FC<HotbarProps> = ({ length = 8 }) => {
     setSlotCount(length);
   }, [length, setSlotCount]);
 
-
   const handleClick = (macro: Macro | null) => {
     if (!macro) return;
     if (macro.type === 'spell') {
@@ -45,37 +44,43 @@ const Hotbar: React.FC<HotbarProps> = ({ length = 8 }) => {
 
   return (
     <div className="space-y-2">
-        <div className="flex space-x-2">
-          {slots.map((slot, i) => (
-            <Droppable droppableId={`slot-${i}`} key={i}>
-              {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className="w-12 h-12 bg-gray-700 rounded flex items-center justify-center relative"
-                  onClick={() => handleClick(slot)}
+      <div className="flex space-x-2">
+        {slots.map((slot, i) => (
+          <Droppable droppableId={`slot-${i}`} key={i}>
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="w-12 h-12 bg-gray-700 rounded flex items-center justify-center relative"
+                onClick={() => handleClick(slot)}
+              >
+                {slot ? (
+                  <span className="text-xs text-center px-1">
+                    {slot.type === 'custom' ? 'C' : slot.id}
+                  </span>
+                ) : (
+                  <span className="text-gray-500 text-xs">+</span>
+                )}
+                <button
+                  className="absolute -top-1 -right-1 bg-gray-800 text-white rounded-full w-4 h-4 text-[10px]"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setEditIdx(i);
+                  }}
                 >
-                  {slot ? (
-                    <span className="text-xs text-center px-1">{slot.type === 'custom' ? 'C' : slot.id}</span>
-                  ) : (
-                    <span className="text-gray-500 text-xs">+</span>
-                  )}
-                  <button
-                    className="absolute -top-1 -right-1 bg-gray-800 text-white rounded-full w-4 h-4 text-[10px]"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setEditIdx(i);
-                    }}
-                  >
-                    ✎
-                  </button>
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          ))}
-        </div>
-        <MacroEditor index={editIdx ?? 0} open={editIdx !== null} onClose={() => setEditIdx(null)} />
+                  ✎
+                </button>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        ))}
+      </div>
+      <MacroEditor
+        index={editIdx ?? 0}
+        open={editIdx !== null}
+        onClose={() => setEditIdx(null)}
+      />
     </div>
   );
 };

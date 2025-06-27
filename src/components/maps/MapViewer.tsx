@@ -77,7 +77,7 @@ const MapViewer: React.FC = () => {
         y2={m.y * 100}
         stroke="yellow"
         strokeWidth="0.3"
-      />
+      />,
     );
     return acc;
   }, []);
@@ -97,7 +97,13 @@ const MapViewer: React.FC = () => {
           className="input"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && e.currentTarget.value) {
-              addToken({ x: 0.5, y: 0.5, src: e.currentTarget.value, rotation: 0, scale: 1 });
+              addToken({
+                x: 0.5,
+                y: 0.5,
+                src: e.currentTarget.value,
+                rotation: 0,
+                scale: 1,
+              });
               e.currentTarget.value = '';
             }
           }}

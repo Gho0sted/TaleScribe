@@ -20,7 +20,9 @@ const SessionsPage: React.FC = () => {
         <tbody>
           {sessions.map((s) => (
             <tr key={s.id} className="border-t border-gray-700">
-              <td className="px-2 py-1">{new Date(s.start).toLocaleDateString()}</td>
+              <td className="px-2 py-1">
+                {new Date(s.start).toLocaleDateString()}
+              </td>
               <td className="px-2 py-1">{s.title}</td>
               <td className="px-2 py-1 space-x-2">
                 <Button onClick={() => removeSession(s.id)}>Удалить</Button>

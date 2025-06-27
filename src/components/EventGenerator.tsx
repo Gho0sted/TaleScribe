@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 const EventGenerator: React.FC = () => {
   const { t } = useTranslation();
   const { events, generateEvent, resetEvents } = useEventGenerator();
-  const [category, setCategory] = useState<'weather'|'road'|'intrigue'>('weather');
+  const [category, setCategory] = useState<'weather' | 'road' | 'intrigue'>(
+    'weather',
+  );
 
   const onGenerate = () => generateEvent(category);
 
@@ -13,15 +15,23 @@ const EventGenerator: React.FC = () => {
     <div className="card">
       <h3 className="text-xl font-bold mb-4">Event Generator</h3>
       <div className="flex items-center space-x-4 mb-4">
-        <select value={category} onChange={(e)=>setCategory(e.target.value as any)} className="input">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value as any)}
+          className="input"
+        >
           <option value="weather">Weather</option>
           <option value="road">Road</option>
           <option value="intrigue">Intrigue</option>
         </select>
       </div>
       <div className="space-x-3">
-        <button className="btn-primary" onClick={onGenerate}>Generate</button>
-        <button className="btn-secondary" onClick={resetEvents}>Reset</button>
+        <button className="btn-primary" onClick={onGenerate}>
+          Generate
+        </button>
+        <button className="btn-secondary" onClick={resetEvents}>
+          Reset
+        </button>
       </div>
       <div className="mt-4 space-y-4">
         {events.length === 0 ? (

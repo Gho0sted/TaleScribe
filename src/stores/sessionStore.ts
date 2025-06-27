@@ -23,12 +23,19 @@ export const useSessionStore = create<SessionState>((set) => ({
     set((state) => ({
       sessions: [
         ...state.sessions,
-        { ...e, id: Date.now().toString(), start: formatISO(new Date(e.start)), end: formatISO(new Date(e.end)) },
+        {
+          ...e,
+          id: Date.now().toString(),
+          start: formatISO(new Date(e.start)),
+          end: formatISO(new Date(e.end)),
+        },
       ],
     })),
   updateSession: (id, updates) =>
     set((state) => ({
-      sessions: state.sessions.map((s) => (s.id === id ? { ...s, ...updates } : s)),
+      sessions: state.sessions.map((s) =>
+        s.id === id ? { ...s, ...updates } : s,
+      ),
     })),
   removeSession: (id) =>
     set((state) => ({
