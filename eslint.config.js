@@ -3,6 +3,7 @@ const js = require('@eslint/js');
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const reactPlugin = require('eslint-plugin-react');
+const reactHooksPlugin = require('eslint-plugin-react-hooks');
 const securityPlugin = require('eslint-plugin-security');
 const prettierPlugin = require('eslint-plugin-prettier');
 
@@ -15,6 +16,7 @@ module.exports = [
   ...compat.extends(
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'plugin:security/recommended',
     'plugin:prettier/recommended'
   ),
@@ -29,6 +31,7 @@ module.exports = [
     plugins: {
       '@typescript-eslint': tsPlugin,
       react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
       security: securityPlugin,
       prettier: prettierPlugin,
     },
@@ -36,6 +39,7 @@ module.exports = [
     rules: {
       'no-console': 'warn',
       'prettier/prettier': 'error',
+      'react/prop-types': 'off',
     },
   },
 ];

@@ -10,10 +10,10 @@ export class DiceUtils {
     return Math.ceil(level / 4) + 1;
   }
 
-  static rollDice(
-    count: number,
-    sides: number,
-    modifier: number = 0,
+    static rollDice(
+      count: number,
+      sides: number,
+      modifier = 0,
   ): Omit<DiceRoll, 'id' | 'timestamp'> {
     const rolls = baseRoll(count, sides);
     const total = rolls.reduce((sum, roll) => sum + roll, 0) + modifier;
@@ -25,10 +25,10 @@ export class DiceUtils {
     };
   }
 
-  static rollDiceAsync(
-    count: number,
-    sides: number,
-    modifier: number = 0,
+    static rollDiceAsync(
+      count: number,
+      sides: number,
+      modifier = 0,
   ): Promise<Omit<DiceRoll, 'id' | 'timestamp'>> {
     const worker = new Worker(
       new URL('../workers/DiceWorker.ts', import.meta.url),

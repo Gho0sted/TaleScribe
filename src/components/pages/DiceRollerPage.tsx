@@ -35,8 +35,8 @@ const DiceRollerPage: React.FC = () => {
     async (
       count: number,
       sides: number,
-      modifier: number = 0,
-      label: string = '',
+      modifier = 0,
+      label = '',
     ) => {
       const result = await DiceUtils.rollDiceAsync(count, sides, modifier);
       const rollData: DiceRoll = {

@@ -25,7 +25,7 @@ const EditionSelector: React.FC<EditionSelectorProps> = ({
         <span className="text-gray-900 dark:text-white">
           {currentEdition?.name}
         </span>
-        <ChevronDown
+        <IconChevronDown
           className={`h-4 w-4 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
@@ -54,7 +54,7 @@ const EditionSelector: React.FC<EditionSelectorProps> = ({
                   </div>
                 </div>
                 {selectedEdition === edition.id && (
-                  <Check className="h-4 w-4 text-blue-600" />
+                  <IconCheck className="h-4 w-4 text-blue-600" />
                 )}
               </button>
             ))}

@@ -11,7 +11,7 @@ const CloudSettings: React.FC = () => {
   const [files, setFiles] = useState<BackupFile[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const provider: 'google' = 'google';
+  const provider = 'google' as const;
 
   const load = async () => {
     setLoading(true);
