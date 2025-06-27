@@ -27,7 +27,7 @@
     "howler": "^2.2.4",
     "react-markdown": "^8.0.7",
     "idb": "^8.0.3",
-    "workbox-window": "^6.5.4"
+    "workbox-window": "^7.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.15",
