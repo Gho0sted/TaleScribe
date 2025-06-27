@@ -27,7 +27,7 @@
     "papaparse": "^5.4.1",
     "jspdf": "^3.0.1",
     "howler": "^2.2.4",
-    "react-markdown": "^8.1.0",
+    "react-markdown": "^8.0.7",
     "rehype-sanitize": "^5.0.1",
     "idb": "^8.0.3",
     "workbox-window": "^7.3.2",
