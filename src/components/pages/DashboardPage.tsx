@@ -3,7 +3,7 @@
  * Панель управления с быстрыми действиями и статистикой редакции
  */
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 import {
   IconSparkles,
   IconUser,
@@ -20,7 +20,7 @@ interface DashboardPageProps {
 }
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { selectedEdition, characters, spells, bestiary, items } =
     useTalescribe();
   const [isOffline] = React.useState(!navigator.onLine);

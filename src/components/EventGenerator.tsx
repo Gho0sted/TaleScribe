@@ -1,9 +1,13 @@
+/**
+ * Random event generator for adventures.
+ * Компонент генерации случайных событий для приключений.
+ */
 import React, { useState } from 'react';
 import { useEventGenerator } from '../stores/useContentStore';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 
 const EventGenerator: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { events, generateEvent, resetEvents } = useEventGenerator();
   const [category, setCategory] = useState<'weather' | 'road' | 'intrigue'>(
     'weather',

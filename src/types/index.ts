@@ -1,3 +1,9 @@
+/**
+ * Shared application type declarations.
+ * Общие объявления типов приложения.
+ */
+import type { ComponentType, SVGProps } from 'react';
+
 export type Edition = '5e' | '3.5e' | 'pathfinder' | 'pf2e';
 
 export interface User {
@@ -162,7 +168,7 @@ export interface DiceRoll {
 export interface NavigationItem {
   id: string;
   name: string;
-  icon: any;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
   color: string;
 }
 

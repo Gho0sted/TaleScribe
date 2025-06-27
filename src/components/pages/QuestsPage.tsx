@@ -1,8 +1,12 @@
+/**
+ * Quest tracking page with filtering and progression.
+ * Страница отслеживания квестов с фильтрацией и прогрессом.
+ */
 import React, { useState, useMemo, useCallback } from 'react';
 import { useTalescribe } from '../../contexts/TalescribeContext';
 import { Card } from '../ui/Card';
 import { IconScroll, IconStar } from '../../constants/icons';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 
 interface Quest {
   id: number;
@@ -46,7 +50,7 @@ const generateQuest = (level: number): Quest => {
 };
 
 const QuestGenerator: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { characters } = useTalescribe();
   const [quest, setQuest] = useState<Quest | null>(null);
 

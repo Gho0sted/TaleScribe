@@ -1,9 +1,13 @@
+/**
+ * Random non-player character generator component.
+ * Компонент генерации случайных неписей.
+ */
 import React, { useState } from 'react';
 import { useNPCGenerator } from '../stores/useContentStore';
-import { useTranslation } from 'react-i18next';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 
 const NPCGenerator: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
   const { npcs, generateNPC, resetNPCs } = useNPCGenerator();
   const [count, setCount] = useState(1);
 

@@ -1,3 +1,7 @@
+/**
+ * IndexedDB helpers with simple AES-GCM encryption.
+ * Вспомогательные функции для IndexedDB с шифрованием AES-GCM.
+ */
 import { openDB } from 'idb';
 
 const textEncoder = new TextEncoder();
@@ -64,28 +68,28 @@ export const getFromDB = async <T>(key: string): Promise<T | undefined> => {
   }
 };
 
-export const setToDB = async (key: string, value: any): Promise<void> => {
+export const setToDB = async <T>(key: string, value: T): Promise<void> => {
   const cipher = await encrypt(value);
   await (await dbPromise).put('data', cipher, key);
 };
 
-export const addToQueue = async (op: any): Promise<void> => {
+export const addToQueue = async <T>(op: T): Promise<void> => {
   const cipher = await encrypt(op);
   await (await dbPromise).add('queue', cipher);
 };
 
-export const getQueue = async (): Promise<any[]> => {
+export const getQueue = async <T = unknown>(): Promise<T[]> => {
   const all = await (await dbPromise).getAll('queue');
-  const result: any[] = [];
+  const result: T[] = [] as T[];
   for (const item of all) {
     if (typeof item === 'string') {
       try {
-        result.push(await decrypt(item));
+        result.push((await decrypt(item)) as T);
       } catch {
         /* ignore */
       }
     } else {
-      result.push(item);
+      result.push(item as T);
     }
   }
   return result;
