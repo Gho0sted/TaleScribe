@@ -4,19 +4,6 @@ export const requestPermission = async () => {
   return perm === 'granted';
 };
 
-export const subscribePush = async () => {
-  if (!('serviceWorker' in navigator)) return;
-  const reg = await navigator.serviceWorker.ready;
-  try {
-    const sub = await reg.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: new Uint8Array([]),
-    });
-    await reg.active?.postMessage({ type: 'save-subscription', data: sub });
-  } catch (e) {
-    console.error(e);
-  }
-};
 
 export const scheduleNotification = async (
   date: Date,
