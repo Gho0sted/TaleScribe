@@ -31,6 +31,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
+            cacheDirectory: true,
             presets: [
               "@babel/preset-env",
               "@babel/preset-react",
@@ -67,7 +68,10 @@ module.exports = {
           }),
         ]
       : []),
-    new CompressionPlugin({ algorithm: "gzip" }),
+    new CompressionPlugin({
+      algorithm: "brotliCompress",
+      compressionOptions: { level: 11 },
+    }),
     // new (require('clean-webpack-plugin').CleanWebpackPlugin)(),
   ],
   devServer: {
