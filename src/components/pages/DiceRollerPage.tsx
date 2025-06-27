@@ -13,6 +13,20 @@ const DiceRollerPage: React.FC = () => {
   const [rollHistory, setRollHistory] = useState<DiceRoll[]>([]);
   const [customDice, setCustomDice] = useState({ count: 1, sides: 20, modifier: 0 });
 
+  const getResultClass = (roll: DiceRoll) => {
+    const match = roll.formula.match(/(\d+)d(\d+)/);
+    if (match) {
+      const count = parseInt(match[1], 10);
+      const sides = parseInt(match[2], 10);
+      if (count === 1 && sides === 20) {
+        const value = roll.rolls[0];
+        if (value === 20) return 'dice-result-success';
+        if (value === 1) return 'dice-result-failure';
+      }
+    }
+    return '';
+  };
+
   const rollDice = useCallback(
     (count: number, sides: number, modifier: number = 0, label: string = '') => {
       const result = DiceUtils.rollDice(count, sides, modifier);
@@ -142,7 +156,7 @@ const DiceRollerPage: React.FC = () => {
                             <span className="text-sm text-gray-300">[{roll.rolls.join(', ')}]</span>
                             {roll.modifier !== 0 && <span className="text-sm text-blue-400">{DiceUtils.formatModifier(roll.modifier)}</span>}
                           </div>
-                          <span className="text-lg font-bold text-white">= {roll.total}</span>
+                          <span className={`text-lg font-bold ${getResultClass(roll) || 'text-white'}`}>= {roll.total}</span>
                         </div>
                       </div>
                     ))}

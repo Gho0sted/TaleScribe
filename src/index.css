@@ -9,6 +9,8 @@
   --font-family: "Inter, sans-serif";
   --primary-accent: #4f46e5;
   --secondary-accent: #d946ef;
+  --color-success: #3dd13d;
+  --color-danger: #d36363;
   --color-bg: #ffffff;
   --color-text: #1f2937;
 }
@@ -16,6 +18,8 @@
 .dark {
   --color-bg: #111827;
   --color-text: #f9fafb;
+  --color-success: #3dd13d;
+  --color-danger: #d36363;
 }
 
 @layer base {
@@ -114,6 +118,15 @@
   /* Input variants */
   .input {
     @apply w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+  }
+
+  /* Dice result colors */
+  .dice-result-success {
+    color: var(--color-success);
+  }
+
+  .dice-result-failure {
+    color: var(--color-danger);
   }
 
   /* Modal overlay */
