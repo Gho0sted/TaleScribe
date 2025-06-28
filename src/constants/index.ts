@@ -321,7 +321,6 @@ export const NAVIGATION: NavigationItem[] = [
   { id: 'quests', name: 'Квесты', icon: IconScroll, color: 'pink' },
   { id: 'content', name: 'Контент', icon: IconSparkles, color: 'teal' },
   { id: 'campaigns', name: 'Кампании', icon: IconUsers, color: 'purple' },
-  { id: 'items', name: 'Предметы', icon: IconPackage, color: 'amber' },
   { id: 'bestiary', name: 'Бестиарий', icon: IconShield, color: 'red' },
   { id: 'battle', name: 'Бой', icon: IconSword, color: 'orange' },
   { id: 'talents', name: 'Таланты', icon: IconLightbulb, color: 'yellow' },

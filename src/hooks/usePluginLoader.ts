@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { usePluginStore } from '../stores/usePluginStore';
 
-const createApi = () => ({
+const listeners = new Map<string, (e: MessageEvent) => void>();
+
+const createApi = (name: string) => ({
   addButton: (label: string) => {
     const btn = document.createElement('button');
     btn.textContent = label;
@@ -9,11 +11,11 @@ const createApi = () => ({
     document.body.appendChild(btn);
   },
   addCommand: (cmd: { id: string; run: () => void }) => {
-    window.addEventListener('message', (e) => {
-      if (e.data === cmd.id) {
-        cmd.run();
-      }
-    });
+    const handler = (e: MessageEvent) => {
+      if (e.data === cmd.id) cmd.run();
+    };
+    listeners.set(`${name}-${cmd.id}`, handler);
+    window.addEventListener('message', handler);
   },
 });
 
@@ -33,15 +35,27 @@ export const usePluginLoader = () => {
           iframe.setAttribute('sandbox', 'allow-scripts');
           iframe.onload = () => {
             iframe.contentWindow?.postMessage(
-              { type: 'init', api: createApi() },
+              { type: 'init', api: createApi(p.name) },
               '*',
             );
           };
           document.body.appendChild(iframe);
         }
       } else {
+        listeners.forEach((handler, key) => {
+          if (key.startsWith(p.name + '-')) {
+            window.removeEventListener('message', handler);
+            listeners.delete(key);
+          }
+        });
         existing?.remove();
       }
     });
+    return () => {
+      listeners.forEach((handler, key) => {
+        window.removeEventListener('message', handler);
+      });
+      listeners.clear();
+    };
   }, [plugins]);
 };

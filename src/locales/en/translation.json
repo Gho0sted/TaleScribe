@@ -17,6 +17,21 @@
     "offline": "Offline",
     "gameMaster": "Game Master"
   },
+  "common": {
+    "back": "Back",
+    "save": "Save"
+  },
+  "classes": {
+    "searchPlaceholder": "Search...",
+    "createCharacter": "Create character",
+    "classLabel": "Class:"
+  },
+  "audio": {
+    "savePlaylist": "Save playlist"
+  },
+  "talents": {
+    "searchPlaceholder": "Search"
+  },
   "dashboard": {
     "welcome": "Welcome to Talescribe!",
     "tagline": "Your advanced D&D assistant for characters, spells and campaigns. Supports D&D 5e, 3.5e, Pathfinder and Pathfinder 2e.",
@@ -79,5 +94,36 @@
     "reroll": "Re-roll",
     "pointsRemaining": "Points remaining",
     "modifier": "Modifier"
+  },
+  "admin": {
+    "logsTitle": "System Logs",
+    "clearButton": "Clear",
+    "level": "Level",
+    "message": "Message",
+    "time": "Time",
+    "flagsTitle": "Feature Flags",
+    "usersTitle": "Users",
+    "changeRole": "Change role",
+    "block": "Block",
+    "unblock": "Unblock",
+    "translationsTitle": "Translation Settings",
+    "restore": "Restore",
+    "role": "Role",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "pages": {
+    "backgrounds": "Backgrounds",
+    "armor": "Armor",
+    "races": "Races & Origins",
+    "glossary": "Glossary",
+    "equipment": "Equipment",
+    "traits": "Traits",
+    "spells": "Spells",
+    "weapons": "Weapons",
+    "classFeatures": "Class Features",
+    "tools": "Tools",
+    "bestiary": "Bestiary",
+    "magicItems": "Magic Items"
   }
 }

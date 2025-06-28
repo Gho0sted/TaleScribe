@@ -2,13 +2,14 @@
  * Application entry component configuring providers and routing.
  * Главный компонент приложения, настраивающий провайдеры и маршрутизацию.
  */
-import React from 'react';
+import React, { Suspense } from 'react';
 import { TalescribeProvider } from './contexts/TalescribeContext';
 import TalescribeApp from './components/TalescribeApp';
 import AudioPlayer from './components/AudioPlayer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AdminDashboard from './admin/AdminDashboard';
-import ForbiddenPage from './components/pages/ForbiddenPage';
+import { LoadingSpinner } from './components/ui/LoadingSpinner';
+const AdminDashboard = React.lazy(() => import('./admin/AdminDashboard'));
+import ForbiddenPage from './pages/ForbiddenPage';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { useApplyTheme } from './hooks/useApplyTheme';
@@ -28,7 +29,9 @@ function App() {
             element={
               <ProtectedRoute role="admin">
                 <TalescribeProvider>
-                  <AdminDashboard />
+                  <Suspense fallback={<LoadingSpinner message="Loading admin..." />}>
+                    <AdminDashboard />
+                  </Suspense>
                 </TalescribeProvider>
               </ProtectedRoute>
             }

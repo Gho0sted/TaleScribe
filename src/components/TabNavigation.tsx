@@ -17,7 +17,7 @@ const tabs = [
   { path: '/tools', label: 'Инструменты' },
 ];
 
-const TabNavigation: React.FC = () => {
+const TabNavigationComponent: React.FC = () => {
   const location = useLocation();
 
   return (
@@ -34,5 +34,7 @@ const TabNavigation: React.FC = () => {
     </nav>
   );
 };
+
+const TabNavigation = React.memo(TabNavigationComponent);
 
 export default TabNavigation;

@@ -13,3 +13,9 @@
 - Issue templates converted to YAML and README links to CONTRIBUTING.
 - English README now shows CI and coverage badges.
 - Pre-commit hook checks formatting before tests.
+- Unified all page components under `src/pages` and removed the obsolete
+  "items" navigation link.
+- Introduced reusable `useStoredState` hook and moved class data into
+  `src/data/classes.ts`.
+- Webpack now loads environment variables with `dotenv-webpack` and
+  adds aliases `@hooks` and `@utils`.

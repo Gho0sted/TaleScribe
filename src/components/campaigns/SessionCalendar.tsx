@@ -5,10 +5,38 @@ import {
   scheduleNotification,
   requestPermission,
 } from '../../services/notificationService';
+import { LoadingSpinner } from '../ui/LoadingSpinner';
+
+interface GapiAuthInstance {
+  isSignedIn: { get(): boolean; listen(cb: (v: boolean) => void): void };
+  signIn(): void;
+  signOut(): void;
+}
+
+interface Gapi {
+  load(lib: string, cb: () => void): void;
+  client: {
+    init(config: {
+      apiKey?: string;
+      clientId?: string;
+      discoveryDocs?: string[];
+      scope?: string;
+    }): Promise<void>;
+    calendar: {
+      events: {
+        list(options: { calendarId: string }): Promise<{ result: { items: any[] } }>;
+        insert(options: { calendarId: string; resource: unknown }): Promise<{ result: any }>;
+      };
+    };
+  };
+  auth2: {
+    getAuthInstance(): GapiAuthInstance;
+  };
+}
 
 declare global {
   interface Window {
-    gapi: any;
+    gapi: Gapi;
   }
 }
 
@@ -20,6 +48,7 @@ const SessionCalendar: React.FC = () => {
   const [gapiReady, setGapiReady] = useState(false);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     requestPermission();
@@ -41,6 +70,7 @@ const SessionCalendar: React.FC = () => {
           if (auth.isSignedIn.get()) loadEvents();
         } catch (e) {
           console.error('Failed to init gapi:', e);
+          setError('Не удалось подключиться к Google Calendar');
         }
       });
     };
@@ -52,7 +82,10 @@ const SessionCalendar: React.FC = () => {
       script.src = 'https://apis.google.com/js/api.js';
       script.async = true;
       script.onload = start;
-      script.onerror = () => console.error('Failed to load Google API script');
+      script.onerror = () => {
+        console.error('Failed to load Google API script');
+        setError('Не удалось загрузить Google API');
+      };
       document.body.appendChild(script);
     }
   }, []);
@@ -62,8 +95,14 @@ const SessionCalendar: React.FC = () => {
       const res = await window.gapi.client.calendar.events.list({
         calendarId: 'primary',
       });
-      const items = res.result.items || [];
-      const ev = items.map((i: any) => ({
+      const items = (res.result.items || []) as Array<{
+        id: string;
+        summary: string;
+        description?: string;
+        start: { dateTime?: string; date?: string };
+        end: { dateTime?: string; date?: string };
+      }>;
+      const ev = items.map((i) => ({
         id: i.id,
         title: i.summary,
         description: i.description,
@@ -73,6 +112,7 @@ const SessionCalendar: React.FC = () => {
       setSessions(ev);
     } catch (e) {
       console.error(e);
+      setError('Ошибка загрузки событий');
     }
   };
 
@@ -82,6 +122,7 @@ const SessionCalendar: React.FC = () => {
       auth.signIn();
     } else {
       console.error('GAPI auth2 not initialized');
+      setError('GAPI не инициализирован');
     }
   };
 
@@ -121,11 +162,13 @@ const SessionCalendar: React.FC = () => {
       setTitle('');
     } catch (e) {
       console.error(e);
+      setError('Не удалось создать событие');
     }
   };
 
   return (
     <div className="p-4 space-y-4">
+      {error && <div className="text-red-500">{error}</div>}
       <div className="flex space-x-2">
         {gapiReady ? (
           signedIn ? (
@@ -138,7 +181,7 @@ const SessionCalendar: React.FC = () => {
             </button>
           )
         ) : (
-          <span>Loading...</span>
+          <LoadingSpinner message="Loading Google API..." />
         )}
       </div>
       {signedIn && (
