@@ -1,13 +1,15 @@
 import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import './i18n';
 import App from './App';
 import { reportWebVitals } from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('Root element not found');
+}
+const root = createRoot(container as HTMLElement);
 
 root.render(
   <React.StrictMode>
