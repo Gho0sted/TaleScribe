@@ -1,5 +1,18 @@
+const CACHE_NAME = 'talescribe-static-v1';
+const ASSETS = [
+  '/',
+  '/index.html',
+  '/favicon.ico',
+];
+
 self.addEventListener('install', (event: ExtendableEvent) => {
-  event.waitUntil((self as ServiceWorkerGlobalScope).skipWaiting());
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.addAll(ASSETS);
+      (self as ServiceWorkerGlobalScope).skipWaiting();
+    })(),
+  );
 });
 
 self.addEventListener('activate', (event: ExtendableEvent) => {
@@ -7,8 +20,22 @@ self.addEventListener('activate', (event: ExtendableEvent) => {
 });
 
 self.addEventListener('fetch', (event: FetchEvent) => {
+  const { request } = event;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== location.origin || url.hostname.includes('googleapis')) {
+    event.respondWith(fetch(request));
+    return;
+  }
   event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request)),
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+      return fetch(request).then((res) => {
+        const resClone = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, resClone));
+        return res;
+      });
+    }),
   );
 });
 

@@ -34,6 +34,6 @@ export default i18n;
 export function translate(
   key: Parameters<typeof i18n.t>[0],
   options?: Parameters<typeof i18n.t>[1],
-) {
+): string {
   return i18n.t(key, options);
 }

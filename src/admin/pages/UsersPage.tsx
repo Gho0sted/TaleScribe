@@ -2,9 +2,11 @@ import React from 'react';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { useUsersStore } from '../../stores/useUsersStore';
+import { useAppTranslation } from '../../hooks/useAppTranslation';
 
 const UsersPage: React.FC = () => {
   const { users, updateUser } = useUsersStore();
+  const { t } = useAppTranslation();
 
   const toggleRole = (id: string) => {
     const user = users.find((u) => u.id === id);
@@ -20,15 +22,15 @@ const UsersPage: React.FC = () => {
 
   return (
     <Card>
-      <h2 className="text-xl font-bold mb-4">Пользователи</h2>
+      <h2 className="text-xl font-bold mb-4">{t('admin.usersTitle')}</h2>
       <table className="min-w-full text-sm">
         <thead>
           <tr>
             <th className="px-2 py-1 text-left">ID</th>
             <th className="px-2 py-1 text-left">Email</th>
-            <th className="px-2 py-1 text-left">Роль</th>
-            <th className="px-2 py-1 text-left">Статус</th>
-            <th className="px-2 py-1" />
+            <th className="px-2 py-1 text-left">{t('admin.role')}</th>
+            <th className="px-2 py-1 text-left">{t('admin.status')}</th>
+            <th className="px-2 py-1">{t('admin.actions')}</th>
           </tr>
         </thead>
         <tbody>
@@ -39,9 +41,11 @@ const UsersPage: React.FC = () => {
               <td className="px-2 py-1">{u.role}</td>
               <td className="px-2 py-1">{u.status}</td>
               <td className="px-2 py-1 space-x-2">
-                <Button onClick={() => toggleRole(u.id)}>Изменить роль</Button>
+                <Button onClick={() => toggleRole(u.id)}>
+                  {t('admin.changeRole')}
+                </Button>
                 <Button onClick={() => toggleStatus(u.id)}>
-                  {u.status === 'active' ? 'Заблокировать' : 'Разблокировать'}
+                  {u.status === 'active' ? t('admin.block') : t('admin.unblock')}
                 </Button>
               </td>
             </tr>

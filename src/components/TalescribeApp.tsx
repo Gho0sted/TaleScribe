@@ -23,18 +23,18 @@ import EditionSelector from './ui/EditionSelector';
 import LanguageSwitcher from './layout/LanguageSwitcher';
 import { useAppTranslation } from '../hooks/useAppTranslation';
 import { usePWA } from '../hooks/usePWA';
-const DiceRollerPage = React.lazy(() => import('./pages/DiceRollerPage'));
-const DashboardPage = React.lazy(() => import('./pages/DashboardPage'));
-const CharactersPage = React.lazy(() => import('./pages/CharactersPage'));
-const QuestsPage = React.lazy(() => import('./pages/QuestsPage'));
-const CampaignsPage = React.lazy(() => import('./pages/CampaignsPage'));
-const CombatTrackerPage = React.lazy(() => import('./pages/CombatTrackerPage'));
+const DiceRollerPage = React.lazy(() => import('../pages/DiceRollerPage'));
+const DashboardPage = React.lazy(() => import('../pages/DashboardPage'));
+const CharactersPage = React.lazy(() => import('../pages/CharactersPage'));
+const QuestsPage = React.lazy(() => import('../pages/QuestsPage'));
+const CampaignsPage = React.lazy(() => import('../pages/CampaignsPage'));
+const CombatTrackerPage = React.lazy(() => import('../pages/CombatTrackerPage'));
 const ContentGeneratorsPage = React.lazy(
-  () => import('./pages/ContentGeneratorsPage'),
+  () => import('../pages/ContentGeneratorsPage'),
 );
-const DataManagerPage = React.lazy(() => import('./pages/DataManagerPage'));
-const TalentsPage = React.lazy(() => import('./pages/TalentsPage'));
-const SettingsPage = React.lazy(() => import('./pages/SettingsPage'));
+const DataManagerPage = React.lazy(() => import('../pages/DataManagerPage'));
+const TalentsPage = React.lazy(() => import('../pages/TalentsPage'));
+const SettingsPage = React.lazy(() => import('../pages/SettingsPage'));
 const ClassesPage = React.lazy(() => import('../pages/ClassesPage'));
 const RacesPage = React.lazy(() => import('../pages/RacesPage'));
 const TraitsPage = React.lazy(() => import('../pages/TraitsPage'));
@@ -81,6 +81,7 @@ const TalescribeApp: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-label="Toggle sidebar"
               className="p-3 text-gray-400 hover:text-white lg:hidden rounded-xl transition-colors"
             >
               <IconMenu className="h-6 w-6" />
@@ -129,7 +130,10 @@ const TalescribeApp: React.FC = () => {
                   </span>
                 </div>
               )}
-              <button className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors">
+              <button
+                className="p-3 text-gray-400 hover:text-white rounded-xl transition-colors"
+                aria-label="Notifications"
+              >
                 <IconBell className="h-5 w-5" />
               </button>
               {installPrompt && (
@@ -163,7 +167,7 @@ const TalescribeApp: React.FC = () => {
       </header>
       <div className="flex">
         <aside
-          className={`fixed lg:static lg:translate-x-0 z-30 w-72 h-screen bg-gray-800/90 backdrop-blur-md shadow-xl transition-transform duration-300 ease-in-out border-r border-gray-700 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+          className={`fixed lg:static lg:translate-x-0 z-30 w-72 max-w-full h-screen bg-gray-800/90 backdrop-blur-md shadow-xl transition-transform duration-300 ease-in-out border-r border-gray-700 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
         >
           <nav className="p-6 space-y-3 mt-6">
             {NAVIGATION.map((item) => {

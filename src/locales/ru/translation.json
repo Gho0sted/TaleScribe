@@ -17,6 +17,21 @@
     "offline": "Офлайн",
     "gameMaster": "Мастер игры"
   },
+  "common": {
+    "back": "Назад",
+    "save": "Сохранить"
+  },
+  "classes": {
+    "searchPlaceholder": "Поиск...",
+    "createCharacter": "Создать персонажа",
+    "classLabel": "Класс:"
+  },
+  "audio": {
+    "savePlaylist": "Сохранить плейлист"
+  },
+  "talents": {
+    "searchPlaceholder": "Поиск"
+  },
   "dashboard": {
     "welcome": "Добро пожаловать в Talescribe!",
     "tagline": "Ваш продвинутый помощник для D&D с полным функционалом управления персонажами, заклинаниями и кампаниями. Поддерживаются редакции: D&D 5e, 3.5e, Pathfinder и Pathfinder 2e.",
@@ -79,5 +94,36 @@
     "reroll": "Перебросить",
     "pointsRemaining": "Осталось очков",
     "modifier": "Модификатор"
+  },
+  "admin": {
+    "logsTitle": "Логи системы",
+    "clearButton": "Очистить",
+    "level": "Уровень",
+    "message": "Сообщение",
+    "time": "Время",
+    "flagsTitle": "Флаги фич",
+    "usersTitle": "Пользователи",
+    "changeRole": "Изменить роль",
+    "block": "Заблокировать",
+    "unblock": "Разблокировать",
+    "translationsTitle": "Настройки перевода",
+    "restore": "Восстановить",
+    "role": "Роль",
+    "status": "Статус",
+    "actions": "Действия"
+  },
+  "pages": {
+    "backgrounds": "Предыстории",
+    "armor": "Доспехи",
+    "races": "Расы и происхождения",
+    "glossary": "Глоссарий",
+    "equipment": "Снаряжение",
+    "traits": "Черты",
+    "spells": "Заклинания",
+    "weapons": "Оружие",
+    "classFeatures": "Особенности классов",
+    "tools": "Инструменты",
+    "bestiary": "Бестиарий",
+    "magicItems": "Магические предметы"
   }
 }
