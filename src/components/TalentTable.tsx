@@ -3,6 +3,7 @@ import Papa from 'papaparse';
 import { downloadFile } from '../utils/downloadFile';
 import { CLASS_TALENTS, ClassTalent } from '../constants/CLASS_TALENTS';
 import { useTalentStore } from '../stores/useTalentStore';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 import {
   IconDownload,
   IconPlus,
@@ -15,6 +16,7 @@ interface TalentTableProps {
 }
 
 const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
+  const { t } = useAppTranslation();
   const talents = useTalentStore((s) => s.talents[classId] || []);
   const setClassTalents = useTalentStore((s) => s.setClassTalents);
   const addTalent = useTalentStore((s) => s.addTalent);
@@ -76,7 +78,7 @@ const TalentTable: React.FC<TalentTableProps> = ({ classId }) => {
       <div className="flex items-center space-x-4">
         <input
           className="input"
-          placeholder="Поиск"
+          placeholder={t('talents.searchPlaceholder')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

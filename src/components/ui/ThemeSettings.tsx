@@ -5,10 +5,12 @@ const fonts = ['Roboto', 'Inter, sans-serif', 'Open Sans'];
 
 const ThemeSettings: React.FC = () => {
   const {
+    mode,
     scale,
     font,
     primaryColor,
     secondaryColor,
+    setMode,
     setScale,
     setFont,
     setPrimaryColor,
@@ -17,6 +19,18 @@ const ThemeSettings: React.FC = () => {
 
   return (
     <div className="space-y-4 p-4">
+      <div>
+        <label className="block mb-1">Theme Mode</label>
+        <select
+          value={mode}
+          onChange={(e) => setMode(e.target.value as 'light' | 'dark' | 'auto')}
+          className="input"
+        >
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="auto">Auto</option>
+        </select>
+      </div>
       <div>
         <label className="block mb-1">Zoom: {Math.round(scale * 100)}%</label>
         <input

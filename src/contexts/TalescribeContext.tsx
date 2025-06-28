@@ -9,6 +9,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useCallback,
   ReactNode,
 } from 'react';
 import {
@@ -23,12 +24,20 @@ import {
 import { DataManager } from '../utils/DataManager';
 import { DataInitializer } from '../utils/DataInitializer';
 
+const CLEAR_KEYS = [
+  'map-store',
+  'audio-store',
+  'chat-store',
+  'hotbar-store',
+  'plugin-store',
+  'talent-store',
+  'theme-settings',
+  'auth-store',
+];
 interface TalescribeContextType {
   user: User;
   selectedEdition: Edition;
   setSelectedEdition: (edition: Edition) => void;
-  theme: 'light' | 'dark' | 'auto';
-  setTheme: (theme: 'light' | 'dark' | 'auto') => void;
   characters: Character[];
   setCharacters: (characters: Character[]) => void;
   spells: Spell[];
@@ -43,7 +52,7 @@ interface TalescribeContextType {
   deleteCharacter: (id: string) => void;
   saveData: () => Promise<void>;
   loadData: () => Promise<void>;
-  clearAllData: () => void;
+  clearAllData: () => Promise<void>;
 }
 
 const TalescribeContext = createContext<TalescribeContextType | undefined>(
@@ -72,7 +81,6 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
   });
 
   const [selectedEdition, setSelectedEdition] = useState<Edition>('5e');
-  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('dark');
 
   const [characters, setCharacters] = useState<Character[]>([]);
   const [spells, setSpells] = useState<Spell[]>([]);
@@ -86,6 +94,11 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', saveData);
+    return () => window.removeEventListener('beforeunload', saveData);
+  }, [saveData]);
 
   useEffect(() => {
     if (characters.length === 0) {
@@ -103,28 +116,9 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
   }, [selectedEdition]);
 
   useEffect(() => {
-    const root = document.documentElement;
+    dataManager.markDirty('talescribe_data');
+  }, [selectedEdition, characters, spells, bestiary, items, campaigns]);
 
-    if (theme === 'auto') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const applyAutoTheme = () => {
-        if (mediaQuery.matches) {
-          root.classList.add('dark');
-        } else {
-          root.classList.remove('dark');
-        }
-      };
-
-      applyAutoTheme();
-      mediaQuery.addEventListener('change', applyAutoTheme);
-
-      return () => mediaQuery.removeEventListener('change', applyAutoTheme);
-    } else if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-  }, [theme]);
 
   const updateCharacter = (id: string, updates: Partial<Character>) => {
     setCharacters((prev) =>
@@ -136,10 +130,9 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
     setCharacters((prev) => prev.filter((char) => char.id !== id));
   };
 
-  const saveData = async () => {
+  const saveData = useCallback(async () => {
     const data = {
       selectedEdition,
-      theme,
       characters,
       spells,
       bestiary,
@@ -147,12 +140,11 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
       campaigns,
     };
     await dataManager.saveData('talescribe_data', data);
-  };
+  }, [selectedEdition, characters, spells, bestiary, items, campaigns]);
 
   const loadData = async () => {
     const data = await dataManager.loadData<{
       selectedEdition: Edition;
-      theme: 'light' | 'dark' | 'auto';
       characters: Character[];
       spells: Spell[];
       bestiary: BestiaryCreature[];
@@ -161,7 +153,6 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
     }>('talescribe_data');
     if (data) {
       if (data.selectedEdition) setSelectedEdition(data.selectedEdition);
-      if (data.theme) setTheme(data.theme);
       if (data.characters) setCharacters(data.characters);
       if (data.spells) setSpells(data.spells);
       if (data.bestiary) setBestiary(data.bestiary);
@@ -170,21 +161,20 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
     }
   };
 
-  const clearAllData = () => {
+  const clearAllData = async () => {
     setCharacters([]);
     setSpells([]);
     setBestiary([]);
     setItems([]);
     setCampaigns([]);
-    localStorage.clear();
+    await dataManager.clearAll();
+    CLEAR_KEYS.forEach((k) => localStorage.removeItem(k));
   };
 
   const value: TalescribeContextType = {
     user,
     selectedEdition,
     setSelectedEdition,
-    theme,
-    setTheme,
     characters,
     setCharacters,
     spells,

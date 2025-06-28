@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Howl } from 'howler';
 import { useAudioStore } from '../stores/useAudioStore';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 
 const AudioPlayer: React.FC = () => {
   const {
@@ -14,6 +15,7 @@ const AudioPlayer: React.FC = () => {
     isPlaying,
     setIsPlaying,
   } = useAudioStore();
+  const { t } = useAppTranslation();
 
   const activePlaylist = playlists.find((p) => p.id === activePlaylistId);
   const [howl, setHowl] = useState<Howl | null>(null);
@@ -141,7 +143,7 @@ const AudioPlayer: React.FC = () => {
           onClick={savePlaylist}
           className="px-2 py-1 bg-indigo-500 rounded"
         >
-          Сохранить плейлист
+          {t('audio.savePlaylist')}
         </button>
       </div>
       <div className="flex space-x-2">

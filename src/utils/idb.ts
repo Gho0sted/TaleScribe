@@ -73,6 +73,13 @@ export const setToDB = async <T>(key: string, value: T): Promise<void> => {
   await (await dbPromise).put('data', cipher, key);
 };
 
+export const deleteFromDB = async (key: string): Promise<void> => {
+  const db = await dbPromise;
+  const tx = db.transaction('data', 'readwrite');
+  tx.store.delete(key);
+  await tx.done;
+};
+
 export const addToQueue = async <T>(op: T): Promise<void> => {
   const cipher = await encrypt(op);
   await (await dbPromise).add('queue', cipher);

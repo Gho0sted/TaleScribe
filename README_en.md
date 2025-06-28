@@ -53,6 +53,7 @@ You can also run webpack manually:
 ```bash
 npx webpack --config webpack.config.js
 ```
+
 If webpack prompts that the CLI is missing, install it with:
 
 ```bash
@@ -99,9 +100,11 @@ To get a full installer, use [Capacitor](https://capacitorjs.com/):
 - The `LanguageSwitcher` component in the header allows instant switching between Russian and English.
 
 ## 📁 Project Structure
+
 (simplified for example)
 
 ## 🛠️ Technologies
+
 - React with TypeScript
 - Tailwind CSS for styling
 - Lucide React for icons
@@ -177,7 +180,7 @@ Strict typing for all components, utilities and game data.
 
 ### Adding a new page
 
-- Create a component in `src/components/pages/`
+- Create a component in `src/pages/`
 - Add a route to `NAVIGATION` in `src/constants/index.ts`
 - Update paths in `src/constants/routes.ts` and routing in `TalescribeApp.tsx`
 
@@ -187,6 +190,15 @@ Strict typing for all components, utilities and game data.
 2. Enable Calendar and Gmail APIs.
 3. Create an OAuth client of type "Web" and set the authorized origin to `http://localhost`.
 4. Copy the client ID and API key to `.env` based on `.env.example`.
+   The build uses `dotenv-webpack` to inject these variables automatically.
+
+### Creating a plugin
+
+1. Place an HTML or JS file into the `plugins` folder.
+2. In that script call `window.parent.postMessage({ type: 'addButton', id: 'my', label: 'My Plugin' }, '*')`
+   to add a button to the UI.
+3. Send `postMessage({ type: 'addCommand', id: 'hello', title: 'Hello' }, '*')` to register a custom command.
+4. Your plugin can listen for `message` events and exchange data with the main app.
 
 ## 📄 License
 

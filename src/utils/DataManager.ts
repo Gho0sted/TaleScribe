@@ -4,7 +4,17 @@
  * Утилитный класс для сохранения и загрузки данных через IndexedDB,
  * обеспечивающий кэш и автоматическое фоновое сохранение.
  */
-import { getFromDB, setToDB, addToQueue, getQueue, clearQueue } from './idb';
+import {
+  getFromDB,
+  setToDB,
+  deleteFromDB,
+  addToQueue,
+  getQueue,
+  clearQueue,
+} from './idb';
+
+const AUTO_SAVE_INTERVAL_MS = 5000;
+const AUTO_SAVE_DELAY_MS = 30000;
 
 export class DataManager {
   private cache = new Map<string, unknown>();
@@ -54,6 +64,24 @@ export class DataManager {
     }
   }
 
+  async deleteData(key: string): Promise<void> {
+    try {
+      await deleteFromDB(key);
+      this.cache.delete(key);
+    } catch (error) {
+      console.error(`Failed to delete ${key}:`, error);
+    }
+  }
+
+  async clearAll(): Promise<void> {
+    try {
+      await this.deleteData('talescribe_data');
+      await clearQueue();
+    } catch (error) {
+      console.error('Failed to clear data:', error);
+    }
+  }
+
   /**
    * Mark specific key as changed to trigger auto save
    * Пометить ключ измененным для последующего автосохранения
@@ -84,10 +112,10 @@ export class DataManager {
 
   private setupAutoSave(): void {
     this.autoSaveInterval = setInterval(() => {
-      if (this.dirtyKeys.size > 0 && Date.now() - this.lastSaveTime > 30000) {
+      if (this.dirtyKeys.size > 0 && Date.now() - this.lastSaveTime > AUTO_SAVE_DELAY_MS) {
         this.performAutoSave();
       }
-    }, 5000);
+    }, AUTO_SAVE_INTERVAL_MS);
   }
 
   /**
