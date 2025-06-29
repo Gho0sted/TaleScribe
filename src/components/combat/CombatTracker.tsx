@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import type { DropResult } from '@hello-pangea/dnd';
 import { useInitiative, useStatuses, Status } from '../../stores/combatStore';
 
 const TURN_TIME = 30;

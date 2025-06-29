@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import ChatMessage from './ChatMessage';
+import { DragDropContext } from '@hello-pangea/dnd';
+import type { DropResult } from '@hello-pangea/dnd';
 import { useChat } from '../../stores/useChatStore';
-import { Hotbar, SpellList } from '../hotbar';
-import { DragDropContext, DropResult } from '@hello-pangea/dnd';
-import { downloadFile } from '../../utils/downloadFile';
 import { useHotbarStore } from '../../stores/useHotbarStore';
+import { Hotbar, SpellList } from '../hotbar';
+import { downloadFile } from '../../utils/downloadFile';
+import ChatMessage from './ChatMessage';
 
 const MasterConsole: React.FC = () => {
   const { messages, addMessage, clearChat, exportTranscript } = useChat();

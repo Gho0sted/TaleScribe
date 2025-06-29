@@ -1,5 +1,5 @@
 import React from 'react';
-import MapViewer from '../maps/MapViewer';
+import MapViewer from '../components/maps/MapViewer';
 
 const MapsPage: React.FC = () => (
   <div className="p-8 text-white">
