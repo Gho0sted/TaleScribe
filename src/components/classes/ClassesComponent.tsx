@@ -1,11 +1,15 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useStoredState from '../../hooks/useStoredState';
 import { classes } from '../../data/classes';
-import { ClassData, Subclass } from '../../types/classes';
+import { ClassData } from '../../types/classes';
 import { useAppTranslation } from '../../hooks/useAppTranslation';
+import { useTalescribe } from '../../contexts/TalescribeContext';
 
 const ClassesComponent: React.FC = () => {
   const { t } = useAppTranslation();
+  const { characters, setCharacters } = useTalescribe();
+  const navigate = useNavigate();
   const [selectedClass, setSelectedClass] = useState<ClassData | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isDarkTheme, setIsDarkTheme] = useStoredState<boolean>(
@@ -84,19 +88,48 @@ const ClassesComponent: React.FC = () => {
 
   const quickStartCharacter = (cls: ClassData) => {
     const newCharacter = {
-      id: Date.now(),
+      id: Date.now().toString(),
       name: `Новый ${cls.name}`,
       class: cls.name,
-      level: 1,
       race: 'Человек',
-      image: cls.image,
+      level: 1,
+      edition: '5e',
+      avatar: cls.image,
+      abilityScores: {
+        strength: 10,
+        dexterity: 10,
+        constitution: 10,
+        intelligence: 10,
+        wisdom: 10,
+        charisma: 10,
+      },
+      skills: {},
+      savingThrows: {},
+      hitPoints: { current: 10, max: 10, temporary: 0 },
+      armorClass: 10,
+      speed: 30,
+      proficiencyBonus: 2,
       background: 'Народный герой',
-      hitDie: cls.hitDie,
-      primaryAbility: cls.primaryAbility,
-      description: cls.description,
+      alignment: 'Neutral',
+      experience: 0,
+      notes: '',
+      spells: [],
+      hitDice: {
+        current: 1,
+        max: 1,
+        type: Number(cls.hitDie.replace('d', '')) || 6,
+      },
+      inspiration: false,
+      passivePerception: 10,
+      initiative: 0,
+      currency: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 },
+      inventory: [],
+      deathSaves: { successes: 0, failures: 0 },
+      conditions: [],
+      relationships: [],
     };
-    // TODO: add character to store instead of alert
-    console.log('Character created', newCharacter);
+    setCharacters([...characters, newCharacter]);
+    navigate('/characters');
   };
 
   return (
@@ -138,6 +171,12 @@ const ClassesComponent: React.FC = () => {
             <button className="mb-4" onClick={backToClasses}>
               {t('common.back')}
             </button>
+            <button
+              className="mb-4 ml-2 btn-primary"
+              onClick={() => quickStartCharacter(selectedClassForDetail)}
+            >
+              Quick Start
+            </button>
             <h2 className="text-2xl font-bold mb-2">
               {selectedClassForDetail.name}
             </h2>
@@ -171,8 +210,6 @@ const ClassesComponent: React.FC = () => {
                 ))}
               </ul>
             </div>
-
-            {/* TODO: implement quick start workflow */}
           </div>
         )}
       </div>

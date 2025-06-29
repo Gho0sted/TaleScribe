@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { usePluginStore } from '../stores/usePluginStore';
 
 const listeners = new Map<string, (e: MessageEvent) => void>();
+const ORIGIN = window.location.origin;
 
 const createApi = (name: string) => ({
   addButton: (label: string) => {
@@ -12,6 +13,7 @@ const createApi = (name: string) => ({
   },
   addCommand: (cmd: { id: string; run: () => void }) => {
     const handler = (e: MessageEvent) => {
+      if (e.origin !== ORIGIN) return;
       if (e.data === cmd.id) cmd.run();
     };
     listeners.set(`${name}-${cmd.id}`, handler);
@@ -32,11 +34,11 @@ export const usePluginLoader = () => {
           iframe.id = id;
           iframe.src = `/plugins/${p.path}`;
           iframe.style.display = 'none';
-          iframe.setAttribute('sandbox', 'allow-scripts');
+          iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
           iframe.onload = () => {
             iframe.contentWindow?.postMessage(
               { type: 'init', api: createApi(p.name) },
-              '*',
+              ORIGIN,
             );
           };
           document.body.appendChild(iframe);
