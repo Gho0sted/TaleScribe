@@ -4,14 +4,13 @@
  */
 import React, { useState } from 'react';
 import { useEventGenerator } from '../stores/useContentStore';
+import { EventCategory } from '../data/events';
 import { useAppTranslation } from '../hooks/useAppTranslation';
 
 const EventGenerator: React.FC = () => {
   const { t } = useAppTranslation();
   const { events, generateEvent, resetEvents } = useEventGenerator();
-  const [category, setCategory] = useState<'weather' | 'road' | 'intrigue'>(
-    'weather',
-  );
+  const [category, setCategory] = useState<EventCategory>('weather');
 
   const onGenerate = () => generateEvent(category);
 
@@ -21,7 +20,7 @@ const EventGenerator: React.FC = () => {
       <div className="flex items-center space-x-4 mb-4">
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value as any)}
+          onChange={(e) => setCategory(e.target.value as EventCategory)}
           className="input"
         >
           <option value="weather">Weather</option>

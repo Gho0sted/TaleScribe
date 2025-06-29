@@ -3,6 +3,7 @@
  * Панель управления с быстрыми действиями и статистикой редакции
  */
 import React from 'react';
+// Use path relative to pages for stable bundling
 import { useAppTranslation } from '../hooks/useAppTranslation';
 import {
   IconSparkles,
