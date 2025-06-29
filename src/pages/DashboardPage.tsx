@@ -3,17 +3,17 @@
  * Панель управления с быстрыми действиями и статистикой редакции
  */
 import React from 'react';
-import { useAppTranslation } from '../../hooks/useAppTranslation';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 import {
   IconSparkles,
   IconUser,
   IconDice6,
   IconScroll,
   IconAlertTriangle,
-} from '../../constants/icons';
-import { useTalescribe } from '../../contexts/TalescribeContext';
-import { DND_EDITIONS } from '../../constants';
-import { DiceUtils } from '../../utils/DiceUtils';
+} from '../constants/icons';
+import { useTalescribe } from '../contexts/TalescribeContext';
+import { DND_EDITIONS } from '../constants';
+import { DiceUtils } from '../utils/DiceUtils';
 
 interface DashboardPageProps {
   onNavigate: (page: string) => void;

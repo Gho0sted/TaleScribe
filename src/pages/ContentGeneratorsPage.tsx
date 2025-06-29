@@ -1,7 +1,7 @@
 import React from 'react';
-import LootGenerator from '../LootGenerator';
-import EventGenerator from '../EventGenerator';
-import NPCGenerator from '../NPCGenerator';
+import LootGenerator from '../components/LootGenerator';
+import EventGenerator from '../components/EventGenerator';
+import NPCGenerator from '../components/NPCGenerator';
 
 const ContentGeneratorsPage: React.FC = () => (
   <div className="bg-gray-900 text-white min-h-screen p-8 space-y-8">

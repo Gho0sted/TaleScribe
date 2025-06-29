@@ -3,10 +3,10 @@
  * Страница отслеживания квестов с фильтрацией и прогрессом.
  */
 import React, { useState, useMemo, useCallback } from 'react';
-import { useTalescribe } from '../../contexts/TalescribeContext';
-import { Card } from '../ui/Card';
-import { IconScroll, IconStar } from '../../constants/icons';
-import { useAppTranslation } from '../../hooks/useAppTranslation';
+import { useTalescribe } from '../contexts/TalescribeContext';
+import { Card } from '../components/ui/Card';
+import { IconScroll, IconStar } from '../constants/icons';
+import { useAppTranslation } from '../hooks/useAppTranslation';
 
 interface Quest {
   id: number;

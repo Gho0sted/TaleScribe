@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { IconDownload, IconUpload, IconRefreshCw } from '../../constants/icons';
-import CloudSettings from '../ui/CloudSettings';
-import { useTalescribe } from '../../contexts/TalescribeContext';
-import { downloadFile } from '../../utils/downloadFile';
+import { IconDownload, IconUpload, IconRefreshCw } from '../constants/icons';
+import CloudSettings from '../components/ui/CloudSettings';
+import { useTalescribe } from '../contexts/TalescribeContext';
+import { downloadFile } from '../utils/downloadFile';
 import {
   exportCharacters,
   importCharacters,
   exportToFoundry,
-} from '../../services/exportService';
+} from '../services/exportService';
 
 const DataManagerPage: React.FC = () => {
   const { characters, setCharacters } = useTalescribe();
