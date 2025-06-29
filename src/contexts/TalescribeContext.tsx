@@ -88,7 +88,17 @@ export const TalescribeProvider: React.FC<TalescribeProviderProps> = ({
   const [items, setItems] = useState<Item[]>([]);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
-  const dataManager = new DataManager();
+  const dataManagerRef = useRef<DataManager>();
+  if (!dataManagerRef.current) {
+    dataManagerRef.current = new DataManager();
+  }
+  const dataManager = dataManagerRef.current;
+
+  useEffect(() => {
+    return () => {
+      dataManager.destroy();
+    };
+  }, [dataManager]);
 
   useEffect(() => {
     loadData();
