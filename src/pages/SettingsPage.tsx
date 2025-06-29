@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ThemeSettings from '../ui/ThemeSettings';
-import PluginManager from '../ui/PluginManager';
+import ThemeSettings from '../components/ui/ThemeSettings';
+import PluginManager from '../components/ui/PluginManager';
 
 const SettingsPage: React.FC = () => {
   const [tab, setTab] = useState<'theme' | 'plugins'>('theme');

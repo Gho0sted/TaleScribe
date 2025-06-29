@@ -3,9 +3,9 @@
  * Страница со списком персонажей выбранной редакции
  */
 import React, { useState } from 'react';
-import { useAppTranslation } from '../../hooks/useAppTranslation';
-import { IconUser, IconPlusCircle, IconSearch } from '../../constants/icons';
-import { useTalescribe } from '../../contexts/TalescribeContext';
+import { useAppTranslation } from '../hooks/useAppTranslation';
+import { IconUser, IconPlusCircle, IconSearch } from '../constants/icons';
+import { useTalescribe } from '../contexts/TalescribeContext';
 
 const CharactersPage: React.FC = () => {
   const { t } = useAppTranslation();

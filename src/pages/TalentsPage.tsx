@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TalentTable from '../TalentTable';
-import PriorityCalculator from '../PriorityCalculator';
-import { useTalescribe } from '../../contexts/TalescribeContext';
-import { CHARACTER_CLASSES } from '../../constants';
+import TalentTable from '../components/TalentTable';
+import PriorityCalculator from '../components/PriorityCalculator';
+import { useTalescribe } from '../contexts/TalescribeContext';
+import { CHARACTER_CLASSES } from '../constants';
 import { useAppTranslation } from '../hooks/useAppTranslation';
 
 const TalentsPage: React.FC = () => {

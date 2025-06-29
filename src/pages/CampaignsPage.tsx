@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
-import SessionCalendar from '../campaigns/SessionCalendar';
-import SessionJournal from '../campaigns/SessionJournal';
-import MasterConsole from '../chat/MasterConsole';
-import { backupNow } from '../../services/backupService';
+import SessionCalendar from '../components/campaigns/SessionCalendar';
+import SessionJournal from '../components/campaigns/SessionJournal';
+import MasterConsole from '../components/chat/MasterConsole';
+import { backupNow } from '../services/backupService';
 
 const CampaignsPage: React.FC = () => {
   useEffect(() => {
