@@ -45,6 +45,12 @@
     "diceDesc": "Roll any dice with modifiers",
     "spells": "Spells",
     "spellsDesc": "Study schools of magic",
+    "bestiaryDesc": "Discover monsters of many worlds",
+    "itemsDesc": "Manage equipment and magical artifacts",
+    "inDatabase": "in database",
+    "inLibrary": "in library",
+    "creatures": "creatures",
+    "inArsenal": "in arsenal",
     "quickRolls": "Quick Rolls"
   },
   "charactersPage": {
@@ -119,11 +125,14 @@
     "glossary": "Glossary",
     "equipment": "Equipment",
     "traits": "Traits",
+    "classes": "Classes",
+    "campaigns": "Campaigns",
     "spells": "Spells",
     "weapons": "Weapons",
     "classFeatures": "Class Features",
     "tools": "Tools",
     "bestiary": "Bestiary",
-    "magicItems": "Magic Items"
+    "magicItems": "Magic Items",
+    "admin": "Administration"
   }
 }
